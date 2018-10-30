@@ -13,9 +13,10 @@ lib:
 	mkdir lib
 
 lib/${TILER_LIB}: lib .tiler_url
-	echo ${TILER_LIB} | wget --base=`cat .tiler_url` --input-file=- -O $@ 
+	rm lib/libtile.a
+	echo ${TILER_LIB} | wget --no-use-server-timestamps --base=`cat .tiler_url` --input-file=- -O $@
 
 lib/libtile.a: lib/${TILER_LIB}
-	ln -s $< $@
+	ln -s ${TILER_LIB} $@
 
 .PHONY: all clean
