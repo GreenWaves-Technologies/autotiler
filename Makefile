@@ -13,7 +13,7 @@ lib:
 	mkdir lib
 
 lib/${TILER_LIB}: lib .tiler_url
-	rm lib/libtile.a
+	rm -rf lib/libtile.a
 	echo ${TILER_LIB} | wget --no-use-server-timestamps --base=`cat .tiler_url` --input-file=- -O $@
 
 lib/libtile.a: lib/${TILER_LIB}
