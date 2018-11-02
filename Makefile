@@ -1,4 +1,4 @@
-TILER_VER=1.0.0
+TILER_VER=2.0.0
 TILER_LIB=libtile.${TILER_VER}.a
 
 all: lib/libtile.a
@@ -6,8 +6,10 @@ all: lib/libtile.a
 clean:
 	rm lib/libtile.a
 
+ifeq (,$(wildcard .tiler_url))
 .tiler_url: get_tiler.py
 	python3 get_tiler.py
+endif
 
 lib:
 	mkdir lib
