@@ -62,7 +62,7 @@ Template for byte image to I,Q expansion to prepare for 2D FFT
 */
 typedef struct {
 	unsigned char * __restrict__ In;	/**< Pointer to a byte image (or image tile) */
-	int32_t * __restrict__ Out;			/**< Pointer to the (I, Q) expansion of In, I=0, Q=In */
+	int * __restrict__ Out;			/**< Pointer to the (I, Q) expansion of In, I=0, Q=In */
 	unsigned short int W;			/**< Image width */
 	unsigned short int H;			/**< Image height */
 } Image2Complex_Arg_T;

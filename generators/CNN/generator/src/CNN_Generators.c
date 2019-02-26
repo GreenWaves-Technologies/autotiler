@@ -260,6 +260,28 @@ void LoadCNNLibrary()
 			)
 	);
 
+
+	LibKernelTemplate("KerAdd_fp_T",
+		CArgs(5,
+			TCArg("short int * __restrict__", "In1"),
+			TCArg("short int * __restrict__", "In2"),
+			TCArg("unsigned short int", "W"),
+			TCArg("unsigned short int", "H"),
+			TCArg("short int * __restrict__", "Out")
+			)
+	);
+
+	LibKernelTemplate("KerAddReLU_fp_T",
+		CArgs(5,
+			TCArg("short int * __restrict__", "In1"),
+			TCArg("short int * __restrict__", "In2"),
+			TCArg("unsigned short int", "W"),
+			TCArg("unsigned short int", "H"),
+			TCArg("short int * __restrict__", "Out")
+			)
+	);
+
+
 	/****************************************************************************************************************/
 	/* Kernels for features and coefficients on 16 bits. Kernels for multiple output features evaluated in parallel */
 	/****************************************************************************************************************/
@@ -419,6 +441,15 @@ void LoadCNNLibrary()
 	/* Linear layer followed by an optional ReLU */
 	LibKernel("KerLinearLayerReLU_fp_fps_fp", CALL_PARALLEL, 0, "KerLinearLayerReLU_fp_fps_fp_T");
 	LibKernel("KerLinearLayerReLU_fp_fp_fpd", CALL_PARALLEL, 0, "KerLinearLayerReLU_fp_fp_fpd_T");
+
+	/****************************************************************************************************************/
+	/* Kernels for Add followed by optional Relu.                                                                   */
+	/****************************************************************************************************************/
+
+	LibKernel("KerAdd_fp",     CALL_PARALLEL, 0, "KerAddReLU_fp_T");
+	LibKernel("KerAddReLU_fp", CALL_PARALLEL, 0, "KerAddReLU_fp_T");
+
+
 }
 
 static void SelectKernels(
@@ -1576,7 +1607,7 @@ void CNN_LargePoolReLU(
 	if (In_DataSize != Out_DataSize) GenTilingError("CNN_LargePoolReLU %s: Only homogeneous data types are supported (byte and half word)\n", Name);
 
 
-	SelectKernels(1, DataSize, 1, 1, DoPool, FSp, PoolStride, 0, &PoolKerName, &ReLUKerName, 0, 0, 0, &NeedPoolDim, &NeedPoolStride);
+	SelectKernels(0, DataSize, 1, 1, DoPool, FSp, PoolStride, 0, &PoolKerName, &ReLUKerName, 0, 0, 0, &NeedPoolDim, &NeedPoolStride);
 	if (DataSize==1) DataType = "signed char * __restrict__"; else DataType = "short int * __restrict__";
 
 	if (DoPool) {
@@ -1601,7 +1632,7 @@ void CNN_LargePoolReLU(
                       TCArg(DataType, "In"),
                       TCArg(DataType, "Out")
                      ),
-                Calls(3,
+                Calls(1,
 			DoPool?
 			Call(PoolKerName, LOC_INNER_LOOP,
 				Bindings(9,
@@ -1672,6 +1703,7 @@ void CNN_LargeParOutFeatPoolReLU(
 	unsigned int NeedConvDim, NeedConvStride, NeedPoolDim, NeedPoolStride;
 	int          DataSize = In_DataSize;
 
+    if (PoolStride>FSp) GenTilingError("LargeParOutFeatPoolReLU_fp %s: PoolStride > pooling region (FSp) (%d, %d)\n", Name, PoolStride, FSp);
 	if (InFeat!=OutFeat) GenTilingError("LargeParOutFeatPoolReLU_fp %s: InFeat != OutFeat (%d, %d)\n", Name, InFeat, OutFeat);
 	if (DoPool==0 && PoolDoReLU==0) GenTilingError("LargeParOutFeatPoolReLU_fp %s: At least DoPool or PoolDoReLU must be non null", Name);
 	if (In_DataSize != Out_DataSize) GenTilingError("CNN_LargePoolReLU %s: Only homogeneous data types are supported (byte and half word)\n", Name);
@@ -1852,6 +1884,99 @@ void CNN_SmallParOutFeatPoolReLU(
 			  FSp, PoolStride, PadInp, PoolDoReLU, DoPool,
 			  0, (DoPool==0)&&(PoolDoReLU), 0, (DataSize==1)?7:15, 0);
 }
+
+
+/*********************************************************************************************************************************************************************
+ 	Generators for Addition followed by an optional linear rectification (ReLU)
+
+	Template:
+		Name:		Name of the generated user kernel
+
+		In_DataSize:	1: byte, 2: half word, 4: word
+		Out_DataSize:	1: byte, 2: half word, 4: word
+
+		In_InL3:	0: In is in L2, 1: In is in L3 memory
+		Out_InL3:	0: Out is in L2, 1: Out is in L3 memory
+
+		InFeat:		Number of input feature's maps
+		OutFeat:	Number of output feature's maps (InFeat has to be equal to OutFeat for these generators
+		Width:		Number of columns of a given feature map
+		Height:		Number of lines of a given feature map
+		
+		DoReLU:	0: No linear rectification, 1: Linear rectification. If DoPool=1 ReLU is performed after pooling otherwise only ReLU is performed.
+
+	Currently only homegeneous data size are supported (bytes and hald words)
+
+	CNN_AddReLU
+		Input feature's maps are evaluated one after the other. A given feature map is tiled and the evaluation of a tile is dispatched on all cores for
+		parallel evaluation. Tiling is horizontal.
+
+*********************************************************************************************************************************************************************/
+
+void CNN_AddReLU(
+			char         *Name,
+			unsigned int In_DataSize,
+			unsigned int Out_DataSize,
+
+			unsigned int In_InL3,		// 1 if In comes from L3, 0 if it comes from L2
+			unsigned int Out_InL3,
+
+			unsigned int InOutFeat,
+            unsigned int Width,
+			unsigned int Height,
+
+			int          DoReLU
+			)
+{
+
+	unsigned int InL3  = In_InL3?O_L2DB:0;
+	unsigned int OutL3 = Out_InL3?O_L2DB:0;
+	
+	char  *DataType, *AddKerName;
+	int   DataSize = In_DataSize;
+
+	if (In_DataSize != Out_DataSize) GenTilingError("CNN_LargePoolReLU %s: Only homogeneous data types are supported (byte and half word)\n", Name);
+
+	if (DataSize==1) DataType = "signed char * __restrict__"; else DataType = "short int * __restrict__";
+
+	if (In_DataSize==2 && Out_DataSize==2 && DoReLU==0) {
+		AddKerName = "KerAdd_fp";
+		DataType = "short int * __restrict__";   DataType = "short int * __restrict__";
+	}
+	else if (In_DataSize==2 && Out_DataSize==2 && DoReLU==1) {
+		AddKerName = "KerAddReLU_fp";
+		DataType = "short int * __restrict__";   DataType = "short int * __restrict__";
+	}
+	else GenTilingError("CNN_LinearLayerReLU: %s Unsupported data size: In:%d, Out: %d\n", Name, In_DataSize, Out_DataSize);
+
+        UserKernel(Name,
+		KernelDimensions(1, InOutFeat, Width*Height, 1),
+		KernelIterationOrder(KER_DIM2, KER_TILE),
+                TILE_HOR,
+                CArgs(3,
+                      TCArg(DataType, "In1"),
+                      TCArg(DataType, "In2"),
+                      TCArg(DataType, "Out")
+                     ),
+                Calls(1,
+					Call(AddKerName, LOC_INNER_LOOP,
+						Bindings(5,
+							K_Arg("In1", KER_ARG_TILE),
+							K_Arg("In2", KER_ARG_TILE),
+							K_Arg("In1", KER_ARG_TILE_W),
+							K_Arg("In1", KER_ARG_TILE_H),
+							K_Arg("Out", KER_ARG_TILE)
+				)
+			)
+            ),
+            KerArgs(3,
+			KerArg ("In1", OBJ_IN_DB  | InL3,   InOutFeat,Width* Height,  In_DataSize,  0, 0, 0, "In1", 0),
+			KerArg ("In2", OBJ_IN_DB  | InL3,   InOutFeat,Width* Height,  In_DataSize,  0, 0, 0, "In2", 0),
+            KerArg ("Out", OBJ_OUT_DB | OutL3,  InOutFeat,Width* Height, Out_DataSize,  0, 0, 0, "Out", 0)
+			)
+        );
+}
+
 
 /*********************************************************************************************************************************************************************
  	Generators for Linear layers followed by an optional linear rectification (ReLU)

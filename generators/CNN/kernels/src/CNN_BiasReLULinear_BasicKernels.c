@@ -25,6 +25,58 @@ static inline unsigned int __attribute__((always_inline)) ChunkSize(unsigned int
 }
 
 
+
+/* Addition basic kernel followed by optional Relu
+ *
+ */
+
+
+void KerAddReLU_fp(KerAddReLU_fp_T *Arg)
+
+{
+    short int * __restrict__ In1 = Arg->In1;
+    short int * __restrict__ In2 = Arg->In2;
+    int W = Arg->W;
+    int H = Arg->H;
+    short int * __restrict__ Out = Arg->Out;
+
+    unsigned int CoreId = gap8_coreid();
+    unsigned int ChunkCell = ChunkSize((W*H));
+    unsigned int First = CoreId*ChunkCell;
+    unsigned int Last  = Minu(First+ChunkCell, (W*H));        
+    unsigned int i;
+
+    for(i=First; i<Last; i++) {
+        Out[i] = gap8_clip(In1[i]+In2[i], 15);
+        Max(Out[i],0);
+    }
+    gap8_waitbarrier(0);
+}
+
+
+void KerAdd_fp(KerAddReLU_fp_T *Arg)
+
+{
+        short int * __restrict__ In1 = Arg->In1;
+        short int * __restrict__ In2 = Arg->In2;
+        int W = Arg->W;
+        int H = Arg->H;
+        short int * __restrict__ Out = Arg->Out;
+
+        unsigned int CoreId = gap8_coreid();
+        unsigned int ChunkCell = ChunkSize((W*H));
+        unsigned int First = CoreId*ChunkCell;
+        unsigned int Last  = Minu(First+ChunkCell, (W*H));
+        unsigned int i;
+
+        for(i=First; i<Last; i++) {
+            Out[i] = gap8_clip(In1[i]+In2[i], 15);
+        }
+
+        gap8_waitbarrier(0);
+}
+
+
 /* Set output features maps initial bias group
 	KerParSetBias_fp		Features are shorts, output feature maps are evaluated in parallel (one per core)
 	KerParSetBias_fps		Features are bytes, output feature maps are evaluated in parallel (one per core)
@@ -235,10 +287,9 @@ static void KerParDoReLU_fp(
 	unsigned int H,
 	short int * __restrict__ Out
 	)
-
 {
-        v2s * VectIn  = (v2s *) In;
-        v2s * VectOut = (v2s *) Out;
+    v2s * VectIn  = (v2s *) In;
+    v2s * VectOut = (v2s *) Out;
 
 	for (unsigned int i=0; i<((W*H)/4); i++) {
 		v2s X = gap8_max2(VectIn[2*i], ((v2s) {0, 0}));
@@ -269,22 +320,22 @@ static void KerParDoReLU_fps(
 void KerParReLU_fp(KerParReLUPool_fp_T *Arg)
 
 {
-        short int * __restrict__ In = Arg->In;
-        unsigned int W = Arg->W;
-        unsigned int H = Arg->H;
+    short int * __restrict__ In = Arg->In;
+    unsigned int W = Arg->W;
+    unsigned int H = Arg->H;
 	unsigned int Wo = W;
 	unsigned int Ho = H;
-        unsigned int OutFeatures = Arg->OutFeatures;
-        short int * __restrict__ Out = Arg->Out;
+    unsigned int OutFeatures = Arg->OutFeatures;
+    short int * __restrict__ Out = Arg->Out;
 
-        unsigned int CoreId = gap8_coreid();
-        unsigned int Chunk = ChunkSize(OutFeatures);
-        unsigned int First = Chunk*CoreId;
-        unsigned int Last = Min(First+Chunk, OutFeatures);
+    unsigned int CoreId = gap8_coreid();
+    unsigned int Chunk = ChunkSize(OutFeatures);
+    unsigned int First = Chunk*CoreId;
+    unsigned int Last = Min(First+Chunk, OutFeatures);
 
-        for (unsigned int of=First; of<Last; of++) KerParDoReLU_fp(In+of*W*H, W, H, Out+of*Wo*Ho);
+    for (unsigned int of=First; of<Last; of++) KerParDoReLU_fp(In+of*W*H, W, H, Out+of*Wo*Ho);
 
-        gap8_waitbarrier(0);
+    gap8_waitbarrier(0);
 }
 
 void KerParReLU_fps(KerParReLUPool_fps_T *Arg)

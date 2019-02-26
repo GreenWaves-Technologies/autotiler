@@ -54,7 +54,7 @@ static unsigned short int ExpCoeffLUT[] = {
 static unsigned int Exp_fp_17_15(unsigned int X)
 
 {
-        unsigned int  Y, Result, IntX, FractX, ScaledInt;
+        int  Y, Result, IntX, FractX, ScaledInt;
         short int Z_s, FractX_s;
         unsigned short int  ScaledFract;
 
@@ -72,14 +72,14 @@ static unsigned int Exp_fp_17_15(unsigned int X)
         ScaledInt = IntegerExpLUT[IntX]; ScaledFract = FractionExpLUT[IntX];
         /* Taylor's series: exp(x) = 1 + x + x ^ 2 / 2 + x ^ 3 / 3! + x ^ 4 / 4! + x ^ 5 / 5! + x ^ 6 / 6! + x ^ 7 / 7! + x ^ 8 / 8!  */
         FractX_s = FractX; Z_s = FractX; Result = 0;
-        for (unsigned int i = 1; i < ARRAYSIZE (ExpCoeffLUT); i++) {
+        for (int i = 1; i < ARRAYSIZE (ExpCoeffLUT); i++) {
                 Result += Z_s*ExpCoeffLUT[i]; // gap8_macs(Result, Z, ExpCoeffLUT[ i ]);
                 Z_s = gap8_mulsRN(Z_s, FractX_s, 15);
         }
         Result = gap8_roundnorm(Result, 15) + ExpCoeffLUT[0];
         unsigned short int U_Res = Result;
         Result = gap8_muluRN(U_Res, ScaledFract, 15) + U_Res * ScaledInt;
-        if (Result && (X > 0x7FFFFFFF))
+        if (Result && (X > 0x7FFFFFFF)) 
 		Result = ((0x7FFFFFFF / Result) >> 1);      /* negative value */
         return (unsigned int) Result;
 }
@@ -99,10 +99,10 @@ void KerParSoftMax_fp(KerParSoftMax_fp_T *Arg)
 	unsigned int Last  = Min(First+ChunkCell, N);
 	unsigned int *Red = &Reduct[CoreId];
 
-	/* Turns In into distribution */
+	/* Turns In into distribution
 	/* Find max */
 	M = 0x80000000;
-	for (unsigned int i=First; i<Last; i++) M = Max(M, In[i]);
+	for (int i=First; i<Last; i++) M = Max(M, In[i]);
 	Reduct[CoreId] = M;
 	gap8_waitbarrier(0);
 	if (CoreId==0) {
@@ -119,7 +119,7 @@ void KerParSoftMax_fp(KerParSoftMax_fp_T *Arg)
 	*/
 	M = Reduct[0];
 	Sum = 0;
-	for (unsigned int i=First; i<Last; i++) {
+	for (int i=First; i<Last; i++) {
 		unsigned int Exp = Exp_fp_17_15((In[i]-M)<<(15-Norm));
 		Out[i] = Exp; Sum += Exp;
 	}
@@ -134,7 +134,7 @@ void KerParSoftMax_fp(KerParSoftMax_fp_T *Arg)
 	gap8_waitbarrier(0);
 	Sum = Reduct[0];
 	InvSum = (FP2FIX(1.0, 15)<<15)/Sum;
-	for (unsigned int i=First; i<Last; i++) Out[i] = Abs(gap8_roundnorm_reg(Out[i]*InvSum, 15));
+	for (int i=First; i<Last; i++) Out[i] = Abs(gap8_roundnorm_reg(Out[i]*InvSum, 15));
 	gap8_waitbarrier(0);
 
 }
@@ -155,10 +155,10 @@ void KerParSoftMax_fps(KerParSoftMax_fps_T *Arg)
 	unsigned int Last  = Min(First+ChunkCell, N);
 	unsigned int *Red = &Reduct[CoreId];
 
-	/* Turns In into distribution */
+	/* Turns In into distribution
 	/* Find max */
 	M = 0x80000000;
-	for (unsigned int i=First; i<Last; i++) M = Max(M, In[i]);
+	for (int i=First; i<Last; i++) M = Max(M, In[i]);
 	Reduct[CoreId] = M;
 	gap8_waitbarrier(0);
 	if (CoreId==0) {
@@ -175,7 +175,7 @@ void KerParSoftMax_fps(KerParSoftMax_fps_T *Arg)
 	*/
 	M = Reduct[0];
 	Sum = 0;
-	for (unsigned int i=First; i<Last; i++) {
+	for (int i=First; i<Last; i++) {
 		unsigned int Exp = Exp_fp_17_15((In[i]-M)<<(15-Norm));
 		Out[i] = Exp>>8; Sum += Exp;
 	}
@@ -190,7 +190,7 @@ void KerParSoftMax_fps(KerParSoftMax_fps_T *Arg)
 	Sum = Reduct[0];
 	InvSum = (FP2FIX(1.0, 7)<<7)/Sum;
 	gap8_waitbarrier(0);
-	for (unsigned int i=First; i<Last; i++) Out[i] = Abs(gap8_roundnorm_reg(Out[i]*InvSum, 7));
+	for (int i=First; i<Last; i++) Out[i] = Abs(gap8_roundnorm_reg(Out[i]*InvSum, 7));
 	gap8_waitbarrier(0);
 
 }

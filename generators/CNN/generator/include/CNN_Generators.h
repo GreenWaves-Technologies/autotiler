@@ -341,6 +341,45 @@ extern void CNN_SmallParOutFeatPoolReLU(
 
 
 /*********************************************************************************************************************************************************************
+ 	Generators for Add layers followed by an optional linear rectification (ReLU)
+
+	Template:
+		Name:		Name of the generated user kernel
+
+		In_DataSize:	1: byte, 2: half word, 4: word
+		Out_DataSize:	1: byte, 2: half word, 4: word
+
+		In_InL3:	0: In is in L2, 1: In is in L3 memory
+		Out_InL3:	0: Out is in L2, 1: Out is in L3 memory
+
+		InDim:		Number of inputs
+		OutDim:		Number of outputs
+
+		DoReLU:		0: No linear rectification after linear layer, 1: Linear rectification applied after linear layer
+
+	CNN_AddReLU
+		Input feature's maps are evaluated one after the other. A given feature map is tiled and the evaluation of a tile is dispatched on all cores for
+		parallel evaluation. Tiling is horizontal.
+
+*********************************************************************************************************************************************************************/
+
+
+extern void CNN_AddReLU(
+			char         *Name,
+			unsigned int In_DataSize,
+			unsigned int Out_DataSize,
+
+			unsigned int In_InL3,		// 1 if In comes from L3, 0 if it comes from L2
+			unsigned int Out_InL3,
+
+			unsigned int InOutFeat,
+            unsigned int Width,
+			unsigned int Height,
+
+			int          DoReLU
+			);
+
+/*********************************************************************************************************************************************************************
  	Generators for Linear layers followed by an optional linear rectification (ReLU)
 
 	Template:
