@@ -1853,7 +1853,7 @@ static void __attribute__ ((noinline)) KerConv5x5BorderStride1_fp(
 	}
 	if (PadT && (Ho_F==2)) {
 		KerConv5x4from5x5Stride1_H_fp(In, W, PadLOrg, Wo, Wo_F, Wo_L, Norm, Out+Wo_F, Filter, 0);
-		KerConv5x4from5x5Stride1_H_fp(In, W, PadLOrg, Wo, Wo_F, Wo_L, Norm, Out+Wo_F+W, Filter, 1);
+		KerConv5x4from5x5Stride1_H_fp(In, W, PadLOrg, Wo, Wo_F, Wo_L, Norm, Out+Wo_F+Wo, Filter, 1);
 	}
 	if (PadB && ((Ho-Ho_L)==2)) {
 		KerConv5x4from5x5Stride1_H_fp(In+(Ho_L*Stride-PadTOrg)*W, W, PadLOrg, Wo, Wo_F, Wo_L, Norm, Out+Ho_L*Wo+Wo_F, Filter, 2);

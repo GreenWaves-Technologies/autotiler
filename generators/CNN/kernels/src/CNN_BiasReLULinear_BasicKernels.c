@@ -30,29 +30,33 @@ static inline unsigned int __attribute__((always_inline)) ChunkSize(unsigned int
  *
  */
 
-
 void KerAddReLU_fp(KerAddReLU_fp_T *Arg)
 
 {
-    short int * __restrict__ In1 = Arg->In1;
-    short int * __restrict__ In2 = Arg->In2;
-    int W = Arg->W;
-    int H = Arg->H;
-    short int * __restrict__ Out = Arg->Out;
+        short int * __restrict__ In1 = Arg->In1;
+        short int * __restrict__ In2 = Arg->In2;
+        int W = Arg->W;
+        int H = Arg->H;
+        short int * __restrict__ Out = Arg->Out;
 
-    unsigned int CoreId = gap8_coreid();
-    unsigned int ChunkCell = ChunkSize((W*H));
-    unsigned int First = CoreId*ChunkCell;
-    unsigned int Last  = Minu(First+ChunkCell, (W*H));        
-    unsigned int i;
+        unsigned int CoreId = gap8_coreid();
+        unsigned int ChunkCell = ChunkSize((W*H)/2);
+        unsigned int First = CoreId*ChunkCell;
+        unsigned int Last  = Minu(First+ChunkCell, (W*H)/2);
+        unsigned int i, j;
+        short int M1, M2;
 
-    for(i=First; i<Last; i++) {
-        Out[i] = gap8_clip(In1[i]+In2[i], 15);
-        Max(Out[i],0);
-    }
-    gap8_waitbarrier(0);
+        for (i=First; i<Last; i++){
+            M1 =  gap8_clip(In1[i*2]+ In2[i*2],15);
+            M2 =  gap8_clip(In1[i*2+1]+ In2[i*2+1],15);
+            
+            Out[i*2]   =  Max(M1,0);
+            Out[i*2+1] =  Max(M2,0);
+        }
+        
+        if((W*H)&0x1) Out[W*H-1] = Max(gap8_clip(In1[W*H-1] + In2[W*H-1],15),0);
+
 }
-
 
 void KerAdd_fp(KerAddReLU_fp_T *Arg)
 
@@ -64,18 +68,25 @@ void KerAdd_fp(KerAddReLU_fp_T *Arg)
         short int * __restrict__ Out = Arg->Out;
 
         unsigned int CoreId = gap8_coreid();
-        unsigned int ChunkCell = ChunkSize((W*H));
+        unsigned int ChunkCell = ChunkSize((W*H)/2);
         unsigned int First = CoreId*ChunkCell;
-        unsigned int Last  = Minu(First+ChunkCell, (W*H));
-        unsigned int i;
+        unsigned int Last  = Minu(First+ChunkCell, (W*H)/2);
 
-        for(i=First; i<Last; i++) {
-            Out[i] = gap8_clip(In1[i]+In2[i], 15);
+        unsigned int i, j;
+        short int M1, M2;
+
+        for (i=First; i<Last; i++){
+    
+            M1 =  gap8_clip(In1[i*2]+ In2[i*2],15);
+            M2 =  gap8_clip(In1[i*2+1]+ In2[i*2+1],15);
+
+            Out[i*2]   =  M1;
+            Out[i*2+1] =  M2;
         }
+        
+        if((W*H)&0x1) Out[W*H-1] = gap8_clip(In1[W*H-1] + In2[W*H-1],15);
 
-        gap8_waitbarrier(0);
 }
-
 
 /* Set output features maps initial bias group
 	KerParSetBias_fp		Features are shorts, output feature maps are evaluated in parallel (one per core)
@@ -143,27 +154,27 @@ void KerParSetBias_fps(KerParSetBias_fps_T *Arg)
 void KerParSetNormedBias_fp_fps(KerParSetNormedBias_fp_fps_T *Arg)
 
 {
-        short int * __restrict__ Out = Arg->Out;
-        unsigned int W = Arg->W;
-        unsigned int H = Arg->H;
-        unsigned int OutFeatures = Arg->OutFeatures;
-        signed char * __restrict__ Bias = Arg->Bias;
-	unsigned int Norm = Arg->Norm;
+    short int * __restrict__ Out = Arg->Out;
+    unsigned int W = Arg->W;
+    unsigned int H = Arg->H;
+    unsigned int OutFeatures = Arg->OutFeatures;
+    signed char * __restrict__ Bias = Arg->Bias;
+    unsigned int Norm = Arg->Norm;
 
-        unsigned int CoreId = gap8_coreid();
-        unsigned int Chunk = ChunkSize(OutFeatures);
-        unsigned int First = Chunk*CoreId;
-        unsigned int Last = Min(First+Chunk, OutFeatures);
+    unsigned int CoreId = gap8_coreid();
+    unsigned int Chunk = ChunkSize(OutFeatures);
+    unsigned int First = Chunk*CoreId;
+    unsigned int Last = Min(First+Chunk, OutFeatures);
 
-        for (unsigned int of=First; of<Last; of++) {
-                v2s *LineOut = (v2s *) (Out+W*H*of);
-                v2s B = (v2s) {Bias[of]<<Norm, Bias[of]<<Norm};
-                for (unsigned int i=0; i<((W*H)/4); i++) {
-                        LineOut[2*i] = B; LineOut[2*i+1] = B;
-                }
-                for (unsigned int i=(4*((W*H)/4)); i<(W*H); i++) Out[W*H*of+i] = Bias[of];
-        }
-        gap8_waitbarrier(0);
+    for (unsigned int of=First; of<Last; of++) {
+            v2s *LineOut = (v2s *) (Out+W*H*of);
+            v2s B = (v2s) {Bias[of]<<Norm, Bias[of]<<Norm};
+            for (unsigned int i=0; i<((W*H)/4); i++) {
+                    LineOut[2*i] = B; LineOut[2*i+1] = B;
+            }
+            for (unsigned int i=(4*((W*H)/4)); i<(W*H); i++) Out[W*H*of+i] = Bias[of];
+    }
+    gap8_waitbarrier(0);
 }
 
 void KerParSetNormedBias_fpd_fp(KerParSetNormedBias_fpd_fp_T *Arg)
@@ -350,9 +361,9 @@ void KerParReLU_fps(KerParReLUPool_fps_T *Arg)
         signed char * __restrict__ Out = Arg->Out;
 
         unsigned int CoreId = gap8_coreid();
-        unsigned int Chunk = ChunkSize(OutFeatures);
-        unsigned int First = Chunk*CoreId;
-        unsigned int Last = Min(First+Chunk, OutFeatures);
+        unsigned int Chunk  = ChunkSize(OutFeatures);
+        unsigned int First  = Chunk*CoreId;
+        unsigned int Last   = Min(First+Chunk, OutFeatures);
 
         for (unsigned int of=First; of<Last; of++) KerParDoReLU_fps(In+of*W*H, W, H, Out+of*Wo*Ho);
 
@@ -408,13 +419,13 @@ void KerReLU_fps(KerReLUPool_fps_T *Arg)
 void KerLinearLayerReLU_fp(KerLinearLayerReLU_fp_T *Arg)
 
 {
-        short int * __restrict__ In = Arg->In;
-        unsigned int InSize = Arg->InSize;
-        const short int * __restrict__ Filter = Arg->Filter;
-        const short int * __restrict__ Bias = Arg->Bias;
-        unsigned int Norm = Arg->Norm;
-        short int * __restrict__ Out = Arg->Out;
-        int OutSize = Arg->OutSize;
+    short int * __restrict__ In = Arg->In;
+    unsigned int InSize = Arg->InSize;
+    const short int * __restrict__ Filter = Arg->Filter;
+    const short int * __restrict__ Bias = Arg->Bias;
+    unsigned int Norm = Arg->Norm;
+    short int * __restrict__ Out = Arg->Out;
+    int OutSize = Arg->OutSize;
 	int ReVal = Arg->DoReLU?0:0x80000000;
 	static L1_CL_MEM int Reduct[8];
 

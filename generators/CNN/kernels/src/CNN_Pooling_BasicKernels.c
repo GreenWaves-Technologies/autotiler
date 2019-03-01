@@ -1236,13 +1236,13 @@ void KerParPoolNxNStrideS_fps(KerParReLUPool_fps_T *Arg)
 
 	if (PoolMax) {
 		for (unsigned int of=First; of<Last; of++) {
-			KerMaxPoolNxNStrideS_Body_fps(In+of*W*H, Out+of*Wo*Ho, FS, FS, PadIn[0], PadIn[2], W, H, Wo, Max(First, Wo_F), Min(Last, Wo_L), Ho, Ho_F, Ho_L, S, ReVal);
-			if ((int) PadIn) KerMaxPoolNxNStrideS_Border_fps(In+of*W*H, Out+of*Wo*Ho, FS, FS, PadIn, PadIn, W, H, Wo, Max(First, Wo_F), Min(Last, Wo_L), Ho, Ho_F, Ho_L, S, ReVal);
+			KerMaxPoolNxNStrideS_Body_fps(In+of*W*H, Out+of*Wo*Ho, FS, FS, PadIn[0], PadIn[2], W, H, Wo, Wo_F,Wo_L, Ho, Ho_F, Ho_L, S, ReVal);
+			if ((int) PadIn) KerMaxPoolNxNStrideS_Border_fps(In+of*W*H, Out+of*Wo*Ho, FS, FS, PadIn, PadIn, W, H, Wo, Wo_F, Wo_L, Ho, Ho_F, Ho_L, S, ReVal);
 		}
 	} else {
 		for (unsigned int of=First; of<Last; of++) {
-			KerAvgPoolNxNStrideS_Body_fps(In+of*W*H, Out+of*Wo*Ho, FS, FS, PadIn[0], PadIn[2], W, H, Wo, Max(First, Wo_F), Min(Last, Wo_L), Ho, Ho_F, Ho_L, S, ReVal);
-			if ((int) PadIn) KerAvgPoolNxNStrideS_Border_fps(In+of*W*H, Out+of*Wo*Ho, FS, FS, PadIn, PadIn, W, H, Wo, Max(First, Wo_F), Min(Last, Wo_L), Ho, Ho_F, Ho_L, S, ReVal);
+			KerAvgPoolNxNStrideS_Body_fps(In+of*W*H, Out+of*Wo*Ho, FS, FS, PadIn[0], PadIn[2], W, H, Wo,  Wo_F,  Wo_L, Ho, Ho_F, Ho_L, S, ReVal);
+			if ((int) PadIn) KerAvgPoolNxNStrideS_Border_fps(In+of*W*H, Out+of*Wo*Ho, FS, FS, PadIn, PadIn, W, H, Wo,  Wo_F,  Wo_L, Ho, Ho_F, Ho_L, S, ReVal);
 		}
 	}
 	gap8_waitbarrier(0);
@@ -1300,13 +1300,13 @@ void KerParPoolNxNStrideS_fp(KerParReLUPool_fp_T *Arg)
 
 	if (PoolMax) {
 		for (unsigned int of=First; of<Last; of++) {
-			KerMaxPoolNxNStrideS_Body_fp(In+of*Wref*Href, Out+of*Wo*Ho, FS, FS, PadIn[0], PadIn[2], W, H, Wo, Max(First, Wo_F), Min(Last, Wo_L), Ho, Ho_F, Ho_L, S, ReVal);
-			if ((int) PadIn) KerMaxPoolNxNStrideS_Border_fp(In+of*Wref*Href, Out+of*Wo*Ho, FS, FS, PadIn, PadIn, W, H, Wo, Max(First, Wo_F), Min(Last, Wo_L), Ho, Ho_F, Ho_L, S, ReVal);
+			KerMaxPoolNxNStrideS_Body_fp(In+of*Wref*Href, Out+of*Wo*Ho, FS, FS, PadIn[0], PadIn[2], W, H, Wo,  Wo_F,  Wo_L, Ho, Ho_F, Ho_L, S, ReVal);
+			if ((int) PadIn) KerMaxPoolNxNStrideS_Border_fp(In+of*Wref*Href, Out+of*Wo*Ho, FS, FS, PadIn, PadIn, W, H, Wo, Wo_F, Wo_L, Ho, Ho_F, Ho_L, S, ReVal);
 		}
 	} else {
 		for (unsigned int of=First; of<Last; of++) {
-			KerAvgPoolNxNStrideS_Body_fp(In+of*Wref*Href, Out+of*Wo*Ho, FS, FS, PadIn[0], PadIn[2], W, H, Wo, Max(First, Wo_F), Min(Last, Wo_L), Ho, Ho_F, Ho_L, S, ReVal);
-			if ((int) PadIn) KerAvgPoolNxNStrideS_Border_fp(In+of*Wref*Href, Out+of*Wo*Ho, FS, FS, PadIn, PadIn, W, H, Wo, Max(First, Wo_F), Min(Last, Wo_L), Ho, Ho_F, Ho_L, S, ReVal);
+			KerAvgPoolNxNStrideS_Body_fp(In+of*Wref*Href, Out+of*Wo*Ho, FS, FS, PadIn[0], PadIn[2], W, H, Wo, Wo_F, Wo_L, Ho, Ho_F, Ho_L, S, ReVal);
+			if ((int) PadIn) KerAvgPoolNxNStrideS_Border_fp(In+of*Wref*Href, Out+of*Wo*Ho, FS, FS, PadIn, PadIn, W, H, Wo, Wo_F, Wo_L, Ho, Ho_F, Ho_L, S, ReVal);
 		}
 	}
         gap8_waitbarrier(0);
