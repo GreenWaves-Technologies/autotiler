@@ -1,6 +1,10 @@
 /*
  * Copyright (C) 2017 GreenWaves Technologies
  * All rights reserved.
+ *
+ * This software may be modified and distributed under the terms
+ * of the Apache License.  See the LICENSE file for details.
+ *
  */
 
 #ifndef __AUTO_TILER_LIB__
@@ -127,26 +131,6 @@ void SetKernelOpts(
 /** @defgroup BasicK BasicKernelTemplate
 Functions in this group should be used to add basic kernels templates
 @{ */
-/**
-@brief Adds a new basic kernel type template
-
-Adds a new basic kernel template
-*/
-void LibKernelTemplate(
-	char *TemplateName,		/**< The template name */
-	CKernel_Arg_T **CArgs		/**< List of C typed arguments provided by CArgs()  */
-	);
-
-/**
-@brief Returns Template type for TemplateName
-
-Returns Template type for TemplateName
-*/
-CKernel_Arg_T **KerTypeTemplate(
-	char *TemplateName		/**< The template name */
-	);
-
-
 /**
 @brief Adds a new basic kernel template
 
@@ -459,21 +443,6 @@ ArgBindingDescr_T *K_Arg(
 	char *ArgName,			/**< A tiled user kernel argument name */
 	KernelArgSelect_T ArgSelect	/**< Select which user kernel argument property to be used */
 	);
-
-/**
-@brief Binds argument to a user kernel argument (a tiled argument) and combine it with Value using Oper
-
-Binds argument to a user kernel argument (a tiled argument) and combine it with Value using Oper
-
-See K_Arg() for ArgName and ArgSelect. Supported operation are defined in ArgBindingOper. Value is a signed immediate constant.
-*/
-ArgBindingDescr_T *K_ArgOper(
-	char *ArgName,			/**< A tiled user kernel argument name */
-	KernelArgSelect_T ArgSelect,	/**< Select which user kernel argument property to be used */
-	char Oper,			/**< Operation, see ArgBindingOper. Valid: + - * / %  */
-	int Value			/**< A signed immediate value */
-	);
-
 /** @} */ // End of ArgBind group
 /** @} */ // End of Calls group
 
@@ -524,25 +493,6 @@ Object_T *KerArg2D(
 	unsigned int W,			/**< Kernel argument Data plane width */
 	unsigned int H,			/**< Kernel argument Data plane height */
 	unsigned int Stride,		/**< Kernel argument W is strided with stride factor = Stride in bytes */
-	unsigned int ItemSize,		/**< Data plane basic data type size in bytes */
-	unsigned int TileOverlap,	/**< Amount of overlap between 2 adjacent tiles */
-	KernelArgConstraints_T Constraint, /**< Kernel argument constraints */
-	unsigned int PreferedTileSize,  /**< Tile variable dimension is prefered to a multiple of PreferedTileSize if not 0 */
-	char *CArgName,			/**< To which user kernel C argument this kernel argument is related to */
-	unsigned int NextPlaneUpdate	/**< When moving to the next plane use NextPlaneUpdate as a multiplication factor */
-	);
-
-/**
-@brief Creates one 3 dimensional user kernel argument.
-
-Creates one 3 dimensional user kernel argument.
-*/
-Object_T *KerArg3D(
-	char 	     *KerArgName,	/**< Kernel argument name */
-	Object_Type_T ObjType,		/**< Kernel argument type: logical OR of types (O_xxx) or pre defined types */
-	unsigned int W,			/**< Kernel argument Data plane width */
-	unsigned int H,			/**< Kernel argument Data plane height */
-	unsigned int Depth,		/**< Kernel argument depth, e.g 3rd dimension */
 	unsigned int ItemSize,		/**< Data plane basic data type size in bytes */
 	unsigned int TileOverlap,	/**< Amount of overlap between 2 adjacent tiles */
 	KernelArgConstraints_T Constraint, /**< Kernel argument constraints */
@@ -608,30 +558,6 @@ Object_T *KerArg2DP(
 	unsigned int W,			/**< Kernel argument Data plane width */
 	unsigned int H,			/**< Kernel argument Data plane height */
 	unsigned int Stride,		/**< Kernel argument W is strided with stride factor = Stride in bytes */
-	unsigned int PadL,		/**< Amount of padding to be added on the left of a line, unit is Item */
-	unsigned int PadR,		/**< Amount of padding to be added on the right of a line, unit is Item */
-	unsigned int PadT,		/**< Amount of padding to be added on the top of a column, unit is Item */
-	unsigned int PadB,		/**< Amount of padding to be added on the bottom of a column, unit is Item */
-	unsigned int ItemSize,		/**< Data plane basic data type size in bytes */
-	unsigned int TileOverlap,	/**< Amount of overlap between 2 adjacent tiles */
-	KernelArgConstraints_T Constraint, /**< Kernel argument constraints */
-	unsigned int PreferedTileSize,  /**< Tile variable dimension is prefered to a multiple of PreferedTileSize if not 0 */
-	char *CArgName,			/**< To which user kernel C argument this kernel argument is related to */
-	unsigned int NextPlaneUpdate	/**< When moving to the next plane use NextPlaneUpdate as a multiplication factor */
-	);
-
-/**
-@brief Creates one 3 dimensional user kernel argument with fixed padding left/right and top/bottom for this argument.
-
-Creates one 3 dimensional user kernel argument with fixed padding left/right and top/bottom for this argument.
-
-*/
-Object_T *KerArg3DP(
-	char 	     *KerArgName,	/**< Kernel argument name */
-	Object_Type_T ObjType,		/**< Kernel argument type: logical OR of types (O_xxx) or pre defined types */
-	unsigned int W,			/**< Kernel argument Data plane width */
-	unsigned int H,			/**< Kernel argument Data plane height */
-	unsigned int Depth,		/**< Kernel argument depth, e.g 3rd dimension */
 	unsigned int PadL,		/**< Amount of padding to be added on the left of a line, unit is Item */
 	unsigned int PadR,		/**< Amount of padding to be added on the right of a line, unit is Item */
 	unsigned int PadT,		/**< Amount of padding to be added on the top of a column, unit is Item */
@@ -790,19 +716,5 @@ void GenTilingWarning(
 extern ArgBindingDescr_T *AT_NO_ARG_BINDING, *AT_IGNORE_ARG_BINDING;
 extern CKernelCall_T *AT_NO_CALL;
 extern Object_T *AT_NO_KER_ARG;
-
-extern void SetAT_TestFile(char *AT_TestFileName);
-extern void AT_PrepareForTest(char *Name,
-                    v4s DataSize, // int In_DataSize, int Filter_DataSize, int Bias_DataSize, int Out_DataSize,
-                    v4s L3,
-                    int InFeat, int OutFeat, int Width, int Height,
-                    int FSc, int ConvStride, v4s PadInp, int ConvDoReLU, int DoConv,
-                    int FSp, int PoolStride, v4s PadInc, int PoolDoReLU, int DoPool,
-                    int DoLinear,
-                    int DoReLU,
-                    int DoSoftMax,
-                    int Norm,
-                    int NormBias);
-extern void AT_TestFinalize();
 
 #endif

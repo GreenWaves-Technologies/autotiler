@@ -1,7 +1,12 @@
 /*
  * Copyright (C) 2017 GreenWaves Technologies
  * All rights reserved.
+ *
+ * This software may be modified and distributed under the terms
+ * of the Apache License.  See the LICENSE file for details.
+ *
  */
+
 
 #ifndef __GEN_TILING_H__
 #define __GEN_TILING_H__
@@ -13,8 +18,6 @@
 @{ */
 
 /* Visible to tiler API */
-
-typedef   signed char  v4s __attribute__((vector_size (4)));
 
 typedef enum {
 	K_INP = 0,
@@ -170,7 +173,6 @@ typedef enum {
 	KER_ARG_INPLANEINDEX = 15,	/**< Current Input Plane index for related user kernel argument, starts at 0 */
 	KER_ARG_OUTPLANEINDEX = 16,	/**< Current Output Plane index for related user kernel argument, starts at 0 */
 	KER_ARG_PAD = 17,		/**< Actual padding of plane associated to arg (left,right,top,bottom) as a v4s */
-	KER_ARG_TILE_PAD = 18,		/**< Actual padding of tile associated to arg (left,right,top,bottom) as a v4s */
 
 	TC_ARG = 19,			/**< A C argument */
 	TC_IMM = 20,			/**< An immediate int value */
@@ -226,7 +228,7 @@ typedef enum {
 	O_NALIAS		= (1<<21),	/**< Argument is not aliased */
 	O_DYNTILE		= (1<<22),	/**< Argument tile size is adjusted dynamically */
 	O_NDYNTILE		= (1<<23),	/**< Argument tile size is not adjusted dynamically */
-
+	
 	O_TILE2			= (1<<29),	/**< Argument traverses the 3rd level of iteration on the basic data plane */
 	O_TILE1			= (1<<30),	/**< Argument traverses the 2nd level of iteration on the basic data plane */
 	O_TILE0			= (1<<31),	/**< Argument traverses the 1st level of iteration on the basic data plane, this should always be the case if tiled */
@@ -420,21 +422,6 @@ typedef enum {
 	BIND_KDIM = 4,	/**< Binds to one of the user kernel dimension */
 } ArgBindingT;
 
-/**
-@brief Argument binding selection, operation with a constant
-
-Argument binding selection, operation with a constant
-*/
-typedef enum {
-	BIND_OP_NOP=1,
-	BIND_OP_PLUS=2,
-	BIND_OP_MINUS=3,
-	BIND_OP_MULT=4,
-	BIND_OP_DIV=5,
-	BIND_OP_MOD=6,
-	BIND_OP_LAST=7,
-} ArgBindingOper;
-
 /* Internal tiler data structures */
 /// @cond PrivateStuff
 typedef struct {
@@ -456,7 +443,6 @@ typedef struct {
 	KernelArgSelect_T ArgSel;
 	unsigned int KernelArg;
 	int Value;
-	ArgBindingOper Oper;
 	NameT *ValueKernelArg;
 	NameT *NameKernelArg;		/* When bound to a C arg this is the actual name */
 } CKernel_Arg_T;
@@ -466,7 +452,6 @@ typedef struct {
 	ArgBindingT BindType;
 	NameT *SourceArgName;
 	int Value;
-	ArgBindingOper Oper;
 	NameT *CValueName;
 	KernelArgSelect_T ArgSelect;
 } ArgBindingDescr_T;
@@ -498,7 +483,6 @@ typedef struct A_Kernel_Arg_T {
 	unsigned int NextPlaneUpdate;
 	unsigned int Width;
 	unsigned int UsedWidth;
-	unsigned int Depth;
 	int Overlap;
 	unsigned int DimRatio;
 	unsigned int Constraints;
@@ -506,7 +490,6 @@ typedef struct A_Kernel_Arg_T {
 	unsigned int VarDim[2];
 	unsigned int Pad[4];
 	unsigned int OrgPad[4];
-	unsigned int ArgPad[4];
 	unsigned int ItemSize;
 	unsigned int MoveSize[2];
 	unsigned int MoveStride;
@@ -534,10 +517,8 @@ typedef struct A_Object_T {
 	unsigned int UsedWidth;
 	unsigned int Height;
 	unsigned int UsedHeight;
-	unsigned int Depth;
 	unsigned int Pad[4];
 	unsigned int OrgPad[4];
-	unsigned int ArgPad[4];
 	unsigned int ArgStride;
 	unsigned int BottomBuffer;
 	unsigned int TopBuffer;
@@ -588,8 +569,6 @@ typedef struct {
 	unsigned int BaseIndex;
 	unsigned int DynSymbolCount;
 	KernelDynamicSymbol_T **DynSymbol;
-	unsigned int UsedL1Memory;
-	unsigned int UsedL2Memory;
 } Kernel_T;
 
 typedef struct {
@@ -614,12 +593,6 @@ typedef struct {
 	CKernelCall_T **CCalls;
 } KernelGroup_T;
 
-typedef struct {
-	NameT *Name;
-	unsigned int CArgCount;
-	CKernel_Arg_T **CArg;
-} KernelLibTemplate_T;
-
 #define Q2F(V, N)               ((float) (((float) (V))/((1<<(N))-0)))
 #define MultRndu(x,y, scale)    ((unsigned int)(((x)*(y)) + (1<<((scale)-1)))>>(scale))
 #define Max(a, b)               (((a)>(b))?(a):(b))
@@ -627,10 +600,8 @@ typedef struct {
 
 /* Return aligned value, alignment is 2^Size */
 #define ALIGN(Value, Size)      (((Value)&((1<<(Size))-1))?((((Value)>>(Size))+1)<<(Size)):(Value))
-extern	   KernelLibTemplate_T KernelLibTemplate[];
 extern	   KernelLib_T KernelLib[];
 extern int HeadKernelLib;
-extern int HeadKernelLibTemplate;
 extern     Kernel_T KernelStack[];
 extern int HeadKernelStack;
 
@@ -645,44 +616,4 @@ extern char *LibTemplateName;
 /// @endcond
 
 /** @}*/ // End of group AutoTilerTypes
-
-/* Data type for non inlined code generation, used at runtime */
-
-typedef struct {
-        int DimRatio;
-        unsigned int L2Offset;
-        unsigned short int L1Offset;
-        unsigned short int FixDim[2];
-        unsigned short int VarDim[2];
-        unsigned short int MoveSize[2];
-        unsigned short int MoveStride;
-        unsigned short int Length2D[2];
-        unsigned short int Stride2D;
-        unsigned short int BufferSize;
-        unsigned short int BuffCount;
-} Kernel_Arg_Exec_T;
-
-typedef struct {
-        unsigned char Iteration[4];
-        unsigned char ArgCount;
-        unsigned char NinPlanes;
-        unsigned char NoutPlanes;
-        Kernel_Arg_Exec_T *Arg;
-} Kernel_Exec_T;
-
-#define BYTE                        1
-#define HALF_WORD                   2
-#define WORD                        4
-#define FROM_L2                     0
-#define FROM_L3                     1
-#define TO_L2                       0
-#define TO_L3                       1
-#define NO_PADDING                  0
-#define ZERO_PADDING                1
-#define NO_RELU                     0
-#define RELU                        1
-#define NO_POOLING                  0
-#define MAX_POOLING                 1
-#define AVG_POOLING                 2
-
 #endif

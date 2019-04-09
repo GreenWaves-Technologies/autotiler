@@ -1,17 +1,19 @@
 /*
  * Copyright (C) 2017 GreenWaves Technologies
  * All rights reserved.
+ *
+ * This software may be modified and distributed under the terms
+ * of the Apache License.  See the LICENSE file for details.
+ *
  */
 
 #ifndef __HASH_NAME_H__
 #define __HASH_NAME_H__
 
-#include <stddef.h>
-
 typedef struct ANameT NameT;
 typedef struct ANameT {
         char *Name;
-	unsigned int Len;
+	size_t Len;
         NameT *Next;
 } NameT;
 
