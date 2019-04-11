@@ -1,4 +1,4 @@
-TILER_VER=dornet
+TILER_VER=dronet
 TILER_LIB=libtile.${TILER_VER}.a
 
 all: lib/libtile.a
