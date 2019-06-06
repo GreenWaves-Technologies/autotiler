@@ -24,7 +24,8 @@ extern void LoadCNNLibrary();
         Width:      Number of columns of a given feature map
         Height:     Number of lines of a given feature map
 
-        FSc:        Dimension of the convolution (FSc x FSc)
+        FScW:       Dimension of the W convolution
+        FScH:       Dimension of the H convolution
         ConvStride: Stride between 2 points in the input feature map where convolution is evaluated
         ConvDoPad:  0: No padding, 1: Zero padding
         ConvDoReLU: Performs linear rectification after all convolutions for a given output feature's map have been evaluated
@@ -77,6 +78,7 @@ extern void LoadCNNLibrary();
 
 *********************************************************************************************************************************************************************/
 
+
 extern void CNN_LargeConvolutionPoolReLU_Hor(
             char         *Name,
 
@@ -90,22 +92,28 @@ extern void CNN_LargeConvolutionPoolReLU_Hor(
             unsigned int Bias_InL3,
             unsigned int Out_InL3,
 
-                        unsigned int InFeat,
-                        unsigned int OutFeat,
-                        unsigned int Width,
-                        unsigned int Height,
+            unsigned int InFeat,
+            unsigned int OutFeat,
+            unsigned int Width,
+            unsigned int Height,
 
-                        unsigned int FSc,
-            unsigned int ConvStride,
+            unsigned int FScW,
+            unsigned int FScH,
+            unsigned int ConvStrideW,
+            unsigned int ConvStrideH,
+            unsigned int ConvDilationW,
+            unsigned int ConvDilationH,
             int          ConvDoPad,
             int          ConvDoReLU,
 
-            unsigned int FSp,
-            unsigned int PoolStride,
+            unsigned int FSpW,
+            unsigned int FSpH,
+            unsigned int PoolStrideW,
+            unsigned int PoolStrideH,
+            
             int          PoolDoPad,
             int          PoolDoReLU,
-
-            int      DoPool
+            int          DoPool
             );
 
 extern void CNN_LargeConvolutionPoolReLU_Ver(
@@ -121,22 +129,28 @@ extern void CNN_LargeConvolutionPoolReLU_Ver(
             unsigned int Bias_InL3,
             unsigned int Out_InL3,
 
-                        unsigned int InFeat,
-                        unsigned int OutFeat,
-                        unsigned int Width,
-                        unsigned int Height,
+            unsigned int InFeat,
+            unsigned int OutFeat,
+            unsigned int Width,
+            unsigned int Height,
 
-                        unsigned int FSc,
-            unsigned int ConvStride,
+            unsigned int FScW,
+            unsigned int FScH,
+            unsigned int ConvStrideW,
+            unsigned int ConvStrideH,
+            unsigned int ConvDilationW,
+            unsigned int ConvDilationH,
             int          ConvDoPad,
             int          ConvDoReLU,
 
-            unsigned int FSp,
-            unsigned int PoolStride,
+            unsigned int FSpW,
+            unsigned int FSpH,
+            unsigned int PoolStrideW,
+            unsigned int PoolStrideH,
+            
             int          PoolDoPad,
             int          PoolDoReLU,
-
-            int      DoPool
+            int          DoPool
             );
 
 extern void CNN_LargeParOutFeatConvolutionPoolReLU_Hor(
@@ -152,22 +166,28 @@ extern void CNN_LargeParOutFeatConvolutionPoolReLU_Hor(
             unsigned int Bias_InL3,
             unsigned int Out_InL3,
 
-                        unsigned int InFeat,
-                        unsigned int OutFeat,
-                        unsigned int Width,
-                        unsigned int Height,
+            unsigned int InFeat,
+            unsigned int OutFeat,
+            unsigned int Width,
+            unsigned int Height,
 
-                        unsigned int FSc,
-            unsigned int ConvStride,
+            unsigned int FScW,
+            unsigned int FScH,
+            unsigned int ConvStrideW,
+            unsigned int ConvStrideH,
+            unsigned int ConvDilationW,
+            unsigned int ConvDilationH,
             int          ConvDoPad,
             int          ConvDoReLU,
 
-            unsigned int FSp,
-            unsigned int PoolStride,
+            unsigned int FSpW,
+            unsigned int FSpH,
+            unsigned int PoolStrideW,
+            unsigned int PoolStrideH,
+            
             int          PoolDoPad,
             int          PoolDoReLU,
-
-            int      DoPool
+            int          DoPool
             );
 
 extern void CNN_LargeParOutFeatConvolutionPoolReLU_Ver(
@@ -183,24 +203,29 @@ extern void CNN_LargeParOutFeatConvolutionPoolReLU_Ver(
             unsigned int Bias_InL3,
             unsigned int Out_InL3,
 
-                        unsigned int InFeat,
-                        unsigned int OutFeat,
-                        unsigned int Width,
-                        unsigned int Height,
+            unsigned int InFeat,
+            unsigned int OutFeat,
+            unsigned int Width,
+            unsigned int Height,
 
-                        unsigned int FSc,
-            unsigned int ConvStride,
+            unsigned int FScW,
+            unsigned int FScH,
+            unsigned int ConvStrideW,
+            unsigned int ConvStrideH,
+            unsigned int ConvDilationW,
+            unsigned int ConvDilationH,
             int          ConvDoPad,
             int          ConvDoReLU,
 
-            unsigned int FSp,
-            unsigned int PoolStride,
+            unsigned int FSpW,
+            unsigned int FSpH,
+            unsigned int PoolStrideW,
+            unsigned int PoolStrideH,
+            
             int          PoolDoPad,
             int          PoolDoReLU,
-
-            int      DoPool
+            int          DoPool
             );
-
 
 extern void CNN_SmallParOutFeatConvolutionPoolReLU(
             char         *Name,
@@ -220,17 +245,23 @@ extern void CNN_SmallParOutFeatConvolutionPoolReLU(
             unsigned int Width,
             unsigned int Height,
 
-            unsigned int FSc,
-            unsigned int ConvStride,
+            unsigned int FScW,
+            unsigned int FScH,
+            unsigned int ConvStrideW,
+            unsigned int ConvStrideH,
+            unsigned int ConvDilationW,
+            unsigned int ConvDilationH,
             int          ConvDoPad,
             int          ConvDoReLU,
 
-            unsigned int FSp,
-            unsigned int PoolStride,
+            unsigned int FSpW,
+            unsigned int FSpH,
+            unsigned int PoolStrideW,
+            unsigned int PoolStrideH,
+            
             int          PoolDoPad,
             int          PoolDoReLU,
-
-            int      DoPool     // 0: NoPool, 1: Max Pool, 2: Average Pool
+            int          DoPool
             );
 
 
@@ -273,7 +304,7 @@ extern void CNN_SmallParOutFeatConvolutionPoolReLU(
 
 *********************************************************************************************************************************************************************/
 
-void CNN_LargeDepthWiseConvolutionReLU_Hor(
+extern void CNN_LargeDepthWiseConvolutionReLU_Hor(
             char         *Name,
     
             unsigned int In_DataSize,
@@ -290,13 +321,16 @@ void CNN_LargeDepthWiseConvolutionReLU_Hor(
             unsigned int Width,
             unsigned int Height,
     
-            unsigned int FSc,
-            unsigned int ConvStride,
+            unsigned int FScW,
+            unsigned int FScH,
+            unsigned int ConvStrideW,
+            unsigned int ConvStrideH,
             int          ConvDoPad,
             int          ConvDoReLU
             );
 
-void CNN_LargeDepthWiseConvolutionReLU_Ver(
+
+extern void CNN_LargeDepthWiseConvolutionReLU_Ver(
             char         *Name,
     
             unsigned int In_DataSize,
@@ -313,8 +347,10 @@ void CNN_LargeDepthWiseConvolutionReLU_Ver(
             unsigned int Width,
             unsigned int Height,
     
-            unsigned int FSc,
-            unsigned int ConvStride,
+            unsigned int FScW,
+            unsigned int FScH,
+            unsigned int ConvStrideW,
+            unsigned int ConvStrideH,
             int          ConvDoPad,
             int          ConvDoReLU
             );
@@ -368,13 +404,15 @@ extern void CNN_LargePoolReLU(
             unsigned int In_InL3,       // 1 if In comes from L3, 0 if it comes from L2
             unsigned int Out_InL3,
 
-                        unsigned int InFeat,
-                        unsigned int OutFeat,
-                        unsigned int Width,
-                        unsigned int Height,
+            unsigned int InFeat,
+            unsigned int OutFeat,
+            unsigned int Width,
+            unsigned int Height,
 
-            unsigned int FSp,
-            unsigned int PoolStride,
+            unsigned int FSpW,
+            unsigned int FSpH,
+            unsigned int PoolStrideW,
+            unsigned int PoolStrideH,
             int          PoolDoPad,
             int          PoolDoReLU,
 
@@ -390,13 +428,15 @@ extern void CNN_LargeParOutFeatPoolReLU(
             unsigned int In_InL3,       // 1 if In comes from L3, 0 if it comes from L2
             unsigned int Out_InL3,
 
-                        unsigned int InFeat,
-                        unsigned int OutFeat,
-                        unsigned int Width,
-                        unsigned int Height,
+            unsigned int InFeat,
+            unsigned int OutFeat,
+            unsigned int Width,
+            unsigned int Height,
 
-            unsigned int FSp,
-            unsigned int PoolStride,
+            unsigned int FSpW,
+            unsigned int FSpH,
+            unsigned int PoolStrideW,
+            unsigned int PoolStrideH,
             int          PoolDoPad,
             int          PoolDoReLU,
 
@@ -412,18 +452,21 @@ extern void CNN_SmallParOutFeatPoolReLU(
             unsigned int In_InL3,       // 1 if In comes from L3, 0 if it comes from L2
             unsigned int Out_InL3,
 
-                        unsigned int InFeat,
-                        unsigned int OutFeat,
-                        unsigned int Width,
-                        unsigned int Height,
+            unsigned int InFeat,
+            unsigned int OutFeat,
+            unsigned int Width,
+            unsigned int Height,
 
-            unsigned int FSp,
-            unsigned int PoolStride,
+            unsigned int FSpW,
+            unsigned int FSpH,
+            unsigned int PoolStrideW,
+            unsigned int PoolStrideH,
             int          PoolDoPad,
             int          PoolDoReLU,
 
             int      DoPool     // 0: NoPool, 1: Max Pool, 2: Average Pool
             );
+
 
 
 /*********************************************************************************************************************************************************************
@@ -619,7 +662,9 @@ void CNN_LoadHWCEKernelLibrary();
 HWCE enabled Pure convolution, no bias setting and no accumulation.
 */
 void CNN_TiledPlainConvNxN_HWCE_fp(
-    char *Name,         /**< Name of the generated tiled kernel */
+
+    char *Name,             /**< Name of the generated tiled kernel */
+
     unsigned int FS,        /**< Convolution dimension, 3, 5, or 7 */
     unsigned int Width,     /**< Input plane width, Width should be even */
     unsigned int Height     /**< Input plane height */
@@ -634,6 +679,7 @@ void CNN_TiledConvNxN_HWCE_fp(
     unsigned int FS,        /**< Convolution dimension, 3, 5 or 7*/
     unsigned int InPlane,       /**< Number of input planes */
     unsigned int OutPlane,      /**< Number of output planes */
+
     unsigned int Width,     /**< Input plane width, Width should be even */
     unsigned int Height     /**< Input plane height */
     );
@@ -643,6 +689,7 @@ void CNN_TiledConvNxN_HWCE_fp(
 HWCE enabled Convolution layer, 3x3 convolution multiple output mode, bias setting and accumulation.
 */
 void CNN_TiledConv3x3_HWCE_MultiOut_fp(
+
     char *Name,         /**< Name of the generated tiled kernel */
     unsigned int Nout,      /**< Number of output processed in parallel: 1, 2 or 3 */
     unsigned int InPlane,       /**< Number of input planes */
@@ -656,13 +703,13 @@ void CNN_TiledConv3x3_HWCE_MultiOut_fp(
 HWCE enabled composite kernels: NxN convolution (3/5/7), ReLU and Max or Average Pooling 2x2 -> 1.
 */
 void CNN_TiledConvNxNReLUPool2x2_HWCE_fp(
-    char *Name,         /**< Name of the generated tiled kernel */
+    char *Name,             /**< Name of the generated tiled kernel */
     unsigned int FS,        /**< Convolution dimension, 3, 5 or 7 */
-    unsigned int InPlane,       /**< Number of input planes */
-    unsigned int OutPlane,      /**< Number of output planes */
+    unsigned int InPlane,   /**< Number of input planes */
+    unsigned int OutPlane,  /**< Number of output planes */
     unsigned int Width,     /**< Input plane width, Width should be even */
-    unsigned int Height,        /**< Input plane height */
-    unsigned int PoolMax        /**< 0: ReLU then Average 2x2 pooling, 1: ReLU then Max 2x2 pooling, 2: Average 2x2 pooling, 3: Max 2x2 pooling. */
+    unsigned int Height,    /**< Input plane height */
+    unsigned int PoolMax    /**< 0: ReLU then Average 2x2 pooling, 1: ReLU then Max 2x2 pooling, 2: Average 2x2 pooling, 3: Max 2x2 pooling. */
     );
 
 /* @brief HWCE enabled composite kernel: 3x3 convolution, ReLU and Max Pooling 2x2 -> 1, multiple out mode.
@@ -670,13 +717,13 @@ void CNN_TiledConvNxNReLUPool2x2_HWCE_fp(
 HWCE enabled composite kernel: 3x3 convolution, ReLU and Max Pooling 2x2 -> 1, multiple out mode.
 */
 void CNN_TiledConv3x3ReLUPool2x2_HWCE_MultiOut_fp(
-    char *Name,         /**< Name of the generated tiled kernel */
+    char *Name,             /**< Name of the generated tiled kernel */
     unsigned int Nout,      /**< Number of simultaneously produced outputs, 1, 2 or 3 */
-        unsigned int InPlane,       /**< Number of input planes */
-    unsigned int OutPlane,      /**< Number of output planes */
+    unsigned int InPlane,   /**< Number of input planes */
+    unsigned int OutPlane,  /**< Number of output planes */
     unsigned int Width,     /**< Input plane width, Width should be even */
-    unsigned int Height,        /**< Input plane height */
-        unsigned int PoolMax        /**< 0: Average 2x2 pooling. 1: Max 2x2 pooling */
+    unsigned int Height,    /**< Input plane height */
+    unsigned int PoolMax    /**< 0: Average 2x2 pooling. 1: Max 2x2 pooling */
     );
 
 #endif

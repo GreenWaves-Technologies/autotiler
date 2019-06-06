@@ -16,20 +16,20 @@
 #define HWCE_CONV5x5            0
 #define HWCE_CONV4x7            2
 
-#define HWCE_ONE_OUT		0x7
-#define HWCE_TWO_OUT		0x3
-#define HWCE_THREE_OUT		0x1
-#define HWCE_FOUR_OUT		0x0
+#define HWCE_ONE_OUT    0x7
+#define HWCE_TWO_OUT    0x3
+#define HWCE_THREE_OUT    0x1
+#define HWCE_FOUR_OUT   0x0
 
 /* HWCE enabled convolutions
 
-Nip: 		Number of input planes
-Nop: 		Number of output planes
+Nip:    Number of input planes
+Nop:    Number of output planes
 
-Filter: 	(2K+1) x (2K + 1)
+Filter:   (2K+1) x (2K + 1)
 
-Input plane: 	W x H
-Output plane:	(W-2K) x (H-2K)
+Input plane:  W x H
+Output plane: (W-2K) x (H-2K)
 
 1) 3x3, Single output per cycle
    HWCE 3x3 convolution on Nip input planes, each of them is W x H, and Nop output planes. One convolution output
@@ -149,7 +149,7 @@ Clock is released
 static inline void HWCE_Enable()
 
 {
-	plp_hwce_enable();
+    plp_hwce_enable();
 }
 
 /** @brief Disable the HWCE
@@ -161,7 +161,7 @@ Clock is paused (HW is clock gated)
 static inline void HWCE_Disable()
 
 {
-	plp_hwce_disable();
+    plp_hwce_disable();
 }
 
 /** @brief Software reset the HWCE
@@ -171,7 +171,7 @@ Software reset the HWCE
 static inline void HwCE_SoftReset()
 
 {
-	__builtin_pulp_OffsetedWrite(1, (int *) HWCE_ADDR_BASE, HWCE_SOFT_CLEAR);
+    __builtin_pulp_OffsetedWrite(1, (int *) HWCE_ADDR_BASE, HWCE_SOFT_CLEAR);
 }
 
 /** @brief Configure the HWCE
@@ -179,18 +179,18 @@ static inline void HwCE_SoftReset()
 Configure the HWCE
 */
 void HWCE_GenericInit(
-	unsigned int ConvType,	/**< 0: 5x5 conv, 1: 3x3 conv, 2: 7x4 conv */
-	unsigned int WStride,	/**< Width in pixels of the convolution input's data */
-	unsigned int Norm	/**< Fixed point format, max is Q15. */
-	);
+    unsigned int ConvType,  /**< 0: 5x5 conv, 1: 3x3 conv, 2: 7x4 conv */
+    unsigned int WStride, /**< Width in pixels of the convolution input's data */
+    unsigned int Norm /**< Fixed point format, max is Q15. */
+);
 
 /** @brief Set bias value
 
 Set bias value
 */
 void HwCE_SetInputBias(
-	int Bias	/**< Bias value, fixed point, max is Q15. */
-	);
+    int Bias  /**< Bias value, fixed point, max is Q15. */
+);
 
 /** @brief Control convolution Bias usage
 
@@ -201,8 +201,8 @@ Control convolution Bias usage
         When Disable = 0 a convolution result will be accumulated with previous result
 */
 void HwCE_SetYinMode(
-	unsigned int Disable	/**< 1: use bias, 0: use previous convolution result */
-	);
+    unsigned int Disable  /**< 1: use bias, 0: use previous convolution result */
+);
 
 
 /** @brief HWCE based 3x3 convolution, short inputs, outputs, coefficients and bias. 1, 2 or 3 outputs per cycle.
@@ -268,16 +268,16 @@ HWCE based 3x3 convolution, short inputs, outputs, coefficients and bias. 1, 2 o
                 In this case padding is needed for coefficients, one zero added after 3x8=27 coefficients
 */
 void HWCE_ProcessOneTile3x3_MultiOut(
-	short int *In,		/**< Pointer to input tile of dimension [W x H] */
-	short int *Out0,	/**< Pointer to 1st output tile of dimension [W-2 x H-2] */
-	short int *Out1,	/**< Null or pointer to 2nd output tile of dimension [W-2 x H-2] */
-	short int *Out2,	/**< Null or pointer to 3rd output tile of dimension [W-2 x H-2] */
-	short int *Filter,	/**< Pointer to Filter coeffs, */
-	short int Bias,		/**< Bias input value, relevant only in 1 output mode */
-	unsigned int W,		/**< Input tile width */
-	unsigned int H,		/**< Input tile height */
-	unsigned int OutMask	/**< Number of output produced: 0x7 => 1 out, 0x3 => 2 out, 0x1 => 3 out  */
-	);
+    short int *In,    /**< Pointer to input tile of dimension [W x H] */
+    short int *Out0,  /**< Pointer to 1st output tile of dimension [W-2 x H-2] */
+    short int *Out1,  /**< Null or pointer to 2nd output tile of dimension [W-2 x H-2] */
+    short int *Out2,  /**< Null or pointer to 3rd output tile of dimension [W-2 x H-2] */
+    short int *Filter,  /**< Pointer to Filter coeffs, */
+    short int Bias,   /**< Bias input value, relevant only in 1 output mode */
+    unsigned int W,   /**< Input tile width */
+    unsigned int H,   /**< Input tile height */
+    unsigned int OutMask  /**< Number of output produced: 0x7 => 1 out, 0x3 => 2 out, 0x1 => 3 out  */
+);
 
 /** @brief HWCE based 5x5 convolution, short inputs, outputs, coefficients and bias.
 
@@ -303,20 +303,20 @@ HWCE based 5x5 convolution, short inputs, outputs, coefficients and bias.
              Each filter group (5x5) should be padded with one zero, this is a HWCE alignment constraint
 */
 void HWCE_ProcessOneTile5x5(
-	short int *In,		/**< Pointer to input, Dim: [W x H], max Q15. */
-	short int *Out,		/**< Pointer to output, Dim: [W-4 x H-4], max Q15. */
-	short int *Filter,	/**< Pointer to convolution coeffs, Dim: [5x5] + 1, Max Q15 */
-	short int Bias,		/**< Input Bias */
-	unsigned int W,		/**< Input width */
-	unsigned int H		/**< Input height */
-	);
+    short int *In,    /**< Pointer to input, Dim: [W x H], max Q15. */
+    short int *Out,   /**< Pointer to output, Dim: [W-4 x H-4], max Q15. */
+    short int *Filter,  /**< Pointer to convolution coeffs, Dim: [5x5] + 1, Max Q15 */
+    short int Bias,   /**< Input Bias */
+    unsigned int W,   /**< Input width */
+    unsigned int H    /**< Input height */
+);
 
 /** @brief HWCE based 7x7 convolution, short inputs, outputs, coefficients and bias.
 
 HWCE based 7x7 convolution, short inputs, outputs, coefficients and bias.
 
         7x7, 1 output each 2 cycles since it is built through combination of 2 adjacent 7x4 convolutions.
-	The second convolution has it's last line at 0.
+  The second convolution has it's last line at 0.
         HWCE 7x7 convolution on Nip input planes, each of them is W x H, and Nop output planes. One convolution output.
         is produced at a time
         Filter:
@@ -335,13 +335,13 @@ HWCE based 7x7 convolution, short inputs, outputs, coefficients and bias.
              Each filter group (7x7) should be padded with 7 zero
 */
 void HWCE_ProcessOneTile7x7(
-	short int *In,		/**< Pointer to input, Dim: [W x H], max Q15. */
-	short int *Out,		/**< Pointer to output, Dim: [W-6 x H-6], max Q15. */
-	short int *Filter,	/**< Pointer to convolution coeffs, Dim: [7 x 8], last line is all 0. */
-	short int Bias,		/**< Input bias */
-	unsigned int W,		/**< Input width */
-	unsigned int H		/**< Input height */
-	);
+    short int *In,    /**< Pointer to input, Dim: [W x H], max Q15. */
+    short int *Out,   /**< Pointer to output, Dim: [W-6 x H-6], max Q15. */
+    short int *Filter,  /**< Pointer to convolution coeffs, Dim: [7 x 8], last line is all 0. */
+    short int Bias,   /**< Input bias */
+    unsigned int W,   /**< Input width */
+    unsigned int H    /**< Input height */
+);
 
 /** @brief HWCE based 7x4 convolution, short inputs, outputs, coefficients and bias.
 
@@ -365,13 +365,13 @@ HWCE based 7x4 convolution, short inputs, outputs, coefficients and bias.
              W has to be a multiple of 2
 */
 void HWCE_ProcessOneTile7x4(
-	short int *In,		/**< Pointer to input, Dim: [W x H], max Q15. */
-	short int *Out,		/**< Pointer to output, Dim: [W-6 x H-3], max Q15. */
-	short int *Filter,	/**< Pointer to convolution coeffs, Dim: [7 x 4]. */
-	short int Bias,		/**< Input bias */
-	unsigned int W,		/**< Input width */
-	unsigned int H		/**< Input height */
-	);
+    short int *In,    /**< Pointer to input, Dim: [W x H], max Q15. */
+    short int *Out,   /**< Pointer to output, Dim: [W-6 x H-3], max Q15. */
+    short int *Filter,  /**< Pointer to convolution coeffs, Dim: [7 x 4]. */
+    short int Bias,   /**< Input bias */
+    unsigned int W,   /**< Input width */
+    unsigned int H    /**< Input height */
+);
 
 /** @} */ // End of CNNHWCEBasicKernels
 /** @} */

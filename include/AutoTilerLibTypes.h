@@ -185,6 +185,9 @@ typedef enum {
 	TC_ARG_PLUS_IND_TILE = 29,	/**< A C argument added to the current current most inner iteration index on argument basic data plane multiplied by a constant */
 	TC_ARG_PLUS_OFFSET = 30,	/**< A C argument plus an immediate offset */
 	TC_ARG_PLUS_C_OFFSET = 31,	/**< A C argument plus a C variable name offset */
+	TC_ARG_IN_IND_IP = 32,		/**< A C argument pointer subscripted by the current In Data Plane iteration index */
+	TC_ARG_IN_IND_OP = 33,		/**< A C argument pointer subscripted by the current Out Data Plane iteration index */
+	TC_ARG_IN_IND_TILE = 34,	/**< A C argument pointer subscripted by the current current most inner iteration index on argument basic data plane */
 } KernelArgSelect_T;
 
 /// @cond PrivateStuff
