@@ -303,7 +303,7 @@ void KerSetNormedBias_fpd_fp(KerSetNormedBias_fpd_fp_T *Arg)
     unsigned int First = CoreId * ChunkCell;
     unsigned int Last  = Minu(First + ChunkCell, W * H);
 
-    for (int i = First; i < Last; i++) Out[i] = Bias;
+    for (unsigned int i = First; i < Last; i++) Out[i] = Bias;
 
     gap8_waitbarrier(0);
 }
@@ -426,7 +426,7 @@ void KerReLU_fp(KerReLUPool_fp_T *Arg)
     unsigned int Last  = Minu(First + ChunkCell, (W * H) / 2);
     v2s *VectIn  = (v2s *) In;
     v2s *VectOut = (v2s *) Out;
-    int i, j;
+    unsigned int i, j;
 
     for (i = First; i < Last; i++) VectOut[i] = gap8_max2(VectIn[i], ((v2s){0, 0}));
     if ((W * H) & 0x1) Out[W * H - 1] = Max(In[W * H - 1], 0);
@@ -437,8 +437,8 @@ void KerReLU_fps(KerReLUPool_fps_T *Arg)
 
 {
     signed char *__restrict__ In = Arg->In;
-    int W = Arg->W;
-    int H = Arg->H;
+    unsigned int W = Arg->W;
+    unsigned int H = Arg->H;
     signed char *__restrict__ Out = Arg->Out;
 
     unsigned int CoreId = gap8_coreid();
@@ -447,7 +447,7 @@ void KerReLU_fps(KerReLUPool_fps_T *Arg)
     unsigned int Last  = Minu(First + ChunkCell, (W * H) / 4);
     v4s *VectIn  = (v4s *) In;
     v4s *VectOut = (v4s *) Out;
-    int i, j;
+    unsigned int i, j;
 
     for (i = First; i < Last; i++) VectOut[i] = gap8_max4(VectIn[i], ((v4s)
     {
@@ -465,7 +465,7 @@ void KerLinearLayerReLU_fp(KerLinearLayerReLU_fp_T *Arg)
 
 {
     short int *__restrict__ In = Arg->In;
-    int InSize = Arg->InSize;
+    unsigned int InSize = Arg->InSize;
     const short int *__restrict__ Filter = Arg->Filter;
     const short int *__restrict__ Bias = Arg->Bias;
     unsigned int Norm = Arg->Norm;
@@ -485,7 +485,7 @@ void KerLinearLayerReLU_fp(KerLinearLayerReLU_fp_T *Arg)
         v2s *__restrict__ Filt = (v2s *) (&Filter[i * InSize + First]);
         v2s *__restrict__ VectIn = (v2s *) (&In[First]);
         int Acc = 0;
-        for (int j = 0; j < (Iter / 2); j++) Acc = gap8_sumdotp2(VectIn[j], Filt[j], Acc);
+        for (unsigned int j = 0; j < (Iter / 2); j++) Acc = gap8_sumdotp2(VectIn[j], Filt[j], Acc);
         if (Iter % 2) Acc += In[Last - 1] * Filter[i * InSize + Last - 1];
         Reduct[CoreId] = Acc;
         gap8_waitbarrier(0);
@@ -504,7 +504,7 @@ void KerLinearLayerReLU_fps(KerLinearLayerReLU_fps_T *Arg)
 
 {
     signed char *__restrict__ In = Arg->In;
-    int InSize = Arg->InSize;
+    unsigned int InSize = Arg->InSize;
     const signed char *__restrict__ Filter = Arg->Filter;
     const signed char *__restrict__ Bias = Arg->Bias;
     unsigned int Norm = Arg->Norm;
@@ -524,8 +524,8 @@ void KerLinearLayerReLU_fps(KerLinearLayerReLU_fps_T *Arg)
         v4s *__restrict__ Filt = (v4s *) (&Filter[i * InSize + First]);
         v4s *__restrict__ VectIn = (v4s *) (&In[First]);
         int Acc = 0;
-        for (int j = 0; j < (Iter / 4); j++) Acc = gap8_sumdotp4(VectIn[j], Filt[j], Acc);
-        for (int j = 4 * (Iter / 4); j < Iter; j++) Acc += In[First + j] * Filter[i * InSize + First + j];
+        for (unsigned int j = 0; j < (Iter / 4); j++) Acc = gap8_sumdotp4(VectIn[j], Filt[j], Acc);
+        for (unsigned int j = 4 * (Iter / 4); j < Iter; j++) Acc += In[First + j] * Filter[i * InSize + First + j];
         Reduct[CoreId] = Acc;
         gap8_waitbarrier(0);
         if (CoreId == 0)
@@ -543,7 +543,7 @@ void KerLinearLayerReLU_fp_fps_fp(KerLinearLayerReLU_fp_fps_fp_T *Arg)
 
 {
     short int *__restrict__ In = Arg->In;
-    int InSize = Arg->InSize;
+    unsigned int InSize = Arg->InSize;
     const signed char *__restrict__ Filter = Arg->Filter;
     const short int *__restrict__ Bias = Arg->Bias;
     unsigned int Norm = Arg->Norm;
@@ -563,7 +563,7 @@ void KerLinearLayerReLU_fp_fps_fp(KerLinearLayerReLU_fp_fps_fp_T *Arg)
     {
         v2s *__restrict__ VectIn = (v2s *) (&In[First]);
         int Acc = 0;
-        for (int j = 0; j < (Iter / 2); j++)
+        for (unsigned int j = 0; j < (Iter / 2); j++)
         {
             v2s F = gap8_pack2(Filter[i * InSize + First + 2 * j], Filter[i * InSize + First + 2 * j + 1]);
             Acc = gap8_sumdotp2(VectIn[j], F, Acc);
@@ -586,7 +586,7 @@ void KerLinearLayerReLU_fp_fp_fpd(KerLinearLayerReLU_fp_fp_fpd_T *Arg)
 
 {
     short int *__restrict__ In = Arg->In;
-    int InSize = Arg->InSize;
+    unsigned int InSize = Arg->InSize;
     const short int *__restrict__ Filter = Arg->Filter;
     const short int *__restrict__ Bias = Arg->Bias;
     unsigned int Norm = Arg->Norm;
@@ -607,7 +607,7 @@ void KerLinearLayerReLU_fp_fp_fpd(KerLinearLayerReLU_fp_fp_fpd_T *Arg)
         v2s *__restrict__ Filt = (v2s *) (&Filter[i * InSize + First]);
         v2s *__restrict__ VectIn = (v2s *) (&In[First]);
         int Acc = 0;
-        for (int j = 0; j < (Iter / 2); j++) Acc = gap8_sumdotp2(VectIn[j], Filt[j], Acc);
+        for (unsigned int j = 0; j < (Iter / 2); j++) Acc = gap8_sumdotp2(VectIn[j], Filt[j], Acc);
         if (Iter % 2) Acc += In[Last - 1] * Filter[i * InSize + Last - 1];
         Reduct[CoreId] = Acc;
         gap8_waitbarrier(0);
@@ -627,19 +627,19 @@ void KerParLinearLayerReLU_fp(KerLinearLayerReLU_fp_T *Arg)
 {
     short int *__restrict__ In = Arg->In;
     int TotalInSize = Arg->TotalInSize;
-    int InSize = Arg->InSize;
+    unsigned int InSize = Arg->InSize;
     int InBase = Arg->InBase;
     const short int *__restrict__ Filter = Arg->Filter;
     unsigned int Norm = Arg->Norm;
     short int *__restrict__ Out = Arg->Out;
     int ReVal = Arg->DoReLU ? 0 : 0x80000000;
 
-    int OutSize = Arg->OutSize;
+    unsigned int OutSize = Arg->OutSize;
     unsigned int CoreId = gap8_coreid();
     unsigned int ChunkCell = ChunkSize(OutSize);
     unsigned int First = CoreId * ChunkCell;
     unsigned int Last  = Min(First + ChunkCell, OutSize);
-    int i, j;
+    unsigned int i, j;
     v2s *__restrict__ VectIn = (v2s *) In;
 
     // Linear combination
@@ -660,7 +660,7 @@ void KerParLinearLayerReLU_fps(KerLinearLayerReLU_fps_T *Arg)
 {
     signed char *__restrict__ In = Arg->In;
     int TotalInSize = Arg->TotalInSize;
-    int InSize = Arg->InSize;
+    unsigned int InSize = Arg->InSize;
     int InBase = Arg->InBase;
     const signed char *__restrict__ Filter = Arg->Filter;
     unsigned int Norm = Arg->Norm;
@@ -668,12 +668,12 @@ void KerParLinearLayerReLU_fps(KerLinearLayerReLU_fps_T *Arg)
     int ReVal = Arg->DoReLU ? 0 : 0x80000000;
 
 
-    int OutSize = Arg->OutSize;
+    unsigned int OutSize = Arg->OutSize;
     unsigned int CoreId = gap8_coreid();
     unsigned int ChunkCell = ChunkSize(OutSize);
     unsigned int First = CoreId * ChunkCell;
     unsigned int Last  = Min(First + ChunkCell, OutSize);
-    int i, j;
+    unsigned int i, j;
     v4s *__restrict__ VectIn = (v4s *) In;
 
     // Linear combination
@@ -693,7 +693,7 @@ void KerParLinearLayerReLU_fp_fps_fp(KerLinearLayerReLU_fp_fps_fp_T *Arg)
 {
     short int *__restrict__ In = Arg->In;
     int TotalInSize = Arg->TotalInSize;
-    int InSize = Arg->InSize;
+    unsigned int InSize = Arg->InSize;
     int InBase = Arg->InBase;
     const signed char *__restrict__ Filter = Arg->Filter;
     unsigned int Norm = Arg->Norm;
@@ -701,12 +701,12 @@ void KerParLinearLayerReLU_fp_fps_fp(KerLinearLayerReLU_fp_fps_fp_T *Arg)
     int ReVal = Arg->DoReLU ? 0 : 0x80000000;
 
 
-    int OutSize = Arg->OutSize;
+    unsigned int OutSize = Arg->OutSize;
     unsigned int CoreId = gap8_coreid();
     unsigned int ChunkCell = ChunkSize(OutSize);
     unsigned int First = CoreId * ChunkCell;
     unsigned int Last  = Min(First + ChunkCell, OutSize);
-    int i, j;
+    unsigned int i, j;
     v4s *__restrict__ VectIn = (v4s *) In;
 
     // Linear combination
@@ -730,19 +730,19 @@ void KerParLinearLayerReLU_fp_fp_fpd(KerLinearLayerReLU_fp_fp_fpd_T *Arg)
 {
     short int *__restrict__ In = Arg->In;
     int TotalInSize = Arg->TotalInSize;
-    int InSize = Arg->InSize;
+    unsigned int InSize = Arg->InSize;
     int InBase = Arg->InBase;
     const short int *__restrict__ Filter = Arg->Filter;
     unsigned int Norm = Arg->Norm;
     int *__restrict__ Out = Arg->Out;
     int ReVal = Arg->DoReLU ? 0 : 0x80000000;
 
-    int OutSize = Arg->OutSize;
+    unsigned int OutSize = Arg->OutSize;
     unsigned int CoreId = gap8_coreid();
     unsigned int ChunkCell = ChunkSize(OutSize);
     unsigned int First = CoreId * ChunkCell;
     unsigned int Last  = Min(First + ChunkCell, OutSize);
-    int i, j;
+    unsigned int i, j;
     v2s *__restrict__ VectIn = (v2s *) In;
 
     // Linear combination

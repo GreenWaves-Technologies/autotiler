@@ -47,7 +47,7 @@ static int LastDefinedOutput(unsigned int DimIn, unsigned int F, unsigned int Pa
     return ((DimIn - ((F - 1) / 2 - PadL + (F / 2)) + Stride - 1) / Stride);
 }
 
-static int __attribute__ ((always_inline)) inline MinCond(int a, int b)
+static inline int __attribute__ ((always_inline)) MinCond(int a, int b)
 
 {
 #ifdef DIM_ALWAYS_GREATER_THAN_FILTER
@@ -205,18 +205,18 @@ static void KerAvgPool2x2Stride2_fp(
 static void __attribute__ ((noinline)) KerMaxPoolNxNStrideS_Border_fp(
     short int *__restrict__ In,
     short int *__restrict__ Out,
-    int Fw,
-    int Fh,
+    unsigned int Fw,
+    unsigned int Fh,
     v4s Pad,
     v4s PadOrg,
     int W,
     int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     int Stride,
     int ReVal)
 {
@@ -236,7 +236,7 @@ static void __attribute__ ((noinline)) KerMaxPoolNxNStrideS_Border_fp(
             for (unsigned int h = 0; h < Ho_F; h++)
             {
                 int Acc = 0x80000000;
-                int Fh_min = ht, Fh_max = Min(Fh, hb); // ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
+                unsigned int Fh_min = ht, Fh_max = Min(Fh, hb); // ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
                 for (unsigned int i = Fh_min; i < Fh_max; i++)
                     for (unsigned int j = 0; j < Fw; j++) Acc = Max(Acc, In[(h * Stride - PadTOrg + i) * W + (w * Stride - PadLOrg + j)]);
                 Out[Wo * h + w] = Max(ReVal, Acc);
@@ -251,7 +251,7 @@ static void __attribute__ ((noinline)) KerMaxPoolNxNStrideS_Border_fp(
             /* Bottom stripe.  Exists only if Ho_L>Ho_F, then in this case Fh_min is = 0 by construction */
             for (unsigned int h = Ho_L; h < Ho; h++)
             {
-                int Fh_min = ht, Fh_max = Min(Fh, hb); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
+                unsigned int Fh_min = ht, Fh_max = Min(Fh, hb); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
                 int Acc = 0x80000000;
                 for (unsigned int i = Fh_min; i < Fh_max; i++)
                     for (unsigned int j = 0; j < Fw; j++) Acc = Max(Acc, In[(h * Stride - PadTOrg + i) * W + (w * Stride - PadLOrg + j)]);
@@ -266,7 +266,7 @@ static void __attribute__ ((noinline)) KerMaxPoolNxNStrideS_Border_fp(
             for (unsigned int w = 0; w < Wo_F; w++)
             {
                 int Acc = 0x80000000;
-                int Wh_min = wl, Wh_max = Min(Fw, wr); // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only
+                unsigned int Wh_min = wl, Wh_max = Min(Fw, wr); // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only
                 for (unsigned int i = 0; i < Fh; i++)
                     for (unsigned int j = Wh_min; j < Wh_max; j++) Acc = Max(Acc, In[(h * Stride - PadTOrg + i) * W + (w * Stride - PadLOrg + j)]);
                 Out[Wo * h + w] = Max(ReVal, Acc);
@@ -281,7 +281,7 @@ static void __attribute__ ((noinline)) KerMaxPoolNxNStrideS_Border_fp(
             for (unsigned int w = Wo_L; w < Wo; w++)
             {
                 int Acc = 0x80000000;
-                int Wh_min = wl, Wh_max = Min(Fw, wr); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
+                unsigned int Wh_min = wl, Wh_max = Min(Fw, wr); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
                 for (unsigned int i = 0; i < Fh; i++)
                     for (unsigned int j = Wh_min; j < Wh_max; j++) Acc = Max(Acc, In[(h * Stride - PadTOrg + i) * W + (w * Stride - PadLOrg + j)]);
                 Out[Wo * h + w] = Max(ReVal, Acc);
@@ -300,7 +300,7 @@ static void __attribute__ ((noinline)) KerMaxPoolNxNStrideS_Border_fp(
                 {
                     int Acc = 0x80000000;
                     // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only. ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = Min(Fw, wr), Fh_min = ht, Fh_max = Min(Fh, hb);
+                    unsigned int Wh_min = wl, Wh_max = Min(Fw, wr), Fh_min = ht, Fh_max = Min(Fh, hb);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc = Max(Acc, In[(h * Stride - PadTOrg + i) * W + (w * Stride - PadLOrg + j)]);
                     Out[Wo * h + w] = Max(ReVal, Acc);
@@ -321,7 +321,7 @@ static void __attribute__ ((noinline)) KerMaxPoolNxNStrideS_Border_fp(
                 {
                     int Acc = 0x80000000;
                     // ht Can't be > F by definition of Ho_L so we can remove and use ht only. ht Can't be > F by definition of Ho_L so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = Min(Fw, wr), Fh_min = ht, Fh_max = Min(Fh, hb);
+                    unsigned int Wh_min = wl, Wh_max = Min(Fw, wr), Fh_min = ht, Fh_max = Min(Fh, hb);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc = Max(Acc, In[(h * Stride - PadTOrg + i) * W + (w * Stride - PadLOrg + j)]);
                     Out[Wo * h + w] = Max(ReVal, Acc);
@@ -344,7 +344,7 @@ static void __attribute__ ((noinline)) KerMaxPoolNxNStrideS_Border_fp(
                 {
                     int Acc = 0x80000000;
                     // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only.  ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = Min(Fw, wr), Fh_min = ht, Fh_max = Min(Fh, hb);
+                    unsigned int Wh_min = wl, Wh_max = Min(Fw, wr), Fh_min = ht, Fh_max = Min(Fh, hb);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc = Max(Acc, In[(h * Stride - PadTOrg + i) * W + (w * Stride - PadLOrg + j)]);
                     Out[Wo * h + w] = Max(ReVal, Acc);
@@ -364,7 +364,7 @@ static void __attribute__ ((noinline)) KerMaxPoolNxNStrideS_Border_fp(
                 {
                     int Acc = 0x80000000;
                     // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only.  ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = Min(Fw, wr), Fh_min = ht, Fh_max = Min(Fh, hb);
+                    unsigned int Wh_min = wl, Wh_max = Min(Fw, wr), Fh_min = ht, Fh_max = Min(Fh, hb);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc = Max(Acc, In[(h * Stride - PadTOrg + i) * W + (w * Stride - PadLOrg + j)]);
                     Out[Wo * h + w] = Max(ReVal, Acc);
@@ -379,18 +379,18 @@ static void __attribute__ ((noinline)) KerMaxPoolNxNStrideS_Border_fp(
 static void __attribute__ ((noinline)) KerMaxPoolNxMStrideSxSy_Border_fp(
     short int *__restrict__ In,
     short int *__restrict__ Out,
-    int Fw,
-    int Fh,
+    unsigned int Fw,
+    unsigned int Fh,
     v4s Pad,
     v4s PadOrg,
     int W,
     int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     int StrideX,
     int StrideY,
     int ReVal)
@@ -412,7 +412,7 @@ static void __attribute__ ((noinline)) KerMaxPoolNxMStrideSxSy_Border_fp(
             for (unsigned int h = 0; h < Ho_F; h++)
             {
                 int Acc = 0x80000000;
-                int Fh_min = ht, Fh_max = Min(Fh, hb); // ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
+                unsigned int Fh_min = ht, Fh_max = Min(Fh, hb); // ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
                 for (unsigned int i = Fh_min; i < Fh_max; i++)
                     for (unsigned int j = 0; j < Fw; j++) Acc = Max(Acc, In[(h * StrideY - PadTOrg + i) * W + (w * StrideX - PadLOrg + j)]);
                 Out[Wo * h + w] = Max(ReVal, Acc);
@@ -427,7 +427,7 @@ static void __attribute__ ((noinline)) KerMaxPoolNxMStrideSxSy_Border_fp(
             /* Bottom stripe.  Exists only if Ho_L>Ho_F, then in this case Fh_min is = 0 by construction */
             for (unsigned int h = Ho_L; h < Ho; h++)
             {
-                int Fh_min = ht, Fh_max = Min(Fh, hb); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
+                unsigned int Fh_min = ht, Fh_max = Min(Fh, hb); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
                 int Acc = 0x80000000;
                 for (unsigned int i = Fh_min; i < Fh_max; i++)
                     for (unsigned int j = 0; j < Fw; j++) Acc = Max(Acc, In[(h * StrideY - PadTOrg + i) * W + (w * StrideX - PadLOrg + j)]);
@@ -442,7 +442,7 @@ static void __attribute__ ((noinline)) KerMaxPoolNxMStrideSxSy_Border_fp(
             for (unsigned int w = 0; w < Wo_F; w++)
             {
                 int Acc = 0x80000000;
-                int Wh_min = wl, Wh_max = Min(Fw, wr); // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only
+                unsigned int Wh_min = wl, Wh_max = Min(Fw, wr); // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only
                 for (unsigned int i = 0; i < Fh; i++)
                     for (unsigned int j = Wh_min; j < Wh_max; j++) Acc = Max(Acc, In[(h * StrideY - PadTOrg + i) * W + (w * StrideX - PadLOrg + j)]);
                 Out[Wo * h + w] = Max(ReVal, Acc);
@@ -457,7 +457,7 @@ static void __attribute__ ((noinline)) KerMaxPoolNxMStrideSxSy_Border_fp(
             for (unsigned int w = Wo_L; w < Wo; w++)
             {
                 int Acc = 0x80000000;
-                int Wh_min = wl, Wh_max = Min(Fw, wr); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
+                unsigned int Wh_min = wl, Wh_max = Min(Fw, wr); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
                 for (unsigned int i = 0; i < Fh; i++)
                     for (unsigned int j = Wh_min; j < Wh_max; j++) Acc = Max(Acc, In[(h * StrideY - PadTOrg + i) * W + (w * StrideX - PadLOrg + j)]);
                 Out[Wo * h + w] = Max(ReVal, Acc);
@@ -476,7 +476,7 @@ static void __attribute__ ((noinline)) KerMaxPoolNxMStrideSxSy_Border_fp(
                 {
                     int Acc = 0x80000000;
                     // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only. ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = Min(Fw, wr), Fh_min = ht, Fh_max = Min(Fh, hb);
+                    unsigned int Wh_min = wl, Wh_max = Min(Fw, wr), Fh_min = ht, Fh_max = Min(Fh, hb);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc = Max(Acc, In[(h * StrideY - PadTOrg + i) * W + (w * StrideX - PadLOrg + j)]);
                     Out[Wo * h + w] = Max(ReVal, Acc);
@@ -497,7 +497,7 @@ static void __attribute__ ((noinline)) KerMaxPoolNxMStrideSxSy_Border_fp(
                 {
                     int Acc = 0x80000000;
                     // ht Can't be > F by definition of Ho_L so we can remove and use ht only. ht Can't be > F by definition of Ho_L so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = Min(Fw, wr), Fh_min = ht, Fh_max = Min(Fh, hb);
+                    unsigned int Wh_min = wl, Wh_max = Min(Fw, wr), Fh_min = ht, Fh_max = Min(Fh, hb);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc = Max(Acc, In[(h * StrideY - PadTOrg + i) * W + (w * StrideX - PadLOrg + j)]);
                     Out[Wo * h + w] = Max(ReVal, Acc);
@@ -520,7 +520,7 @@ static void __attribute__ ((noinline)) KerMaxPoolNxMStrideSxSy_Border_fp(
                 {
                     int Acc = 0x80000000;
                     // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only.  ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = Min(Fw, wr), Fh_min = ht, Fh_max = Min(Fh, hb);
+                    unsigned int Wh_min = wl, Wh_max = Min(Fw, wr), Fh_min = ht, Fh_max = Min(Fh, hb);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc = Max(Acc, In[(h * StrideY - PadTOrg + i) * W + (w * StrideX - PadLOrg + j)]);
                     Out[Wo * h + w] = Max(ReVal, Acc);
@@ -540,7 +540,7 @@ static void __attribute__ ((noinline)) KerMaxPoolNxMStrideSxSy_Border_fp(
                 {
                     int Acc = 0x80000000;
                     // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only.  ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = Min(Fw, wr), Fh_min = ht, Fh_max = Min(Fh, hb);
+                    unsigned int Wh_min = wl, Wh_max = Min(Fw, wr), Fh_min = ht, Fh_max = Min(Fh, hb);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc = Max(Acc, In[(h * StrideY - PadTOrg + i) * W + (w * StrideX - PadLOrg + j)]);
                     Out[Wo * h + w] = Max(ReVal, Acc);
@@ -555,18 +555,18 @@ static void __attribute__ ((noinline)) KerMaxPoolNxMStrideSxSy_Border_fp(
 static void __attribute__ ((noinline)) KerAvgPoolNxNStrideS_Border_fp(
     short int *__restrict__ In,
     short int *__restrict__ Out,
-    int Fw,
-    int Fh,
+    unsigned int Fw,
+    unsigned int Fh,
     v4s Pad,
     v4s PadOrg,
     int W,
     int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     int Stride,
     int ReVal)
 
@@ -589,7 +589,7 @@ static void __attribute__ ((noinline)) KerAvgPoolNxNStrideS_Border_fp(
             for (unsigned int h = 0; h < Ho_F; h++)
             {
                 int Acc = 0;
-                int Fh_min = ht, Fh_max = Min(Fh, hb); // ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
+                unsigned int Fh_min = ht, Fh_max = Min(Fh, hb); // ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
                 for (unsigned int i = Fh_min; i < Fh_max; i++)
                     for (unsigned int j = 0; j < Fw; j++) Acc += In[(h * Stride - PadTOrg + i) * W + (w * Stride - PadLOrg + j)];
                 Out[Wo * h + w] = Max(ReVal, gap8_clip(gap8_roundnorm_reg(Acc * PoolFactor, 16), 15));
@@ -604,7 +604,7 @@ static void __attribute__ ((noinline)) KerAvgPoolNxNStrideS_Border_fp(
             /* Bottom stripe.  Exists only if Ho_L>Ho_F, then in this case Fh_min is = 0 by construction */
             for (unsigned int h = Ho_L; h < Ho; h++)
             {
-                int Fh_min = ht, Fh_max = Min(Fh, hb); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
+                unsigned int Fh_min = ht, Fh_max = Min(Fh, hb); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
                 int Acc = 0;
                 for (unsigned int i = Fh_min; i < Fh_max; i++)
                     for (unsigned int j = 0; j < Fw; j++) Acc += In[(h * Stride - PadTOrg + i) * W + (w * Stride - PadLOrg + j)];
@@ -619,7 +619,7 @@ static void __attribute__ ((noinline)) KerAvgPoolNxNStrideS_Border_fp(
             for (unsigned int w = 0; w < Wo_F; w++)
             {
                 int Acc = 0;
-                int Wh_min = wl, Wh_max = Min(Fw, wr); // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only
+                unsigned int Wh_min = wl, Wh_max = Min(Fw, wr); // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only
                 for (unsigned int i = 0; i < Fh; i++)
                     for (unsigned int j = Wh_min; j < Wh_max; j++) Acc += In[(h * Stride - PadTOrg + i) * W + (w * Stride - PadLOrg + j)];
                 Out[Wo * h + w] = Max(ReVal, gap8_clip(gap8_roundnorm_reg(Acc * PoolFactor, 16), 15));
@@ -634,7 +634,7 @@ static void __attribute__ ((noinline)) KerAvgPoolNxNStrideS_Border_fp(
             for (unsigned int w = Wo_L; w < Wo; w++)
             {
                 int Acc = 0;
-                int Wh_min = wl, Wh_max = Min(Fw, wr); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
+                unsigned int Wh_min = wl, Wh_max = Min(Fw, wr); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
                 for (unsigned int i = 0; i < Fh; i++)
                     for (unsigned int j = Wh_min; j < Wh_max; j++) Acc += In[(h * Stride - PadTOrg + i) * W + (w * Stride - PadLOrg + j)];
                 Out[Wo * h + w] = Max(ReVal, gap8_clip(gap8_roundnorm_reg(Acc * PoolFactor, 16), 15));
@@ -653,7 +653,7 @@ static void __attribute__ ((noinline)) KerAvgPoolNxNStrideS_Border_fp(
                 {
                     int Acc = 0;
                     // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only. ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = Min(Fw, wr), Fh_min = ht, Fh_max = Min(Fh, hb);
+                    unsigned int Wh_min = wl, Wh_max = Min(Fw, wr), Fh_min = ht, Fh_max = Min(Fh, hb);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc += In[(h * Stride - PadTOrg + i) * W + (w * Stride - PadLOrg + j)];
                     Out[Wo * h + w] = Max(ReVal, gap8_clip(gap8_roundnorm_reg(Acc * PoolFactor, 16), 15));
@@ -674,7 +674,7 @@ static void __attribute__ ((noinline)) KerAvgPoolNxNStrideS_Border_fp(
                 {
                     int Acc = 0;
                     // ht Can't be > F by definition of Ho_L so we can remove and use ht only. ht Can't be > F by definition of Ho_L so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = Min(Fw, wr), Fh_min = ht, Fh_max = Min(Fh, hb);
+                    unsigned int Wh_min = wl, Wh_max = Min(Fw, wr), Fh_min = ht, Fh_max = Min(Fh, hb);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc += In[(h * Stride - PadTOrg + i) * W + (w * Stride - PadLOrg + j)];
                     Out[Wo * h + w] = Max(ReVal, gap8_clip(gap8_roundnorm_reg(Acc * PoolFactor, 16), 15));
@@ -697,7 +697,7 @@ static void __attribute__ ((noinline)) KerAvgPoolNxNStrideS_Border_fp(
                 {
                     int Acc = 0;
                     // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only.  ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = Min(Fw, wr), Fh_min = ht, Fh_max = Min(Fh, hb);
+                    unsigned int Wh_min = wl, Wh_max = Min(Fw, wr), Fh_min = ht, Fh_max = Min(Fh, hb);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc += In[(h * Stride - PadTOrg + i) * W + (w * Stride - PadLOrg + j)];
                     Out[Wo * h + w] = Max(ReVal, gap8_clip(gap8_roundnorm_reg(Acc * PoolFactor, 16), 15));
@@ -717,7 +717,7 @@ static void __attribute__ ((noinline)) KerAvgPoolNxNStrideS_Border_fp(
                 {
                     int Acc = 0;
                     // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only.  ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = Min(Fw, wr), Fh_min = ht, Fh_max = Min(Fh, hb);
+                    unsigned int Wh_min = wl, Wh_max = Min(Fw, wr), Fh_min = ht, Fh_max = Min(Fh, hb);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc += In[(h * Stride - PadTOrg + i) * W + (w * Stride - PadLOrg + j)];
                     Out[Wo * h + w] = Max(ReVal, gap8_clip(gap8_roundnorm_reg(Acc * PoolFactor, 16), 15));
@@ -733,18 +733,18 @@ static void __attribute__ ((noinline)) KerAvgPoolNxNStrideS_Border_fp(
 static void __attribute__ ((noinline)) KerAvgPoolNxMStrideSxSy_Border_fp(
     short int *__restrict__ In,
     short int *__restrict__ Out,
-    int Fw,
-    int Fh,
+    unsigned int Fw,
+    unsigned int Fh,
     v4s Pad,
     v4s PadOrg,
     int W,
     int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     int StrideX,
     int StrideY,
     int ReVal)
@@ -768,7 +768,7 @@ static void __attribute__ ((noinline)) KerAvgPoolNxMStrideSxSy_Border_fp(
             for (unsigned int h = 0; h < Ho_F; h++)
             {
                 int Acc = 0;
-                int Fh_min = ht, Fh_max = Min(Fh, hb); // ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
+                unsigned int Fh_min = ht, Fh_max = Min(Fh, hb); // ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
                 for (unsigned int i = Fh_min; i < Fh_max; i++)
                     for (unsigned int j = 0; j < Fw; j++) Acc += In[(h * StrideY - PadTOrg + i) * W + (w * StrideX - PadLOrg + j)];
                 Out[Wo * h + w] = Max(ReVal, gap8_clip(gap8_roundnorm_reg(Acc * PoolFactor, 16), 15));
@@ -783,7 +783,7 @@ static void __attribute__ ((noinline)) KerAvgPoolNxMStrideSxSy_Border_fp(
             /* Bottom stripe.  Exists only if Ho_L>Ho_F, then in this case Fh_min is = 0 by construction */
             for (unsigned int h = Ho_L; h < Ho; h++)
             {
-                int Fh_min = ht, Fh_max = Min(Fh, hb); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
+                unsigned int Fh_min = ht, Fh_max = Min(Fh, hb); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
                 int Acc = 0;
                 for (unsigned int i = Fh_min; i < Fh_max; i++)
                     for (unsigned int j = 0; j < Fw; j++) Acc += In[(h * StrideY - PadTOrg + i) * W + (w * StrideX - PadLOrg + j)];
@@ -798,7 +798,7 @@ static void __attribute__ ((noinline)) KerAvgPoolNxMStrideSxSy_Border_fp(
             for (unsigned int w = 0; w < Wo_F; w++)
             {
                 int Acc = 0;
-                int Wh_min = wl, Wh_max = Min(Fw, wr); // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only
+                unsigned int Wh_min = wl, Wh_max = Min(Fw, wr); // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only
                 for (unsigned int i = 0; i < Fh; i++)
                     for (unsigned int j = Wh_min; j < Wh_max; j++) Acc += In[(h * StrideY - PadTOrg + i) * W + (w * StrideX - PadLOrg + j)];
                 Out[Wo * h + w] = Max(ReVal, gap8_clip(gap8_roundnorm_reg(Acc * PoolFactor, 16), 15));
@@ -813,7 +813,7 @@ static void __attribute__ ((noinline)) KerAvgPoolNxMStrideSxSy_Border_fp(
             for (unsigned int w = Wo_L; w < Wo; w++)
             {
                 int Acc = 0;
-                int Wh_min = wl, Wh_max = Min(Fw, wr); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
+                unsigned int Wh_min = wl, Wh_max = Min(Fw, wr); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
                 for (unsigned int i = 0; i < Fh; i++)
                     for (unsigned int j = Wh_min; j < Wh_max; j++) Acc += In[(h * StrideY - PadTOrg + i) * W + (w * StrideX - PadLOrg + j)];
                 Out[Wo * h + w] = Max(ReVal, gap8_clip(gap8_roundnorm_reg(Acc * PoolFactor, 16), 15));
@@ -832,7 +832,7 @@ static void __attribute__ ((noinline)) KerAvgPoolNxMStrideSxSy_Border_fp(
                 {
                     int Acc = 0;
                     // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only. ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = Min(Fw, wr), Fh_min = ht, Fh_max = Min(Fh, hb);
+                    unsigned int Wh_min = wl, Wh_max = Min(Fw, wr), Fh_min = ht, Fh_max = Min(Fh, hb);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc += In[(h * StrideY - PadTOrg + i) * W + (w * StrideX - PadLOrg + j)];
                     Out[Wo * h + w] = Max(ReVal, gap8_clip(gap8_roundnorm_reg(Acc * PoolFactor, 16), 15));
@@ -853,7 +853,7 @@ static void __attribute__ ((noinline)) KerAvgPoolNxMStrideSxSy_Border_fp(
                 {
                     int Acc = 0;
                     // ht Can't be > F by definition of Ho_L so we can remove and use ht only. ht Can't be > F by definition of Ho_L so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = Min(Fw, wr), Fh_min = ht, Fh_max = Min(Fh, hb);
+                    unsigned int Wh_min = wl, Wh_max = Min(Fw, wr), Fh_min = ht, Fh_max = Min(Fh, hb);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc += In[(h * StrideY - PadTOrg + i) * W + (w * StrideX - PadLOrg + j)];
                     Out[Wo * h + w] = Max(ReVal, gap8_clip(gap8_roundnorm_reg(Acc * PoolFactor, 16), 15));
@@ -876,7 +876,7 @@ static void __attribute__ ((noinline)) KerAvgPoolNxMStrideSxSy_Border_fp(
                 {
                     int Acc = 0;
                     // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only.  ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = Min(Fw, wr), Fh_min = ht, Fh_max = Min(Fh, hb);
+                    unsigned int Wh_min = wl, Wh_max = Min(Fw, wr), Fh_min = ht, Fh_max = Min(Fh, hb);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc += In[(h * StrideY - PadTOrg + i) * W + (w * StrideX - PadLOrg + j)];
                     Out[Wo * h + w] = Max(ReVal, gap8_clip(gap8_roundnorm_reg(Acc * PoolFactor, 16), 15));
@@ -896,7 +896,7 @@ static void __attribute__ ((noinline)) KerAvgPoolNxMStrideSxSy_Border_fp(
                 {
                     int Acc = 0;
                     // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only.  ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = Min(Fw, wr), Fh_min = ht, Fh_max = Min(Fh, hb);
+                    unsigned int Wh_min = wl, Wh_max = Min(Fw, wr), Fh_min = ht, Fh_max = Min(Fh, hb);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc += In[(h * StrideY - PadTOrg + i) * W + (w * StrideX - PadLOrg + j)];
                     Out[Wo * h + w] = Max(ReVal, gap8_clip(gap8_roundnorm_reg(Acc * PoolFactor, 16), 15));
@@ -911,18 +911,18 @@ static void __attribute__ ((noinline)) KerAvgPoolNxMStrideSxSy_Border_fp(
 static void __attribute__ ((noinline)) KerMaxPoolNxNStrideS_Body_fp(
     short int *__restrict__ In,
     short int *__restrict__ Out,
-    int Fw,
-    int Fh,
+    unsigned int Fw,
+    unsigned int Fh,
     int PadL,
     int PadT,
     int W,
     int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     int Stride,
     int ReVal)
 
@@ -994,18 +994,18 @@ static void __attribute__ ((noinline)) KerMaxPoolNxNStrideS_Body_fp(
 static void __attribute__ ((noinline)) KerMaxPoolNxMStrideSxSy_Body_fp(
     short int *__restrict__ In,
     short int *__restrict__ Out,
-    int Fw,
-    int Fh,
+    unsigned int Fw,
+    unsigned int Fh,
     int PadL,
     int PadT,
     int W,
     int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     int StrideX,
     int StrideY,
     int ReVal)
@@ -1078,18 +1078,18 @@ static void __attribute__ ((noinline)) KerMaxPoolNxMStrideSxSy_Body_fp(
 static void __attribute__ ((noinline)) KerAvgPoolNxNStrideS_Body_fp(
     short int *__restrict__ In,
     short int *__restrict__ Out,
-    int Fw,
-    int Fh,
+    unsigned int Fw,
+    unsigned int Fh,
     int PadL,
     int PadT,
     int W,
     int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     int Stride,
     int DoReLU)
 
@@ -1184,18 +1184,18 @@ static void __attribute__ ((noinline)) KerAvgPoolNxNStrideS_Body_fp(
 static void __attribute__ ((noinline)) KerAvgPoolNxMStrideSxSy_Body_fp(
     short int *__restrict__ In,
     short int *__restrict__ Out,
-    int Fw,
-    int Fh,
+    unsigned int Fw,
+    unsigned int Fh,
     int PadL,
     int PadT,
     int W,
     int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     int StrideX,
     int StrideY,
     int DoReLU)
@@ -1293,12 +1293,12 @@ static void KerMaxPool2x2Stride2_fps(
     int W,
     int H,
     signed char *__restrict__ Out,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     int PadR,
     int PadB,
     int DoReLU
@@ -1376,12 +1376,12 @@ static void KerAvgPool2x2Stride2_fps(
     int W,
     int H,
     signed char *__restrict__ Out,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     int PadR,
     int PadB,
     int DoReLU
@@ -1460,18 +1460,18 @@ static void KerAvgPool2x2Stride2_fps(
 static void __attribute__ ((noinline)) KerMaxPoolNxNStrideS_Border_fps(
     signed char *__restrict__ In,
     signed char *__restrict__ Out,
-    int Fw,
-    int Fh,
+    unsigned int Fw,
+    unsigned int Fh,
     v4s Pad,
     v4s PadOrg,
     int W,
     int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     int Stride,
     int ReVal)
 
@@ -1492,7 +1492,7 @@ static void __attribute__ ((noinline)) KerMaxPoolNxNStrideS_Border_fps(
             for (unsigned int h = 0; h < Ho_F; h++)
             {
                 int Acc = 0x80000000;
-                int Fh_min = ht, Fh_max = MinCond(Fh, hb); // ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
+                unsigned int Fh_min = ht, Fh_max = MinCond(Fh, hb); // ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
                 for (unsigned int i = Fh_min; i < Fh_max; i++)
                     for (unsigned int j = 0; j < Fw; j++) Acc = Max(Acc, In[(h * Stride - PadTOrg + i) * W + (w * Stride - PadLOrg + j)]);
                 Out[Wo * h + w] = Max(ReVal, Acc);
@@ -1507,7 +1507,7 @@ static void __attribute__ ((noinline)) KerMaxPoolNxNStrideS_Border_fps(
             /* Bottom stripe.  Exists only if Ho_L>Ho_F, then in this case Fh_min is = 0 by construction */
             for (unsigned int h = Ho_L; h < Ho; h++)
             {
-                int Fh_min = ht, Fh_max = MinCond(hb, Fh); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
+                unsigned int Fh_min = ht, Fh_max = MinCond(hb, Fh); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
                 int Acc = 0x80000000;
                 for (unsigned int i = Fh_min; i < Fh_max; i++)
                     for (unsigned int j = 0; j < Fw; j++) Acc = Max(Acc, In[(h * Stride - PadTOrg + i) * W + (w * Stride - PadLOrg + j)]);
@@ -1522,7 +1522,7 @@ static void __attribute__ ((noinline)) KerMaxPoolNxNStrideS_Border_fps(
             for (unsigned int w = 0; w < Wo_F; w++)
             {
                 int Acc = 0x80000000;
-                int Wh_min = wl, Wh_max = MinCond(Fw, wr); // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only
+                unsigned int Wh_min = wl, Wh_max = MinCond(Fw, wr); // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only
                 for (unsigned int i = 0; i < Fh; i++)
                     for (unsigned int j = Wh_min; j < Wh_max; j++) Acc = Max(Acc, In[(h * Stride - PadTOrg + i) * W + (w * Stride - PadLOrg + j)]);
                 Out[Wo * h + w] = Max(ReVal, Acc);
@@ -1537,7 +1537,7 @@ static void __attribute__ ((noinline)) KerMaxPoolNxNStrideS_Border_fps(
             for (unsigned int w = Wo_L; w < Wo; w++)
             {
                 int Acc = 0x80000000;
-                int Wh_min = wl, Wh_max = MinCond(wr, Fw); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
+                unsigned int Wh_min = wl, Wh_max = MinCond(wr, Fw); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
                 for (unsigned int i = 0; i < Fh; i++)
                     for (unsigned int j = Wh_min; j < Wh_max; j++) Acc = Max(Acc, In[(h * Stride - PadTOrg + i) * W + (w * Stride - PadLOrg + j)]);
                 Out[Wo * h + w] = Max(ReVal, Acc);
@@ -1556,7 +1556,7 @@ static void __attribute__ ((noinline)) KerMaxPoolNxNStrideS_Border_fps(
                 {
                     int Acc = 0x80000000;
                     // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only. ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = MinCond(Fw, wr), Fh_min = ht, Fh_max = MinCond(Fh, hb);
+                    unsigned int Wh_min = wl, Wh_max = MinCond(Fw, wr), Fh_min = ht, Fh_max = MinCond(Fh, hb);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc = Max(Acc, In[(h * Stride - PadTOrg + i) * W + (w * Stride - PadLOrg + j)]);
                     Out[Wo * h + w] = Max(ReVal, Acc);
@@ -1577,7 +1577,7 @@ static void __attribute__ ((noinline)) KerMaxPoolNxNStrideS_Border_fps(
                 {
                     int Acc = 0x80000000;
                     // ht Can't be > F by definition of Ho_L so we can remove and use ht only. ht Can't be > F by definition of Ho_L so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = MinCond(wr, Fw), Fh_min = ht, Fh_max = MinCond(Fh, hb);
+                    unsigned int Wh_min = wl, Wh_max = MinCond(wr, Fw), Fh_min = ht, Fh_max = MinCond(Fh, hb);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc = Max(Acc, In[(h * Stride - PadTOrg + i) * W + (w * Stride - PadLOrg + j)]);
                     Out[Wo * h + w] = Max(ReVal, Acc);
@@ -1600,7 +1600,7 @@ static void __attribute__ ((noinline)) KerMaxPoolNxNStrideS_Border_fps(
                 {
                     int Acc = 0x80000000;
                     // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only.  ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = MinCond(Fw, wr), Fh_min = ht, Fh_max = MinCond(hb, Fh);
+                    unsigned int Wh_min = wl, Wh_max = MinCond(Fw, wr), Fh_min = ht, Fh_max = MinCond(hb, Fh);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc = Max(Acc, In[(h * Stride - PadTOrg + i) * W + (w * Stride - PadLOrg + j)]);
                     Out[Wo * h + w] = Max(ReVal, Acc);
@@ -1620,7 +1620,7 @@ static void __attribute__ ((noinline)) KerMaxPoolNxNStrideS_Border_fps(
                 {
                     int Acc = 0x80000000;
                     // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only.  ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = MinCond(wr, Fw), Fh_min = ht, Fh_max = MinCond(hb, Fh);
+                    unsigned int Wh_min = wl, Wh_max = MinCond(wr, Fw), Fh_min = ht, Fh_max = MinCond(hb, Fh);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc = Max(Acc, In[(h * Stride - PadTOrg + i) * W + (w * Stride - PadLOrg + j)]);
                     Out[Wo * h + w] = Max(ReVal, Acc);
@@ -1635,18 +1635,18 @@ static void __attribute__ ((noinline)) KerMaxPoolNxNStrideS_Border_fps(
 static void __attribute__ ((noinline)) KerMaxPoolNxMStrideSxSy_Border_fps(
     signed char *__restrict__ In,
     signed char *__restrict__ Out,
-    int Fw,
-    int Fh,
+    unsigned int Fw,
+    unsigned int Fh,
     v4s Pad,
     v4s PadOrg,
     int W,
     int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     int StrideX,
     int StrideY,
     int ReVal)
@@ -1668,7 +1668,7 @@ static void __attribute__ ((noinline)) KerMaxPoolNxMStrideSxSy_Border_fps(
             for (unsigned int h = 0; h < Ho_F; h++)
             {
                 int Acc = 0x80000000;
-                int Fh_min = ht, Fh_max = MinCond(Fh, hb); // ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
+                unsigned int Fh_min = ht, Fh_max = MinCond(Fh, hb); // ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
                 for (unsigned int i = Fh_min; i < Fh_max; i++)
                     for (unsigned int j = 0; j < Fw; j++) Acc = Max(Acc, In[(h * StrideY - PadTOrg + i) * W + (w * StrideX - PadLOrg + j)]);
                 Out[Wo * h + w] = Max(ReVal, Acc);
@@ -1683,7 +1683,7 @@ static void __attribute__ ((noinline)) KerMaxPoolNxMStrideSxSy_Border_fps(
             /* Bottom stripe.  Exists only if Ho_L>Ho_F, then in this case Fh_min is = 0 by construction */
             for (unsigned int h = Ho_L; h < Ho; h++)
             {
-                int Fh_min = ht, Fh_max = MinCond(hb, Fh); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
+                unsigned int Fh_min = ht, Fh_max = MinCond(hb, Fh); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
                 int Acc = 0x80000000;
                 for (unsigned int i = Fh_min; i < Fh_max; i++)
                     for (unsigned int j = 0; j < Fw; j++) Acc = Max(Acc, In[(h * StrideY - PadTOrg + i) * W + (w * StrideX - PadLOrg + j)]);
@@ -1698,7 +1698,7 @@ static void __attribute__ ((noinline)) KerMaxPoolNxMStrideSxSy_Border_fps(
             for (unsigned int w = 0; w < Wo_F; w++)
             {
                 int Acc = 0x80000000;
-                int Wh_min = wl, Wh_max = MinCond(Fw, wr); // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only
+                unsigned int Wh_min = wl, Wh_max = MinCond(Fw, wr); // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only
                 for (unsigned int i = 0; i < Fh; i++)
                     for (unsigned int j = Wh_min; j < Wh_max; j++) Acc = Max(Acc, In[(h * StrideY - PadTOrg + i) * W + (w * StrideX - PadLOrg + j)]);
                 Out[Wo * h + w] = Max(ReVal, Acc);
@@ -1713,7 +1713,7 @@ static void __attribute__ ((noinline)) KerMaxPoolNxMStrideSxSy_Border_fps(
             for (unsigned int w = Wo_L; w < Wo; w++)
             {
                 int Acc = 0x80000000;
-                int Wh_min = wl, Wh_max = MinCond(wr, Fw); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
+                unsigned int Wh_min = wl, Wh_max = MinCond(wr, Fw); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
                 for (unsigned int i = 0; i < Fh; i++)
                     for (unsigned int j = Wh_min; j < Wh_max; j++) Acc = Max(Acc, In[(h * StrideY - PadTOrg + i) * W + (w * StrideX - PadLOrg + j)]);
                 Out[Wo * h + w] = Max(ReVal, Acc);
@@ -1732,7 +1732,7 @@ static void __attribute__ ((noinline)) KerMaxPoolNxMStrideSxSy_Border_fps(
                 {
                     int Acc = 0x80000000;
                     // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only. ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = MinCond(Fw, wr), Fh_min = ht, Fh_max = MinCond(Fh, hb);
+                    unsigned int Wh_min = wl, Wh_max = MinCond(Fw, wr), Fh_min = ht, Fh_max = MinCond(Fh, hb);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc = Max(Acc, In[(h * StrideY - PadTOrg + i) * W + (w * StrideX - PadLOrg + j)]);
                     Out[Wo * h + w] = Max(ReVal, Acc);
@@ -1753,7 +1753,7 @@ static void __attribute__ ((noinline)) KerMaxPoolNxMStrideSxSy_Border_fps(
                 {
                     int Acc = 0x80000000;
                     // ht Can't be > F by definition of Ho_L so we can remove and use ht only. ht Can't be > F by definition of Ho_L so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = MinCond(wr, Fw), Fh_min = ht, Fh_max = MinCond(Fh, hb);
+                    unsigned int Wh_min = wl, Wh_max = MinCond(wr, Fw), Fh_min = ht, Fh_max = MinCond(Fh, hb);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc = Max(Acc, In[(h * StrideY - PadTOrg + i) * W + (w * StrideX - PadLOrg + j)]);
                     Out[Wo * h + w] = Max(ReVal, Acc);
@@ -1776,7 +1776,7 @@ static void __attribute__ ((noinline)) KerMaxPoolNxMStrideSxSy_Border_fps(
                 {
                     int Acc = 0x80000000;
                     // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only.  ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = MinCond(Fw, wr), Fh_min = ht, Fh_max = MinCond(hb, Fh);
+                    unsigned int Wh_min = wl, Wh_max = MinCond(Fw, wr), Fh_min = ht, Fh_max = MinCond(hb, Fh);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc = Max(Acc, In[(h * StrideY - PadTOrg + i) * W + (w * StrideX - PadLOrg + j)]);
                     Out[Wo * h + w] = Max(ReVal, Acc);
@@ -1796,7 +1796,7 @@ static void __attribute__ ((noinline)) KerMaxPoolNxMStrideSxSy_Border_fps(
                 {
                     int Acc = 0x80000000;
                     // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only.  ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = MinCond(wr, Fw), Fh_min = ht, Fh_max = MinCond(hb, Fh);
+                    unsigned int Wh_min = wl, Wh_max = MinCond(wr, Fw), Fh_min = ht, Fh_max = MinCond(hb, Fh);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc = Max(Acc, In[(h * StrideY - PadTOrg + i) * W + (w * StrideX - PadLOrg + j)]);
                     Out[Wo * h + w] = Max(ReVal, Acc);
@@ -1811,18 +1811,18 @@ static void __attribute__ ((noinline)) KerMaxPoolNxMStrideSxSy_Border_fps(
 static void __attribute__ ((noinline)) KerAvgPoolNxNStrideS_Border_fps(
     signed char *__restrict__ In,
     signed char *__restrict__ Out,
-    int Fw,
-    int Fh,
+    unsigned int Fw,
+    unsigned int Fh,
     v4s Pad,
     v4s PadOrg,
     int W,
     int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     int Stride,
     int ReVal)
 
@@ -1845,7 +1845,7 @@ static void __attribute__ ((noinline)) KerAvgPoolNxNStrideS_Border_fps(
             for (unsigned int h = 0; h < Ho_F; h++)
             {
                 int Acc = 0;
-                int Fh_min = ht, Fh_max = MinCond(Fh, hb); // ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
+                unsigned int Fh_min = ht, Fh_max = MinCond(Fh, hb); // ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
                 for (unsigned int i = Fh_min; i < Fh_max; i++)
                     for (unsigned int j = 0; j < Fw; j++) Acc += In[(h * Stride - PadTOrg + i) * W + (w * Stride - PadLOrg + j)];
                 Out[Wo * h + w] = Max(ReVal, gap8_clip(gap8_roundnorm_reg(Acc * PoolFactor, 8), 7));
@@ -1860,7 +1860,7 @@ static void __attribute__ ((noinline)) KerAvgPoolNxNStrideS_Border_fps(
             /* Bottom stripe.  Exists only if Ho_L>Ho_F, then in this case Fh_min is = 0 by construction */
             for (unsigned int h = Ho_L; h < Ho; h++)
             {
-                int Fh_min = ht, Fh_max = MinCond(hb, Fh); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
+                unsigned int Fh_min = ht, Fh_max = MinCond(hb, Fh); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
                 int Acc = 0;
                 for (unsigned int i = Fh_min; i < Fh_max; i++)
                     for (unsigned int j = 0; j < Fw; j++) Acc += In[(h * Stride - PadTOrg + i) * W + (w * Stride - PadLOrg + j)];
@@ -1875,7 +1875,7 @@ static void __attribute__ ((noinline)) KerAvgPoolNxNStrideS_Border_fps(
             for (unsigned int w = 0; w < Wo_F; w++)
             {
                 int Acc = 0;
-                int Wh_min = wl, Wh_max = MinCond(Fw, wr); // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only
+                unsigned int Wh_min = wl, Wh_max = MinCond(Fw, wr); // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only
                 for (unsigned int i = 0; i < Fh; i++)
                     for (unsigned int j = Wh_min; j < Wh_max; j++) Acc += In[(h * Stride - PadTOrg + i) * W + (w * Stride - PadLOrg + j)];
                 Out[Wo * h + w] = Max(ReVal, gap8_clip(gap8_roundnorm_reg(Acc * PoolFactor, 8), 7));
@@ -1890,7 +1890,7 @@ static void __attribute__ ((noinline)) KerAvgPoolNxNStrideS_Border_fps(
             for (unsigned int w = Wo_L; w < Wo; w++)
             {
                 int Acc = 0;
-                int Wh_min = wl, Wh_max = MinCond(wr, Fw); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
+                unsigned int Wh_min = wl, Wh_max = MinCond(wr, Fw); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
                 for (unsigned int i = 0; i < Fh; i++)
                     for (unsigned int j = Wh_min; j < Wh_max; j++) Acc += In[(h * Stride - PadTOrg + i) * W + (w * Stride - PadLOrg + j)];
                 Out[Wo * h + w] = Max(ReVal, gap8_clip(gap8_roundnorm_reg(Acc * PoolFactor, 8), 7));
@@ -1909,7 +1909,7 @@ static void __attribute__ ((noinline)) KerAvgPoolNxNStrideS_Border_fps(
                 {
                     int Acc = 0;
                     // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only. ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = MinCond(Fw, wr), Fh_min = ht, Fh_max = MinCond(Fh, hb);
+                    unsigned int Wh_min = wl, Wh_max = MinCond(Fw, wr), Fh_min = ht, Fh_max = MinCond(Fh, hb);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc += In[(h * Stride - PadTOrg + i) * W + (w * Stride - PadLOrg + j)];
                     Out[Wo * h + w] = Max(ReVal, gap8_clip(gap8_roundnorm_reg(Acc * PoolFactor, 8), 7));
@@ -1930,7 +1930,7 @@ static void __attribute__ ((noinline)) KerAvgPoolNxNStrideS_Border_fps(
                 {
                     int Acc = 0;
                     // ht Can't be > F by definition of Ho_L so we can remove and use ht only. ht Can't be > F by definition of Ho_L so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = MinCond(wr, Fw), Fh_min = ht, Fh_max = MinCond(Fh, hb);
+                    unsigned int Wh_min = wl, Wh_max = MinCond(wr, Fw), Fh_min = ht, Fh_max = MinCond(Fh, hb);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc += In[(h * Stride - PadTOrg + i) * W + (w * Stride - PadLOrg + j)];
                     Out[Wo * h + w] = Max(ReVal, gap8_clip(gap8_roundnorm_reg(Acc * PoolFactor, 8), 7));
@@ -1953,7 +1953,7 @@ static void __attribute__ ((noinline)) KerAvgPoolNxNStrideS_Border_fps(
                 {
                     int Acc = 0;
                     // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only.  ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = MinCond(Fw, wr), Fh_min = ht, Fh_max = MinCond(hb, Fh);
+                    unsigned int Wh_min = wl, Wh_max = MinCond(Fw, wr), Fh_min = ht, Fh_max = MinCond(hb, Fh);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc += In[(h * Stride - PadTOrg + i) * W + (w * Stride - PadLOrg + j)];
                     Out[Wo * h + w] = Max(ReVal, gap8_clip(gap8_roundnorm_reg(Acc * PoolFactor, 8), 7));
@@ -1973,7 +1973,7 @@ static void __attribute__ ((noinline)) KerAvgPoolNxNStrideS_Border_fps(
                 {
                     int Acc = 0;
                     // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only.  ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = MinCond(wr, Fw), Fh_min = ht, Fh_max = Min(hb, Fh);
+                    unsigned int Wh_min = wl, Wh_max = MinCond(wr, Fw), Fh_min = ht, Fh_max = Min(hb, Fh);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc += In[(h * Stride - PadTOrg + i) * W + (w * Stride - PadLOrg + j)];
                     Out[Wo * h + w] = Max(ReVal, gap8_clip(gap8_roundnorm_reg(Acc * PoolFactor, 8), 7));
@@ -1988,18 +1988,18 @@ static void __attribute__ ((noinline)) KerAvgPoolNxNStrideS_Border_fps(
 static void __attribute__ ((noinline)) KerAvgPoolNxMStrideSxSy_Border_fps(
     signed char *__restrict__ In,
     signed char *__restrict__ Out,
-    int Fw,
-    int Fh,
+    unsigned int Fw,
+    unsigned int Fh,
     v4s Pad,
     v4s PadOrg,
     int W,
     int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     int StrideX,
     int StrideY,
     int ReVal)
@@ -2023,7 +2023,7 @@ static void __attribute__ ((noinline)) KerAvgPoolNxMStrideSxSy_Border_fps(
             for (unsigned int h = 0; h < Ho_F; h++)
             {
                 int Acc = 0;
-                int Fh_min = ht, Fh_max = MinCond(Fh, hb); // ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
+                unsigned int Fh_min = ht, Fh_max = MinCond(Fh, hb); // ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
                 for (unsigned int i = Fh_min; i < Fh_max; i++)
                     for (unsigned int j = 0; j < Fw; j++) Acc += In[(h * StrideY - PadTOrg + i) * W + (w * StrideX - PadLOrg + j)];
                 Out[Wo * h + w] = Max(ReVal, gap8_clip(gap8_roundnorm_reg(Acc * PoolFactor, 8), 7));
@@ -2038,7 +2038,7 @@ static void __attribute__ ((noinline)) KerAvgPoolNxMStrideSxSy_Border_fps(
             /* Bottom stripe.  Exists only if Ho_L>Ho_F, then in this case Fh_min is = 0 by construction */
             for (unsigned int h = Ho_L; h < Ho; h++)
             {
-                int Fh_min = ht, Fh_max = MinCond(hb, Fh); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
+                unsigned int Fh_min = ht, Fh_max = MinCond(hb, Fh); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
                 int Acc = 0;
                 for (unsigned int i = Fh_min; i < Fh_max; i++)
                     for (unsigned int j = 0; j < Fw; j++) Acc += In[(h * StrideY - PadTOrg + i) * W + (w * StrideX - PadLOrg + j)];
@@ -2053,7 +2053,7 @@ static void __attribute__ ((noinline)) KerAvgPoolNxMStrideSxSy_Border_fps(
             for (unsigned int w = 0; w < Wo_F; w++)
             {
                 int Acc = 0;
-                int Wh_min = wl, Wh_max = MinCond(Fw, wr); // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only
+                unsigned int Wh_min = wl, Wh_max = MinCond(Fw, wr); // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only
                 for (unsigned int i = 0; i < Fh; i++)
                     for (unsigned int j = Wh_min; j < Wh_max; j++) Acc += In[(h * StrideY - PadTOrg + i) * W + (w * StrideX - PadLOrg + j)];
                 Out[Wo * h + w] = Max(ReVal, gap8_clip(gap8_roundnorm_reg(Acc * PoolFactor, 8), 7));
@@ -2068,7 +2068,7 @@ static void __attribute__ ((noinline)) KerAvgPoolNxMStrideSxSy_Border_fps(
             for (unsigned int w = Wo_L; w < Wo; w++)
             {
                 int Acc = 0;
-                int Wh_min = wl, Wh_max = MinCond(wr, Fw); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
+                unsigned int Wh_min = wl, Wh_max = MinCond(wr, Fw); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
                 for (unsigned int i = 0; i < Fh; i++)
                     for (unsigned int j = Wh_min; j < Wh_max; j++) Acc += In[(h * StrideY - PadTOrg + i) * W + (w * StrideX - PadLOrg + j)];
                 Out[Wo * h + w] = Max(ReVal, gap8_clip(gap8_roundnorm_reg(Acc * PoolFactor, 8), 7));
@@ -2087,7 +2087,7 @@ static void __attribute__ ((noinline)) KerAvgPoolNxMStrideSxSy_Border_fps(
                 {
                     int Acc = 0;
                     // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only. ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = MinCond(Fw, wr), Fh_min = ht, Fh_max = MinCond(Fh, hb);
+                    unsigned int Wh_min = wl, Wh_max = MinCond(Fw, wr), Fh_min = ht, Fh_max = MinCond(Fh, hb);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc += In[(h * StrideY - PadTOrg + i) * W + (w * StrideX - PadLOrg + j)];
                     Out[Wo * h + w] = Max(ReVal, gap8_clip(gap8_roundnorm_reg(Acc * PoolFactor, 8), 7));
@@ -2108,7 +2108,7 @@ static void __attribute__ ((noinline)) KerAvgPoolNxMStrideSxSy_Border_fps(
                 {
                     int Acc = 0;
                     // ht Can't be > F by definition of Ho_L so we can remove and use ht only. ht Can't be > F by definition of Ho_L so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = MinCond(wr, Fw), Fh_min = ht, Fh_max = MinCond(Fh, hb);
+                    unsigned int Wh_min = wl, Wh_max = MinCond(wr, Fw), Fh_min = ht, Fh_max = MinCond(Fh, hb);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc += In[(h * StrideY - PadTOrg + i) * W + (w * StrideX - PadLOrg + j)];
                     Out[Wo * h + w] = Max(ReVal, gap8_clip(gap8_roundnorm_reg(Acc * PoolFactor, 8), 7));
@@ -2131,7 +2131,7 @@ static void __attribute__ ((noinline)) KerAvgPoolNxMStrideSxSy_Border_fps(
                 {
                     int Acc = 0;
                     // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only.  ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = MinCond(Fw, wr), Fh_min = ht, Fh_max = MinCond(hb, Fh);
+                    unsigned int Wh_min = wl, Wh_max = MinCond(Fw, wr), Fh_min = ht, Fh_max = MinCond(hb, Fh);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc += In[(h * StrideY - PadTOrg + i) * W + (w * StrideX - PadLOrg + j)];
                     Out[Wo * h + w] = Max(ReVal, gap8_clip(gap8_roundnorm_reg(Acc * PoolFactor, 8), 7));
@@ -2151,7 +2151,7 @@ static void __attribute__ ((noinline)) KerAvgPoolNxMStrideSxSy_Border_fps(
                 {
                     int Acc = 0;
                     // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only.  ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = MinCond(wr, Fw), Fh_min = ht, Fh_max = Min(hb, Fh);
+                    unsigned int Wh_min = wl, Wh_max = MinCond(wr, Fw), Fh_min = ht, Fh_max = Min(hb, Fh);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc += In[(h * StrideY - PadTOrg + i) * W + (w * StrideX - PadLOrg + j)];
                     Out[Wo * h + w] = Max(ReVal, gap8_clip(gap8_roundnorm_reg(Acc * PoolFactor, 8), 7));
@@ -2166,18 +2166,18 @@ static void __attribute__ ((noinline)) KerAvgPoolNxMStrideSxSy_Border_fps(
 static void __attribute__ ((noinline)) KerMaxPoolNxNStrideS_Body_fps(
     signed char *__restrict__ In,
     signed char *__restrict__ Out,
-    int Fw,
-    int Fh,
+    unsigned int Fw,
+    unsigned int Fh,
     int PadL,
     int PadT,
     int W,
     int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     int Stride,
     int ReVal)
 
@@ -2248,18 +2248,18 @@ static void __attribute__ ((noinline)) KerMaxPoolNxNStrideS_Body_fps(
 static void __attribute__ ((noinline)) KerMaxPoolNxMStrideSxSy_Body_fps(
     signed char *__restrict__ In,
     signed char *__restrict__ Out,
-    int Fw,
-    int Fh,
+    unsigned int Fw,
+    unsigned int Fh,
     int PadL,
     int PadT,
     int W,
     int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     int StrideX,
     int StrideY,
     int ReVal)
@@ -2331,18 +2331,18 @@ static void __attribute__ ((noinline)) KerMaxPoolNxMStrideSxSy_Body_fps(
 static void __attribute__ ((noinline)) KerAvgPoolNxNStrideS_Body_fps(
     signed char *__restrict__ In,
     signed char *__restrict__ Out,
-    int Fw,
-    int Fh,
+    unsigned int Fw,
+    unsigned int Fh,
     int PadL,
     int PadT,
     int W,
     int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     int Stride,
     int DoReLU)
 
@@ -2437,18 +2437,18 @@ static void __attribute__ ((noinline)) KerAvgPoolNxNStrideS_Body_fps(
 static void __attribute__ ((noinline)) KerAvgPoolNxMStrideSxSy_Body_fps(
     signed char *__restrict__ In,
     signed char *__restrict__ Out,
-    int Fw,
-    int Fh,
+    unsigned int Fw,
+    unsigned int Fh,
     int PadL,
     int PadT,
     int W,
     int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     int StrideX,
     int StrideY,
     int DoReLU)
@@ -2600,10 +2600,10 @@ void KerParPool2x2Stride2_fps(KerParReLUPool_fps_T *Arg)
     unsigned int Last = Min(First + Chunk, OutFeatures);
     v4s PadIn = Arg->Pad;
 
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
 
     if (PoolMax) for (unsigned int of = First; of < Last; of++) KerMaxPool2x2Stride2_fps(In + of * W * H, W, H, Out + of * Wo * Ho, Wo, Wo_F, Wo_L, Ho, Ho_F, Ho_L, PadIn[1]&W & 0x1, PadIn[3]&H & 0x1, Arg->DoReLU & 0x1);
     else         for (unsigned int of = First; of < Last; of++) KerAvgPool2x2Stride2_fps(In + of * W * H, W, H, Out + of * Wo * Ho, Wo, Wo_F, Wo_L, Ho, Ho_F, Ho_L, PadIn[1]&W & 0x1, PadIn[3]&H & 0x1, Arg->DoReLU & 0x1);
@@ -2628,10 +2628,10 @@ void KerParPoolNxNStrideS_fps(KerParReLUPool_fps_T *Arg)
     v4s PadIn = Arg->Pad;
     int ReVal = ((int)Arg->DoReLU & 0x1) ? 0 : 0x80000000;
 
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
 
     if (PoolMax)
     {
@@ -2710,10 +2710,10 @@ void KerParPool2x2Stride2_fp(KerParReLUPool_fp_T *Arg)
     unsigned int Last = Min(First + Chunk, OutFeatures);
     v4s PadIn = Arg->Pad;
 
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
 
     if (PoolMax) for (unsigned int of = First; of < Last; of++) KerMaxPool2x2Stride2_fp(In + of * W * H, W, H, Out + of * Wo * Ho, Wo, Wo_F, Wo_L, Ho, Ho_F, Ho_L, PadIn[1]&W & 0x1, PadIn[3]&H & 0x1, Arg->DoReLU & 0x1);
     else         for (unsigned int of = First; of < Last; of++) KerAvgPool2x2Stride2_fp(In + of * W * H, W, H, Out + of * Wo * Ho, Wo, Wo_F, Wo_L, Ho, Ho_F, Ho_L, PadIn[1]&W & 0x1, PadIn[3]&H & 0x1, Arg->DoReLU & 0x1);
@@ -2739,10 +2739,10 @@ void KerParPoolNxNStrideS_fp(KerParReLUPool_fp_T *Arg)
     v4s PadIn = Arg->Pad;
     int ReVal = ((int)Arg->DoReLU & 0x1) ? 0 : 0x80000000;
 
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
 
     if (PoolMax)
     {
@@ -2859,10 +2859,10 @@ void KerPool2x2Stride2_fps(KerReLUPool_fps_T *Arg)
     v4s PadIn = Arg->Pad;
     int PoolMax = (((int)Arg->DoReLU & 0x2) == 0);
 
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
     int ReVal = ((int)Arg->DoReLU & 0x1) ? 0 : 0x80000000;
 
     unsigned int CoreId = gap8_coreid();
@@ -2902,10 +2902,10 @@ void KerPoolNxNStrideS_fps(KerReLUPool_fps_T *Arg)
     v4s PadIn = Arg->Pad;
     int PoolMax = (((int)Arg->DoReLU & 0x2) == 0);
 
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
     int ReVal = ((int)Arg->DoReLU & 0x1) ? 0 : 0x80000000;
 
     unsigned int CoreId = gap8_coreid();
@@ -2962,10 +2962,10 @@ void KerPoolNxMStrideSxSy_fps(KerReLUPool_fps_T *Arg)
     v4s PadIn = Arg->Pad;
     int PoolMax = (((int)Arg->DoReLU & 0x2) == 0);
 
-    int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
-    int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
+    unsigned int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
+    unsigned int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
     int ReVal = ((int)Arg->DoReLU & 0x1) ? 0 : 0x80000000;
 
     unsigned int CoreId = gap8_coreid();
@@ -3021,10 +3021,10 @@ void KerPool2x2Stride2_fp(KerReLUPool_fp_T *Arg)
     v4s PadIn = Arg->Pad;
     int PoolMax = ((int)(Arg->DoReLU & 0x2) == 0);
 
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
     int ReVal = ((int)Arg->DoReLU & 0x1) ? 0 : 0x80000000;
 
     unsigned int CoreId = gap8_coreid();
@@ -3064,10 +3064,10 @@ void KerPoolNxNStrideS_fp(KerReLUPool_fp_T *Arg)
     v4s PadIn = Arg->Pad;
     int PoolMax = ((Arg->DoReLU & 0x2) == 0);
 
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
     int ReVal = (Arg->DoReLU & 0x1) ? 0 : 0x80000000;
 
     unsigned int CoreId = gap8_coreid();
@@ -3124,10 +3124,10 @@ void KerPoolNxMStrideSxSy_fp(KerReLUPool_fp_T *Arg)
     v4s PadIn = Arg->Pad;
     int PoolMax = ((Arg->DoReLU & 0x2) == 0);
 
-    int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
-    int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
+    unsigned int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
+    unsigned int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
     int ReVal = (Arg->DoReLU & 0x1) ? 0 : 0x80000000;
 
     unsigned int CoreId = gap8_coreid();

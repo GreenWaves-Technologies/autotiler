@@ -148,8 +148,8 @@ static inline int __attribute__ ((always_inline))  MinCond(int a, int b)
 
 static void __attribute__ ((noinline)) KerConv2x1from3x1StrideNx1_V_fps(
     signed char *__restrict__ In,
-    int W, int PadTOrg,
-    int Wo, int Ho, int Ho_F, int Ho_L,
+    unsigned int W, int PadTOrg,
+    unsigned int Wo, unsigned int Ho, unsigned int Ho_F, unsigned int Ho_L,
     unsigned int Norm,
     signed char *__restrict__ Out,
     signed char *__restrict__ Filter,
@@ -187,8 +187,8 @@ static void __attribute__ ((noinline)) KerConv2x1from3x1StrideNx1_V_fps(
 
 static void __attribute__ ((noinline)) KerConv1x2from1x3Stride1xN_H_fps(
     signed char *__restrict__ In,
-    int W, int PadL,
-    int Wo, int Wo_F, int Wo_L,
+    unsigned int W, int PadL,
+    unsigned int Wo, unsigned int Wo_F, unsigned int Wo_L,
     unsigned int Norm,
     signed char *__restrict__ Out,
     signed char *__restrict__ Filter,
@@ -227,7 +227,7 @@ static void __attribute__ ((noinline)) KerConv1x2from1x3Stride1xN_H_fps(
 static void __attribute__ ((noinline)) KerConv2x3from3x3Stride1_V_fps(
     signed char *__restrict__ In,
     int W, int PadTOrg,
-    int Wo, int Ho, int Ho_F, int Ho_L,
+    unsigned int Wo, unsigned int Ho, unsigned int Ho_F, unsigned int Ho_L,
     unsigned int Norm,
     signed char *__restrict__ Out,
     signed char *__restrict__ Filter,
@@ -300,8 +300,8 @@ static void __attribute__ ((noinline)) KerConv2x3from3x3Stride1_V_fps(
 
 static void __attribute__ ((noinline)) KerConv2x3from3x3Stride2_V_fps(
     signed char *__restrict__ In,
-    int W, int PadTOrg,
-    int Wo, int Ho, int Ho_F, int Ho_L,
+    unsigned int W, int PadTOrg,
+    unsigned int Wo,unsigned int Ho, unsigned int Ho_F, unsigned int Ho_L,
     unsigned int Norm,
     signed char *__restrict__ Out,
     signed char *__restrict__ Filter,
@@ -371,8 +371,8 @@ static void __attribute__ ((noinline)) KerConv2x3from3x3Stride2_V_fps(
 
 static void __attribute__ ((noinline)) KerConv2x3from3x3StrideS_V_fps(
     signed char *__restrict__ In,
-    int W, int PadTOrg,
-    int Wo, int Ho, int Ho_F, int Ho_L,
+    unsigned int W,  int PadTOrg,
+    unsigned int Wo, unsigned int Ho, unsigned int Ho_F, unsigned int Ho_L,
     int Stride,
     unsigned int Norm,
     signed char *__restrict__ Out,
@@ -445,8 +445,8 @@ static void __attribute__ ((noinline)) KerConv2x3from3x3StrideS_V_fps(
 
 static void __attribute__ ((noinline)) KerConv3x2from3x3Stride1_H_fps(
     signed char *__restrict__ In,
-    int W, int PadL,
-    int Wo, int Wo_F, int Wo_L,
+    unsigned int W, int PadL,
+    unsigned int Wo, unsigned int Wo_F, unsigned int Wo_L,
     unsigned int Norm,
     signed char *__restrict__ Out,
     signed char *__restrict__ Filter,
@@ -488,8 +488,8 @@ static void __attribute__ ((noinline)) KerConv3x2from3x3Stride1_H_fps(
 
 static void __attribute__ ((noinline)) KerConv3x2from3x3Stride2_H_fps(
     signed char *__restrict__ In,
-    int W, int PadL,
-    int Wo, int Wo_F, int Wo_L,
+    unsigned int W, int PadL,
+    unsigned int Wo, unsigned int Wo_F, unsigned int Wo_L,
     unsigned int Norm,
     signed char *__restrict__ Out,
     signed char *__restrict__ Filter,
@@ -531,8 +531,8 @@ static void __attribute__ ((noinline)) KerConv3x2from3x3Stride2_H_fps(
 
 static void __attribute__ ((noinline)) KerConv3x2from3x3StrideS_H_fps(
     signed char *__restrict__ In,
-    int W, int PadL,
-    int Wo, int Wo_F, int Wo_L,
+    unsigned int W, int PadL,
+    unsigned int Wo, unsigned int Wo_F, unsigned int Wo_L,
     int Stride,
     unsigned int Norm,
     signed char *__restrict__ Out,
@@ -575,8 +575,8 @@ static void __attribute__ ((noinline)) KerConv3x2from3x3StrideS_H_fps(
 
 static void __attribute__ ((noinline)) KerConv4x1from5x1StrideNx1_V_fps(
     signed char *__restrict__ In,
-    int W, v4s PadOrg, v4s Pad,
-    int Wo, int Ho, int Ho_F, int Ho_L,
+    unsigned int W, v4s PadOrg, v4s Pad,
+    unsigned int Wo, unsigned int Ho, unsigned int Ho_F, unsigned int Ho_L,
     unsigned int Norm,
     signed char *__restrict__ Out,
     signed char *__restrict__ Filter,
@@ -613,8 +613,8 @@ static void __attribute__ ((noinline)) KerConv4x1from5x1StrideNx1_V_fps(
 
 static void __attribute__ ((noinline)) KerConv1x4from1x5Stride1xN_H_fps(
     signed char *__restrict__ In,
-    int W, int PadL,
-    int Wo, int Wo_F, int Wo_L,
+    unsigned int W, int PadL,
+    unsigned int Wo, unsigned int Wo_F, unsigned int Wo_L,
     unsigned int Norm,
     signed char *__restrict__ Out,
     signed char *__restrict__ Filter,
@@ -659,8 +659,8 @@ static void __attribute__ ((noinline)) KerConv1x4from1x5Stride1xN_H_fps(
 
 static void __attribute__ ((noinline)) KerConv4x5from5x5Stride1_V_fps(
     signed char *__restrict__ In,
-    int W, v4s PadOrg, v4s Pad,
-    int Wo, int Ho, int Ho_F, int Ho_L,
+    unsigned int W, v4s PadOrg, v4s Pad,
+    unsigned int Wo, unsigned int Ho, unsigned int Ho_F, unsigned int Ho_L,
     unsigned int Norm,
     signed char *__restrict__ Out,
     signed char *__restrict__ Filter,
@@ -793,8 +793,8 @@ static void __attribute__ ((noinline)) KerConv4x5from5x5Stride1_V_fps(
 
 static void __attribute__ ((noinline)) KerConv4x5from5x5Stride2_V_fps(
     signed char *__restrict__ In,
-    int W, int H, v4s PadOrg, v4s Pad,
-    int Wo, int Ho, int Ho_F, int Ho_L,
+    unsigned int W, unsigned int H, v4s PadOrg, v4s Pad,
+    unsigned int Wo, unsigned int Ho, unsigned int Ho_F, unsigned int Ho_L,
     unsigned int Norm,
     signed char *__restrict__ Out,
     signed char *__restrict__ Filter,
@@ -905,8 +905,8 @@ static void __attribute__ ((noinline)) KerConv4x5from5x5Stride2_V_fps(
 
 static void __attribute__ ((noinline)) KerConv4x5from5x5StrideS_V_fps(
     signed char *__restrict__ In,
-    int W, int H, v4s PadOrg, v4s Pad,
-    int Wo, int Ho, int Ho_F, int Ho_L,
+    unsigned int W, unsigned int H, v4s PadOrg, v4s Pad,
+    unsigned int Wo, unsigned int Ho, unsigned int Ho_F, unsigned int Ho_L,
     int Stride,
     unsigned int Norm,
     signed char *__restrict__ Out,
@@ -1019,8 +1019,8 @@ static void __attribute__ ((noinline)) KerConv4x5from5x5StrideS_V_fps(
 
 static void __attribute__ ((noinline)) KerConv5x4from5x5Stride1_H_fps(
     signed char *__restrict__ In,
-    int W, int PadL,
-    int Wo, int Wo_F, int Wo_L,
+    unsigned int W, int PadL,
+    unsigned int Wo, unsigned int Wo_F, unsigned int Wo_L,
     unsigned int Norm,
     signed char *__restrict__ Out,
     signed char *__restrict__ Filter,
@@ -1126,8 +1126,8 @@ static void __attribute__ ((noinline)) KerConv5x4from5x5Stride1_H_fps(
 
 static void __attribute__ ((noinline)) KerConv5x4from5x5Stride2_H_fps(
     signed char *__restrict__ In,
-    int W, int H, int PadL, int PadT,
-    int Wo, int Wo_F, int Wo_L,
+    unsigned int W, unsigned int H, int PadL, int PadT,
+    unsigned int Wo, unsigned int Wo_F, unsigned int Wo_L,
     unsigned int Norm,
     signed char *__restrict__ Out,
     signed char *__restrict__ Filter,
@@ -1217,8 +1217,8 @@ static void __attribute__ ((noinline)) KerConv5x4from5x5Stride2_H_fps(
 
 static void __attribute__ ((noinline)) KerConv5x4from5x5StrideS_H_fps(
     signed char *__restrict__ In,
-    int W, int H, int PadL, int PadT,
-    int Wo, int Wo_F, int Wo_L,
+    unsigned int W, unsigned int H, int PadL, int PadT,
+    unsigned int Wo, unsigned int Wo_F, unsigned int Wo_L,
     unsigned int Stride,
     unsigned int Norm,
     signed char *__restrict__ Out,
@@ -1305,16 +1305,16 @@ void __attribute__ ((noinline)) KerConvNxNStrideS_Border_fps(
     signed char *__restrict__ In,
     signed char *__restrict__ Out,
     signed char *__restrict__ Filter,
-    int Fw,
-    int Fh,
-    int W,
-    int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Fw,
+    unsigned int Fh,
+    unsigned int W,
+    unsigned int H,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     int Stride,
     v4s Pad,
     v4s PadOrg,
@@ -1335,7 +1335,7 @@ void __attribute__ ((noinline)) KerConvNxNStrideS_Border_fps(
         int ht = PadTOrg, hb = H - Hi_F + Fh / 2;
         for (unsigned int h = 0; h < Ho_F; h++)
         {
-            int Fh_min = ht, Fh_max = MinCond(Fh, hb); // ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
+            unsigned int Fh_min = ht, Fh_max = MinCond(Fh, hb); // ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
             for (unsigned int w = Wo_F; w < Wo_L; w++)
             {
                 int Acc = Out[Wo * h + w] << Norm;
@@ -1352,7 +1352,7 @@ void __attribute__ ((noinline)) KerConvNxNStrideS_Border_fps(
         int ht = 0, hb = H - (Hi_L + Stride) + Fh / 2;
         for (unsigned int h = Ho_L; h < Ho; h++)
         {
-            int Fh_min = ht, Fh_max = MinCond(hb, Fh); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
+            unsigned int Fh_min = ht, Fh_max = MinCond(hb, Fh); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
             for (unsigned int w = Wo_F; w < Wo_L; w++)
             {
                 int Acc = Out[Wo * h + w] << Norm;
@@ -1368,7 +1368,7 @@ void __attribute__ ((noinline)) KerConvNxNStrideS_Border_fps(
         int wl = PadLOrg, wr = W - Wi_F + Fw / 2;
         for (unsigned int w = 0; w < Wo_F; w++)
         {
-            int Wh_min = wl, Wh_max = MinCond(Fw, wr); // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only
+            unsigned int Wh_min = wl, Wh_max = MinCond(Fw, wr); // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only
             for (unsigned int h = Ho_F; h < Ho_L; h++)
             {
                 int Acc = Out[Wo * h + w] << Norm;
@@ -1385,7 +1385,7 @@ void __attribute__ ((noinline)) KerConvNxNStrideS_Border_fps(
         int wl = 0, wr = W - (Wi_L + Stride) + Fw / 2;
         for (unsigned int w = Wo_L; w < Wo; w++)
         {
-            int Wh_min = wl, Wh_max = MinCond(wr, Fw); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
+            unsigned int Wh_min = wl, Wh_max = MinCond(wr, Fw); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
             for (unsigned int h = Ho_F; h < Ho_L; h++)
             {
                 int Acc = Out[Wo * h + w] << Norm;
@@ -1408,7 +1408,7 @@ void __attribute__ ((noinline)) KerConvNxNStrideS_Border_fps(
                 {
                     int Acc = Out[Wo * h + w] << Norm;
                     // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only. ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = MinCond(Fw, wr), Fh_min = ht, Fh_max = MinCond(Fh, hb);
+                    unsigned int Wh_min = wl, Wh_max = MinCond(Fw, wr), Fh_min = ht, Fh_max = MinCond(Fh, hb);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc += In[(h * Stride - PadTOrg + i) * W + (w * Stride - PadLOrg + j)] * Filter[Fh * i + j];
                     Out[Wo * h + w] = gap8_clip(gap8_roundnorm_reg(Acc, Norm), 7);
@@ -1429,7 +1429,7 @@ void __attribute__ ((noinline)) KerConvNxNStrideS_Border_fps(
                 {
                     int Acc = Out[Wo * h + w] << Norm;
                     // ht Can't be > F by definition of Ho_L so we can remove and use ht only. ht Can't be > F by definition of Ho_L so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = MinCond(wr, Fw), Fh_min = ht, Fh_max = MinCond(Fh, hb);
+                    unsigned int Wh_min = wl, Wh_max = MinCond(wr, Fw), Fh_min = ht, Fh_max = MinCond(Fh, hb);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc += In[(h * Stride - PadTOrg + i) * W + (w * Stride - PadLOrg + j)] * Filter[Fh * i + j];
                     Out[Wo * h + w] = gap8_clip(gap8_roundnorm_reg(Acc, Norm), 7);
@@ -1452,7 +1452,7 @@ void __attribute__ ((noinline)) KerConvNxNStrideS_Border_fps(
                 {
                     int Acc = Out[Wo * h + w] << Norm;
                     // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only.  ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = MinCond(Fw, wr), Fh_min = ht, Fh_max = MinCond(hb, Fh);
+                    unsigned int Wh_min = wl, Wh_max = MinCond(Fw, wr), Fh_min = ht, Fh_max = MinCond(hb, Fh);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc += In[(h * Stride - PadTOrg + i) * W + (w * Stride - PadLOrg + j)] * Filter[Fh * i + j];
                     Out[Wo * h + w] = gap8_clip(gap8_roundnorm_reg(Acc, Norm), 7);
@@ -1472,7 +1472,7 @@ void __attribute__ ((noinline)) KerConvNxNStrideS_Border_fps(
                 {
                     int Acc = Out[Wo * h + w] << Norm;
                     // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only.  ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = MinCond(wr, Fw), Fh_min = ht, Fh_max = MinCond(hb, Fh);
+                    unsigned int Wh_min = wl, Wh_max = MinCond(wr, Fw), Fh_min = ht, Fh_max = MinCond(hb, Fh);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc += In[(h * Stride - PadTOrg + i) * W + (w * Stride - PadLOrg + j)] * Filter[Fh * i + j];
                     Out[Wo * h + w] = gap8_clip(gap8_roundnorm_reg(Acc, Norm), 7);
@@ -1488,16 +1488,16 @@ void __attribute__ ((noinline)) KerConvNxMStrideSxSy_Border_fps(
     signed char *__restrict__ In,
     signed char *__restrict__ Out,
     signed char *__restrict__ Filter,
-    int Fw,
-    int Fh,
-    int W,
-    int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Fw,
+    unsigned int Fh,
+    unsigned int W,
+    unsigned int H,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     int StrideX,
     int StrideY,
     v4s Pad,
@@ -1519,7 +1519,7 @@ void __attribute__ ((noinline)) KerConvNxMStrideSxSy_Border_fps(
         int ht = PadTOrg, hb = H - Hi_F + Fh / 2;
         for (unsigned int h = 0; h < Ho_F; h++)
         {
-            int Fh_min = ht, Fh_max = MinCond(Fh, hb); // ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
+            unsigned int Fh_min = ht, Fh_max = MinCond(Fh, hb); // ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
             for (unsigned int w = Wo_F; w < Wo_L; w++)
             {
                 int Acc = Out[Wo * h + w] << Norm;
@@ -1536,7 +1536,7 @@ void __attribute__ ((noinline)) KerConvNxMStrideSxSy_Border_fps(
         int ht = 0, hb = H - (Hi_L + StrideY) + Fh / 2;
         for (unsigned int h = Ho_L; h < Ho; h++)
         {
-            int Fh_min = ht, Fh_max = MinCond(hb, Fh); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
+            unsigned int Fh_min = ht, Fh_max = MinCond(hb, Fh); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
             for (unsigned int w = Wo_F; w < Wo_L; w++)
             {
                 int Acc = Out[Wo * h + w] << Norm;
@@ -1552,7 +1552,7 @@ void __attribute__ ((noinline)) KerConvNxMStrideSxSy_Border_fps(
         int wl = PadLOrg, wr = W - Wi_F + Fw / 2;
         for (unsigned int w = 0; w < Wo_F; w++)
         {
-            int Wh_min = wl, Wh_max = MinCond(Fw, wr); // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only
+            unsigned int Wh_min = wl, Wh_max = MinCond(Fw, wr); // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only
             for (unsigned int h = Ho_F; h < Ho_L; h++)
             {
                 int Acc = Out[Wo * h + w] << Norm;
@@ -1569,7 +1569,7 @@ void __attribute__ ((noinline)) KerConvNxMStrideSxSy_Border_fps(
         int wl = 0, wr = W - (Wi_L + StrideX) + Fw / 2;
         for (unsigned int w = Wo_L; w < Wo; w++)
         {
-            int Wh_min = wl, Wh_max = MinCond(wr, Fw); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
+            unsigned int Wh_min = wl, Wh_max = MinCond(wr, Fw); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
             for (unsigned int h = Ho_F; h < Ho_L; h++)
             {
                 int Acc = Out[Wo * h + w] << Norm;
@@ -1592,7 +1592,7 @@ void __attribute__ ((noinline)) KerConvNxMStrideSxSy_Border_fps(
                 {
                     int Acc = Out[Wo * h + w] << Norm;
                     // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only. ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = MinCond(Fw, wr), Fh_min = ht, Fh_max = MinCond(Fh, hb);
+                    unsigned int Wh_min = wl, Wh_max = MinCond(Fw, wr), Fh_min = ht, Fh_max = MinCond(Fh, hb);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc += In[(h * StrideY - PadTOrg + i) * W + (w * StrideX - PadLOrg + j)] * Filter[Fh * i + j];
                     Out[Wo * h + w] = gap8_clip(gap8_roundnorm_reg(Acc, Norm), 7);
@@ -1613,7 +1613,7 @@ void __attribute__ ((noinline)) KerConvNxMStrideSxSy_Border_fps(
                 {
                     int Acc = Out[Wo * h + w] << Norm;
                     // ht Can't be > F by definition of Ho_L so we can remove and use ht only. ht Can't be > F by definition of Ho_L so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = MinCond(wr, Fw), Fh_min = ht, Fh_max = MinCond(Fh, hb);
+                    unsigned int Wh_min = wl, Wh_max = MinCond(wr, Fw), Fh_min = ht, Fh_max = MinCond(Fh, hb);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc += In[(h * StrideY - PadTOrg + i) * W + (w * StrideX - PadLOrg + j)] * Filter[Fh * i + j];
                     Out[Wo * h + w] = gap8_clip(gap8_roundnorm_reg(Acc, Norm), 7);
@@ -1636,7 +1636,7 @@ void __attribute__ ((noinline)) KerConvNxMStrideSxSy_Border_fps(
                 {
                     int Acc = Out[Wo * h + w] << Norm;
                     // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only.  ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = MinCond(Fw, wr), Fh_min = ht, Fh_max = MinCond(hb, Fh);
+                    unsigned int Wh_min = wl, Wh_max = MinCond(Fw, wr), Fh_min = ht, Fh_max = MinCond(hb, Fh);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc += In[(h * StrideY - PadTOrg + i) * W + (w * StrideX - PadLOrg + j)] * Filter[Fh * i + j];
                     Out[Wo * h + w] = gap8_clip(gap8_roundnorm_reg(Acc, Norm), 7);
@@ -1656,7 +1656,7 @@ void __attribute__ ((noinline)) KerConvNxMStrideSxSy_Border_fps(
                 {
                     int Acc = Out[Wo * h + w] << Norm;
                     // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only.  ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = MinCond(wr, Fw), Fh_min = ht, Fh_max = MinCond(hb, Fh);
+                    unsigned int Wh_min = wl, Wh_max = MinCond(wr, Fw), Fh_min = ht, Fh_max = MinCond(hb, Fh);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc += In[(h * StrideY - PadTOrg + i) * W + (w * StrideX - PadLOrg + j)] * Filter[Fh * i + j];
                     Out[Wo * h + w] = gap8_clip(gap8_roundnorm_reg(Acc, Norm), 7);
@@ -1670,8 +1670,8 @@ void __attribute__ ((noinline)) KerConvNxMStrideSxSy_Border_fps(
 
 static void __attribute__ ((noinline)) KerConv2x1from3x1StrideNx1_V_fp(
     short int *__restrict__ In,
-    int W, int PadTOrg,
-    int Wo, int Ho, int Ho_F, int Ho_L,
+    unsigned int W, int PadTOrg,
+    unsigned int Wo, unsigned int Ho, unsigned int Ho_F, unsigned int Ho_L,
     unsigned int Norm,
     short int *__restrict__ Out,
     short int *__restrict__ Filter,
@@ -1709,8 +1709,8 @@ static void __attribute__ ((noinline)) KerConv2x1from3x1StrideNx1_V_fp(
 
 static void __attribute__ ((noinline)) KerConv1x2from1x3Stride1xN_H_fp(
     short int *__restrict__ In,
-    int W, int PadL,
-    int Wo, int Wo_F, int Wo_L,
+    unsigned int W, int PadL,
+    unsigned int Wo, unsigned int Wo_F, unsigned int Wo_L,
     unsigned int Norm,
     short int *__restrict__ Out,
     short *__restrict__ Filter,
@@ -1748,8 +1748,8 @@ static void __attribute__ ((noinline)) KerConv1x2from1x3Stride1xN_H_fp(
 
 static void __attribute__ ((noinline)) KerConv2x3from3x3Stride1_V_fp(
     short int *__restrict__ In,
-    int W, int PadTOrg,
-    int Wo, int Ho, int Ho_F, int Ho_L,
+    unsigned int W, int PadTOrg,
+    unsigned int Wo, unsigned int Ho, unsigned int Ho_F, unsigned int Ho_L,
     unsigned int Norm,
     short int *__restrict__ Out,
     short int *__restrict__ Filter,
@@ -1822,8 +1822,8 @@ static void __attribute__ ((noinline)) KerConv2x3from3x3Stride1_V_fp(
 
 static void __attribute__ ((noinline)) KerConv2x3from3x3Stride2_V_fp(
     short int *__restrict__ In,
-    int W, int PadTOrg,
-    int Wo, int Ho, int Ho_F, int Ho_L,
+    unsigned int W, int PadTOrg,
+    unsigned int Wo, unsigned int Ho, unsigned int Ho_F, unsigned int Ho_L,
     unsigned int Norm,
     short int *__restrict__ Out,
     short *__restrict__ Filter,
@@ -1893,8 +1893,8 @@ static void __attribute__ ((noinline)) KerConv2x3from3x3Stride2_V_fp(
 
 static void __attribute__ ((noinline)) KerConv2x3from3x3StrideS_V_fp(
     short int *__restrict__ In,
-    int W, int PadTOrg,
-    int Wo, int Ho, int Ho_F, int Ho_L,
+    unsigned int W, int PadTOrg,
+    unsigned int Wo, unsigned int Ho, unsigned int Ho_F, unsigned int Ho_L,
     int Stride,
     unsigned int Norm,
     short int *__restrict__ Out,
@@ -1966,8 +1966,8 @@ static void __attribute__ ((noinline)) KerConv2x3from3x3StrideS_V_fp(
 
 static void __attribute__ ((noinline)) KerConv3x2from3x3Stride1_H_fp(
     short int *__restrict__ In,
-    int W, int PadL,
-    int Wo, int Wo_F, int Wo_L,
+    unsigned int W, int PadL,
+    unsigned int Wo, unsigned int Wo_F, unsigned int Wo_L,
     unsigned int Norm,
     short int *__restrict__ Out,
     short *__restrict__ Filter,
@@ -2038,8 +2038,8 @@ static void __attribute__ ((noinline)) KerConv3x2from3x3Stride1_H_fp(
 
 static void __attribute__ ((noinline)) KerConv3x2from3x3Stride2_H_fp(
     short int *__restrict__ In,
-    int W, int PadL,
-    int Wo, int Wo_F, int Wo_L,
+    unsigned int W, int PadL,
+    unsigned int Wo, unsigned int Wo_F, unsigned int Wo_L,
     unsigned int Norm,
     short int *__restrict__ Out,
     short *__restrict__ Filter,
@@ -2117,8 +2117,8 @@ static void __attribute__ ((noinline)) KerConv3x2from3x3Stride2_H_fp(
 
 static void __attribute__ ((noinline)) KerConv3x2from3x3StrideS_H_fp(
     short int *__restrict__ In,
-    int W, int PadL,
-    int Wo, int Wo_F, int Wo_L,
+    unsigned int W, int PadL,
+    unsigned int Wo, unsigned int Wo_F, unsigned int Wo_L,
     int Stride,
     unsigned int Norm,
     short int *__restrict__ Out,
@@ -2186,15 +2186,15 @@ static void __attribute__ ((noinline)) KerConv3x2from3x3StrideS_H_fp(
 
 static void __attribute__ ((noinline)) KerConv4x1from5x1StrideNx1_V_fp(
     short int *__restrict__ In,
-    int W, v4s PadOrg, v4s Pad,
-    int Wo, int Ho, int Ho_F, int Ho_L,
+    unsigned int W, v4s PadOrg, v4s Pad,
+    unsigned int Wo, unsigned int Ho, unsigned int Ho_F, unsigned int Ho_L,
     unsigned int Norm,
     short int *__restrict__ Out,
     short *__restrict__ Filter,
     int FilterConf
 )
 {
-    v2s V0, V1;
+    v2s V0 = {0,0}, V1 = {0,0};
     v2s C0, C1;
     short int *PtIn, *PtOut;
 
@@ -2228,8 +2228,8 @@ static void __attribute__ ((noinline)) KerConv4x1from5x1StrideNx1_V_fp(
 
 static void __attribute__ ((noinline)) KerConv1x4from1x5Stride1xN_H_fp(
     short int *__restrict__ In,
-    int W, int PadL,
-    int Wo, int Wo_F, int Wo_L,
+    unsigned int W, int PadL,
+    unsigned int Wo, unsigned int Wo_F, unsigned int Wo_L,
     unsigned int Norm,
     short int *__restrict__ Out,
     short *__restrict__ Filter,
@@ -2279,8 +2279,8 @@ static void __attribute__ ((noinline)) KerConv1x4from1x5Stride1xN_H_fp(
 
 static void __attribute__ ((noinline)) KerConv4x5from5x5Stride1_V_fp(
     short int *__restrict__ In,
-    int W, v4s PadOrg, v4s Pad,
-    int Wo, int Ho, int Ho_F, int Ho_L,
+    unsigned int W, v4s PadOrg, v4s Pad,
+    unsigned int Wo, unsigned int Ho, unsigned int Ho_F, unsigned int Ho_L,
     unsigned int Norm,
     short int *__restrict__ Out,
     short *__restrict__ Filter,
@@ -2507,8 +2507,8 @@ static void __attribute__ ((noinline)) KerConv4x5from5x5Stride1_V_fp(
 
 static void __attribute__ ((noinline)) KerConv4x5from5x5Stride2_V_fp(
     short int *__restrict__ In,
-    int W, int H, v4s PadOrg, v4s Pad,
-    int Wo, int Ho, int Ho_F, int Ho_L,
+    unsigned int W, unsigned int H, v4s PadOrg, v4s Pad,
+    unsigned int Wo, unsigned int Ho, unsigned int Ho_F, unsigned int Ho_L,
     unsigned int Norm,
     short int *__restrict__ Out,
     short *__restrict__ Filter,
@@ -2671,8 +2671,8 @@ static void __attribute__ ((noinline)) KerConv4x5from5x5Stride2_V_fp(
 
 static void __attribute__ ((noinline)) KerConv4x5from5x5StrideS_V_fp(
     short int *__restrict__ In,
-    int W, int H, v4s PadOrg, v4s Pad,
-    int Wo, int Ho, int Ho_F, int Ho_L,
+    unsigned int W, unsigned int H, v4s PadOrg, v4s Pad,
+    unsigned int Wo, unsigned int Ho, unsigned int Ho_F, unsigned int Ho_L,
     int Stride,
     unsigned int Norm,
     short int *__restrict__ Out,
@@ -2837,8 +2837,8 @@ static void __attribute__ ((noinline)) KerConv4x5from5x5StrideS_V_fp(
 
 static void __attribute__ ((noinline)) KerConv5x4from5x5Stride1_H_fp(
     short int *__restrict__ In,
-    int W, int PadL,
-    int Wo, int Wo_F, int Wo_L,
+    unsigned int W, int PadL,
+    unsigned int Wo, unsigned int Wo_F, unsigned int Wo_L,
     unsigned int Norm,
     short int *__restrict__ Out,
     short *__restrict__ Filter,
@@ -3077,8 +3077,8 @@ static void __attribute__ ((noinline)) KerConv5x4from5x5Stride1_H_fp(
 
 static void __attribute__ ((noinline)) KerConv5x4from5x5Stride2_H_fp(
     short int *__restrict__ In,
-    int W, int H, int PadL, int PadT,
-    int Wo, int Wo_F, int Wo_L,
+    unsigned int W, unsigned int H, int PadL, int PadT,
+    unsigned int Wo, unsigned int Wo_F, unsigned int Wo_L,
     unsigned int Norm,
     short int *__restrict__ Out,
     short *__restrict__ Filter,
@@ -3278,8 +3278,8 @@ static void __attribute__ ((noinline)) KerConv5x4from5x5Stride2_H_fp(
 
 static void __attribute__ ((noinline)) KerConv5x4from5x5StrideS_H_fp(
     short int *__restrict__ In,
-    int W, int H, int PadL, int PadT,
-    int Wo, int Wo_F, int Wo_L,
+    unsigned int W, unsigned int H, int PadL, int PadT,
+    unsigned int Wo, unsigned int Wo_F, unsigned int Wo_L,
     int Stride,
     unsigned int Norm,
     short int *__restrict__ Out,
@@ -3436,16 +3436,16 @@ void __attribute__ ((noinline)) KerConvNxNStrideS_Border_fp(
     short int *__restrict__ In,
     short int *__restrict__ Out,
     short int *__restrict__ Filter,
-    int Fw,
-    int Fh,
-    int W,
-    int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Fw,
+    unsigned int Fh,
+    unsigned int W,
+    unsigned int H,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     int Stride,
     v4s Pad,
     v4s PadOrg,
@@ -3466,7 +3466,7 @@ void __attribute__ ((noinline)) KerConvNxNStrideS_Border_fp(
         int ht = PadTOrg, hb = H - Hi_F + Fh / 2;
         for (unsigned int h = 0; h < Ho_F; h++)
         {
-            int Fh_min = ht, Fh_max = MinCond(Fh, hb); // ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
+            unsigned int Fh_min = ht, Fh_max = MinCond(Fh, hb); // ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
             for (unsigned int w = Wo_F; w < Wo_L; w++)
             {
                 int Acc = Out[Wo * h + w] << Norm;
@@ -3483,7 +3483,7 @@ void __attribute__ ((noinline)) KerConvNxNStrideS_Border_fp(
         int ht = 0, hb = H - (Hi_L + Stride) + Fh / 2;
         for (unsigned int h = Ho_L; h < Ho; h++)
         {
-            int Fh_min = ht, Fh_max = MinCond(hb, Fh); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
+            unsigned int Fh_min = ht, Fh_max = MinCond(hb, Fh); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
             for (unsigned int w = Wo_F; w < Wo_L; w++)
             {
                 int Acc = Out[Wo * h + w] << Norm;
@@ -3499,7 +3499,7 @@ void __attribute__ ((noinline)) KerConvNxNStrideS_Border_fp(
         int wl = PadLOrg, wr = W - Wi_F + Fw / 2;
         for (unsigned int w = 0; w < Wo_F; w++)
         {
-            int Wh_min = wl, Wh_max = MinCond(Fw, wr); // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only
+            unsigned int Wh_min = wl, Wh_max = MinCond(Fw, wr); // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only
             for (unsigned int h = Ho_F; h < Ho_L; h++)
             {
                 int Acc = Out[Wo * h + w] << Norm;
@@ -3516,7 +3516,7 @@ void __attribute__ ((noinline)) KerConvNxNStrideS_Border_fp(
         int wl = 0, wr = W - (Wi_L + Stride) + Fw / 2;
         for (unsigned int w = Wo_L; w < Wo; w++)
         {
-            int Wh_min = wl, Wh_max = MinCond(wr, Fw); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
+            unsigned int Wh_min = wl, Wh_max = MinCond(wr, Fw); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
             for (unsigned int h = Ho_F; h < Ho_L; h++)
             {
                 int Acc = Out[Wo * h + w] << Norm;
@@ -3539,7 +3539,7 @@ void __attribute__ ((noinline)) KerConvNxNStrideS_Border_fp(
                 {
                     int Acc = Out[Wo * h + w] << Norm;
                     // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only. ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = MinCond(Fw, wr), Fh_min = ht, Fh_max = MinCond(Fh, hb);
+                    unsigned int Wh_min = wl, Wh_max = MinCond(Fw, wr), Fh_min = ht, Fh_max = MinCond(Fh, hb);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc += In[(h * Stride - PadTOrg + i) * W + (w * Stride - PadLOrg + j)] * Filter[Fh * i + j];
                     Out[Wo * h + w] = gap8_clip(gap8_roundnorm_reg(Acc, Norm), 15);
@@ -3560,7 +3560,7 @@ void __attribute__ ((noinline)) KerConvNxNStrideS_Border_fp(
                 {
                     int Acc = Out[Wo * h + w] << Norm;
                     // ht Can't be > F by definition of Ho_L so we can remove and use ht only. ht Can't be > F by definition of Ho_L so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = MinCond(wr, Fw), Fh_min = ht, Fh_max = MinCond(Fh, hb);
+                    unsigned int Wh_min = wl, Wh_max = MinCond(wr, Fw), Fh_min = ht, Fh_max = MinCond(Fh, hb);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc += In[(h * Stride - PadTOrg + i) * W + (w * Stride - PadLOrg + j)] * Filter[Fh * i + j];
                     Out[Wo * h + w] = gap8_clip(gap8_roundnorm_reg(Acc, Norm), 15);
@@ -3583,7 +3583,7 @@ void __attribute__ ((noinline)) KerConvNxNStrideS_Border_fp(
                 {
                     int Acc = Out[Wo * h + w] << Norm;
                     // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only.  ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = MinCond(Fw, wr), Fh_min = ht, Fh_max = MinCond(hb, Fh);
+                    unsigned int Wh_min = wl, Wh_max = MinCond(Fw, wr), Fh_min = ht, Fh_max = MinCond(hb, Fh);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc += In[(h * Stride - PadTOrg + i) * W + (w * Stride - PadLOrg + j)] * Filter[Fh * i + j];
                     Out[Wo * h + w] = gap8_clip(gap8_roundnorm_reg(Acc, Norm), 15);
@@ -3603,7 +3603,7 @@ void __attribute__ ((noinline)) KerConvNxNStrideS_Border_fp(
                 {
                     int Acc = Out[Wo * h + w] << Norm;
                     // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only.  ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = MinCond(wr, Fw), Fh_min = ht, Fh_max = MinCond(hb, Fh);
+                    unsigned int Wh_min = wl, Wh_max = MinCond(wr, Fw), Fh_min = ht, Fh_max = MinCond(hb, Fh);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc += In[(h * Stride - PadTOrg + i) * W + (w * Stride - PadLOrg + j)] * Filter[Fh * i + j];
                     Out[Wo * h + w] = gap8_clip(gap8_roundnorm_reg(Acc, Norm), 15);
@@ -3619,16 +3619,16 @@ void __attribute__ ((noinline)) KerConvNxMStrideSxSy_Border_fp(
     short int *__restrict__ In,
     short int *__restrict__ Out,
     short int *__restrict__ Filter,
-    int Fw,
-    int Fh,
-    int W,
-    int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Fw,
+    unsigned int Fh,
+    unsigned int W,
+    unsigned int H,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     int StrideX,
     int StrideY,
     v4s Pad,
@@ -3650,7 +3650,7 @@ void __attribute__ ((noinline)) KerConvNxMStrideSxSy_Border_fp(
         int ht = PadTOrg, hb = H - Hi_F + Fh / 2;
         for (unsigned int h = 0; h < Ho_F; h++)
         {
-            int Fh_min = ht, Fh_max = MinCond(Fh, hb); // ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
+            unsigned int Fh_min = ht, Fh_max = MinCond(Fh, hb); // ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
             for (unsigned int w = Wo_F; w < Wo_L; w++)
             {
                 int Acc = Out[Wo * h + w] << Norm;
@@ -3667,7 +3667,7 @@ void __attribute__ ((noinline)) KerConvNxMStrideSxSy_Border_fp(
         int ht = 0, hb = H - (Hi_L + StrideY) + Fh / 2;
         for (unsigned int h = Ho_L; h < Ho; h++)
         {
-            int Fh_min = ht, Fh_max = MinCond(hb, Fh); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
+            unsigned int Fh_min = ht, Fh_max = MinCond(hb, Fh); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
             for (unsigned int w = Wo_F; w < Wo_L; w++)
             {
                 int Acc = Out[Wo * h + w] << Norm;
@@ -3683,7 +3683,7 @@ void __attribute__ ((noinline)) KerConvNxMStrideSxSy_Border_fp(
         int wl = PadLOrg, wr = W - Wi_F + Fw / 2;
         for (unsigned int w = 0; w < Wo_F; w++)
         {
-            int Wh_min = wl, Wh_max = MinCond(Fw, wr); // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only
+            unsigned int Wh_min = wl, Wh_max = MinCond(Fw, wr); // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only
             for (unsigned int h = Ho_F; h < Ho_L; h++)
             {
                 int Acc = Out[Wo * h + w] << Norm;
@@ -3700,7 +3700,7 @@ void __attribute__ ((noinline)) KerConvNxMStrideSxSy_Border_fp(
         int wl = 0, wr = W - (Wi_L + StrideX) + Fw / 2;
         for (unsigned int w = Wo_L; w < Wo; w++)
         {
-            int Wh_min = wl, Wh_max = MinCond(wr, Fw); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
+            unsigned int Wh_min = wl, Wh_max = MinCond(wr, Fw); // ht Can't be > F by definition of Ho_L so we can remove and use ht only
             for (unsigned int h = Ho_F; h < Ho_L; h++)
             {
                 int Acc = Out[Wo * h + w] << Norm;
@@ -3723,7 +3723,7 @@ void __attribute__ ((noinline)) KerConvNxMStrideSxSy_Border_fp(
                 {
                     int Acc = Out[Wo * h + w] << Norm;
                     // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only. ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = MinCond(Fw, wr), Fh_min = ht, Fh_max = MinCond(Fh, hb);
+                    unsigned int Wh_min = wl, Wh_max = MinCond(Fw, wr), Fh_min = ht, Fh_max = MinCond(Fh, hb);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc += In[(h * StrideY - PadTOrg + i) * W + (w * StrideX - PadLOrg + j)] * Filter[Fh * i + j];
                     Out[Wo * h + w] = gap8_clip(gap8_roundnorm_reg(Acc, Norm), 15);
@@ -3744,7 +3744,7 @@ void __attribute__ ((noinline)) KerConvNxMStrideSxSy_Border_fp(
                 {
                     int Acc = Out[Wo * h + w] << Norm;
                     // ht Can't be > F by definition of Ho_L so we can remove and use ht only. ht Can't be > F by definition of Ho_L so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = MinCond(wr, Fw), Fh_min = ht, Fh_max = MinCond(Fh, hb);
+                    unsigned int Wh_min = wl, Wh_max = MinCond(wr, Fw), Fh_min = ht, Fh_max = MinCond(Fh, hb);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc += In[(h * StrideY - PadTOrg + i) * W + (w * StrideX - PadLOrg + j)] * Filter[Fh * i + j];
                     Out[Wo * h + w] = gap8_clip(gap8_roundnorm_reg(Acc, Norm), 15);
@@ -3767,7 +3767,7 @@ void __attribute__ ((noinline)) KerConvNxMStrideSxSy_Border_fp(
                 {
                     int Acc = Out[Wo * h + w] << Norm;
                     // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only.  ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = MinCond(Fw, wr), Fh_min = ht, Fh_max = MinCond(hb, Fh);
+                    unsigned int Wh_min = wl, Wh_max = MinCond(Fw, wr), Fh_min = ht, Fh_max = MinCond(hb, Fh);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc += In[(h * StrideY - PadTOrg + i) * W + (w * StrideX - PadLOrg + j)] * Filter[Fh * i + j];
                     Out[Wo * h + w] = gap8_clip(gap8_roundnorm_reg(Acc, Norm), 15);
@@ -3787,7 +3787,7 @@ void __attribute__ ((noinline)) KerConvNxMStrideSxSy_Border_fp(
                 {
                     int Acc = Out[Wo * h + w] << Norm;
                     // wh Can't be < 0 by definition of Wo_F so we can remove and use wl only.  ht Can't be < 0 by definition of Ho_F so we can remove and use ht only
-                    int Wh_min = wl, Wh_max = MinCond(wr, Fw), Fh_min = ht, Fh_max = MinCond(hb, Fh);
+                    unsigned int Wh_min = wl, Wh_max = MinCond(wr, Fw), Fh_min = ht, Fh_max = MinCond(hb, Fh);
                     for (unsigned int i = Fh_min; i < Fh_max; i++)
                         for (unsigned int j = Wh_min; j < Wh_max; j++) Acc += In[(h * StrideY - PadTOrg + i) * W + (w * StrideX - PadLOrg + j)] * Filter[Fh * i + j];
                     Out[Wo * h + w] = gap8_clip(gap8_roundnorm_reg(Acc, Norm), 15);
@@ -3805,14 +3805,14 @@ static void __attribute__ ((noinline)) KerConv3x1BorderStrideNx1_fp(
     short int *__restrict__ In,
     short int *__restrict__ Out,
     short int *__restrict__ Filter,
-    int W,
-    int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int W,
+    unsigned int H,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     int Stride,
     v4s Pad,
     v4s PadOrg,
@@ -3830,14 +3830,14 @@ static void __attribute__ ((noinline)) KerConv1x3BorderStride1xN_fp(
     short int *__restrict__ In,
     short int *__restrict__ Out,
     short int *__restrict__ Filter,
-    int W,
-    int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int W,
+    unsigned int H,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     int Stride,
     v4s Pad,
     v4s PadOrg,
@@ -3855,14 +3855,14 @@ static void __attribute__ ((noinline)) KerConv3x3BorderStride1_fp(
     short int *__restrict__ In,
     short int *__restrict__ Out,
     short int *__restrict__ Filter,
-    int W,
-    int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int W,
+    unsigned int H,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     v4s Pad,
     v4s PadOrg,
     int Norm)
@@ -3882,14 +3882,14 @@ static void __attribute__ ((noinline)) KerConv3x3BorderStride2_fp(
     short int *__restrict__ In,
     short int *__restrict__ Out,
     short int *__restrict__ Filter,
-    int W,
-    int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int W,
+    unsigned int H,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     v4s Pad,
     v4s PadOrg,
     int Norm)
@@ -3909,14 +3909,14 @@ static void __attribute__ ((noinline)) KerConv3x3BorderStrideS_fp(
     short int *__restrict__ In,
     short int *__restrict__ Out,
     short int *__restrict__ Filter,
-    int W,
-    int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int W,
+    unsigned int H,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     int Stride,
     v4s Pad,
     v4s PadOrg,
@@ -3937,14 +3937,14 @@ static void __attribute__ ((noinline)) KerConv5x1BorderStrideNx1_fp(
     short int *__restrict__ In,
     short int *__restrict__ Out,
     short int *__restrict__ Filter,
-    int W,
-    int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int W,
+    unsigned int H,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     int Stride,
     v4s Pad,
     v4s PadOrg,
@@ -3970,14 +3970,14 @@ static void __attribute__ ((noinline)) KerConv1x5BorderStride1xN_fp(
     short int *__restrict__ In,
     short int *__restrict__ Out,
     short int *__restrict__ Filter,
-    int W,
-    int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int W,
+    unsigned int H,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     int Stride,
     v4s Pad,
     v4s PadOrg,
@@ -4006,10 +4006,10 @@ static void __attribute__ ((noinline)) KerConv5x5BorderStride1_fp(
     int W,
     int H,
     int Wo,
-    int Wo_F,
+    unsigned int Wo_F,
     int Wo_L,
     int Ho,
-    int Ho_F,
+    unsigned int Ho_F,
     int Ho_L,
     v4s Pad,
     v4s PadOrg,
@@ -4049,10 +4049,10 @@ static void __attribute__ ((noinline)) KerConv5x5BorderStride2_fp(
     int W,
     int H,
     int Wo,
-    int Wo_F,
+    unsigned int Wo_F,
     int Wo_L,
     int Ho,
-    int Ho_F,
+    unsigned int Ho_F,
     int Ho_L,
     v4s Pad,
     v4s PadOrg,
@@ -4077,10 +4077,10 @@ static void __attribute__ ((noinline)) KerConv5x5BorderStrideS_fp(
     int W,
     int H,
     int Wo,
-    int Wo_F,
+    unsigned int Wo_F,
     int Wo_L,
     int Ho,
-    int Ho_F,
+    unsigned int Ho_F,
     int Ho_L,
     int Stride,
     v4s Pad,
@@ -4106,10 +4106,10 @@ static void __attribute__ ((noinline)) KerConv3x1BorderStrideNx1_fps(
     int W,
     int H,
     int Wo,
-    int Wo_F,
+    unsigned int Wo_F,
     int Wo_L,
     int Ho,
-    int Ho_F,
+    unsigned int Ho_F,
     int Ho_L,
     int Stride,
     v4s Pad,
@@ -4131,10 +4131,10 @@ static void __attribute__ ((noinline)) KerConv1x3BorderStride1xN_fps(
     int W,
     int H,
     int Wo,
-    int Wo_F,
+    unsigned int Wo_F,
     int Wo_L,
     int Ho,
-    int Ho_F,
+    unsigned int Ho_F,
     int Ho_L,
     int Stride,
     v4s Pad,
@@ -4156,10 +4156,10 @@ static void __attribute__ ((noinline)) KerConv3x3BorderStride1_fps(
     int W,
     int H,
     int Wo,
-    int Wo_F,
+    unsigned int Wo_F,
     int Wo_L,
     int Ho,
-    int Ho_F,
+    unsigned int Ho_F,
     int Ho_L,
     v4s Pad,
     v4s PadOrg,
@@ -4183,10 +4183,10 @@ static void __attribute__ ((noinline)) KerConv3x3BorderStride2_fps(
     int W,
     int H,
     int Wo,
-    int Wo_F,
+    unsigned int Wo_F,
     int Wo_L,
     int Ho,
-    int Ho_F,
+    unsigned int Ho_F,
     int Ho_L,
     v4s Pad,
     v4s PadOrg,
@@ -4210,10 +4210,10 @@ static void __attribute__ ((noinline)) KerConv3x3BorderStrideS_fps(
     int W,
     int H,
     int Wo,
-    int Wo_F,
+    unsigned int Wo_F,
     int Wo_L,
     int Ho,
-    int Ho_F,
+    unsigned int Ho_F,
     int Ho_L,
     int Stride,
     v4s Pad,
@@ -4238,10 +4238,10 @@ static void __attribute__ ((noinline)) KerConv5x1BorderStrideNx1_fps(
     int W,
     int H,
     int Wo,
-    int Wo_F,
+    unsigned int Wo_F,
     int Wo_L,
     int Ho,
-    int Ho_F,
+    unsigned int Ho_F,
     int Ho_L,
     int Stride,
     v4s Pad,
@@ -4271,10 +4271,10 @@ static void __attribute__ ((noinline)) KerConv1x5BorderStride1xN_fps(
     int W,
     int H,
     int Wo,
-    int Wo_F,
+    unsigned int Wo_F,
     int Wo_L,
     int Ho,
-    int Ho_F,
+    unsigned int Ho_F,
     int Ho_L,
     int Stride,
     v4s Pad,
@@ -4304,10 +4304,10 @@ static void __attribute__ ((noinline)) KerConv5x5BorderStride1_fps(
     int W,
     int H,
     int Wo,
-    int Wo_F,
+    unsigned int Wo_F,
     int Wo_L,
     int Ho,
-    int Ho_F,
+    unsigned int Ho_F,
     int Ho_L,
     v4s Pad,
     v4s PadOrg,
@@ -4347,10 +4347,10 @@ static void __attribute__ ((noinline)) KerConv5x5BorderStride2_fps(
     int W,
     int H,
     int Wo,
-    int Wo_F,
+    unsigned int Wo_F,
     int Wo_L,
     int Ho,
-    int Ho_F,
+    unsigned int Ho_F,
     int Ho_L,
     v4s Pad,
     v4s PadOrg,
@@ -4375,10 +4375,10 @@ static void __attribute__ ((noinline)) KerConv5x5BorderStrideS_fps(
     int W,
     int H,
     int Wo,
-    int Wo_F,
+    unsigned int Wo_F,
     int Wo_L,
     int Ho,
-    int Ho_F,
+    unsigned int Ho_F,
     int Ho_L,
     int Stride,
     v4s Pad,
@@ -4455,14 +4455,14 @@ static void __attribute__ ((noinline)) KerConv1x1Stride1_Body_fps(
     signed char *__restrict__ In,
     signed char *__restrict__ Out,
     signed char *__restrict__ Filter,
-    int W,
-    int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int W,
+    unsigned int H,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     v4s Pad,
     int Norm
 )
@@ -4472,7 +4472,7 @@ static void __attribute__ ((noinline)) KerConv1x1Stride1_Body_fps(
     unsigned short int PadL = Pad[0], PadT = Pad[2];
 
     int C0 = Filter[0];
-    int IterW = Wo_L - Wo_F;
+    unsigned int IterW = Wo_L - Wo_F;
     switch (IterW & 0x3)
     {
     case 0:
@@ -4574,12 +4574,12 @@ static void __attribute__ ((noinline)) KerConv1x1Stride2_Body_fps(
     signed char *__restrict__ Filter,
     int W,
     int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     v4s Pad,
     int Norm
 )
@@ -4614,12 +4614,12 @@ static void __attribute__ ((noinline)) KerConv1x1StrideS_Body_fps(
     signed char *__restrict__ Filter,
     int W,
     int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     int Stride,
     v4s Pad,
     int Norm
@@ -4653,12 +4653,12 @@ static void __attribute__ ((noinline)) KerConv3x1Stride1x1_Body_fps(
     signed char *__restrict__ Filter,
     int W,
     int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     v4s Pad,
     int Norm
 )
@@ -4698,12 +4698,12 @@ static void __attribute__ ((noinline)) KerConv3x1Stride2x1_Body_fps(
     signed char *__restrict__ Filter,
     int W,
     int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     v4s Pad,
     int Norm
 )
@@ -4743,19 +4743,19 @@ static void __attribute__ ((noinline)) KerConv1x3Stride1x1_Body_fps(
     signed char *__restrict__ Filter,
     int W,
     int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     v4s Pad,
     int Norm
 )
 
 {
     v4s C0 = *((v4s *) &Filter[0]);
-    v4s V0;
+    v4s V0 = {0,0};
     v4s Mask = (v4s)
     {
         1, 2, 4, 0
@@ -4795,19 +4795,19 @@ static void __attribute__ ((noinline)) KerConv1x3Stride1x2_Body_fps(
     signed char *__restrict__ Filter,
     int W,
     int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     v4s Pad,
     int Norm
 )
 
 {
     v4s C0 = *((v4s *) &Filter[0]);
-    v4s V0;
+    v4s V0 = {0,0};
     v4s Mask = (v4s)
     {
         2, 4, 5, 0
@@ -4848,12 +4848,12 @@ static void __attribute__ ((noinline)) KerConv3x3Stride1_Body_fps(
     signed char *__restrict__ Filter,
     int W,
     int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     v4s Pad,
     int Norm
 )
@@ -4901,12 +4901,12 @@ static void __attribute__ ((noinline)) KerConv3x3Stride2_Body_fps(
     signed char *__restrict__ Filter,
     int W,
     int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     v4s Pad,
     int Norm
 )
@@ -4952,12 +4952,12 @@ static void __attribute__ ((noinline)) KerConv3x3StrideS_Body_fps(
     signed char *__restrict__ Filter,
     int W,
     int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     int Stride,
     v4s Pad,
     int Norm
@@ -5002,12 +5002,12 @@ static void __attribute__ ((noinline)) KerConv5x1Stride1x1_Body_fps(
     signed char *__restrict__ Filter,
     int W,
     int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     v4s Pad,
     int Norm
 )
@@ -5052,12 +5052,12 @@ static void __attribute__ ((noinline)) KerConv5x1Stride2x1_Body_fps(
     signed char *__restrict__ Filter,
     int W,
     int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     v4s Pad,
     int Norm
 )
@@ -5102,12 +5102,12 @@ static void __attribute__ ((noinline)) KerConv1x5Stride1x1_Body_fps(
     signed char *__restrict__ Filter,
     int W,
     int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     v4s Pad,
     int Norm
 )
@@ -5163,12 +5163,12 @@ static void __attribute__ ((noinline)) KerConv1x5Stride1x2_Body_fps(
     signed char *__restrict__ Filter,
     int W,
     int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     v4s Pad,
     int Norm
 )
@@ -5225,12 +5225,12 @@ static void __attribute__ ((noinline)) KerConv5x5Stride1_Body_fps(
     signed char *__restrict__ Filter,
     int W,
     int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     v4s Pad,
     int Norm
 )
@@ -5323,12 +5323,12 @@ static void __attribute__ ((noinline)) KerConv5x5Stride2_Body_fps(
     signed char *__restrict__ Filter,
     int W,
     int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     v4s Pad,
     int Norm
 )
@@ -5398,12 +5398,12 @@ static void __attribute__ ((noinline)) KerConv5x5StrideS_Body_fps(
     signed char *__restrict__ Filter,
     int W,
     int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     int Stride,
     v4s Pad,
     int Norm
@@ -5442,7 +5442,7 @@ static void __attribute__ ((noinline)) KerConv5x5StrideS_Body_fps(
             x2 = *((signed char *) PtI);
             PtI = (v4s *) ((signed char *)PtI + W - 4);
             V3 = *PtI++;
-            x3 = *((signed char *) PtI);
+            //x3 = *((signed char *) PtI); //TODO CHECK THIS
             PtI = (v4s *) ((signed char *)PtI + W - 4);
             V5 = gap8_pack4(x0, x1, x2, 0);
             V4 = *PtI++;
@@ -5470,16 +5470,16 @@ static void __attribute__ ((noinline)) KerConvNxNStrideS_Body_fps(
     signed char *__restrict__ In,
     signed char *__restrict__ Out,
     signed char *__restrict__ Filter,
-    int Fw,
-    int Fh,
+    unsigned int Fw,
+    unsigned int Fh,
     int W,
     int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     int Stride,
     v4s Pad,
     int Norm
@@ -5509,16 +5509,16 @@ static void __attribute__ ((noinline)) KerConvNxMStrideSxSy_Body_fps(
     signed char *__restrict__ In,
     signed char *__restrict__ Out,
     signed char *__restrict__ Filter,
-    int Fw,
-    int Fh,
+    unsigned int Fw,
+    unsigned int Fh,
     int W,
     int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     int StrideX,
     int StrideY,
     v4s Pad,
@@ -5551,12 +5551,12 @@ static void __attribute__ ((noinline)) KerConv1x1Stride1_Body_fp(
     short int *__restrict__ Filter,
     int W,
     int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     v4s Pad,
     int Norm
 )
@@ -5566,7 +5566,7 @@ static void __attribute__ ((noinline)) KerConv1x1Stride1_Body_fp(
     unsigned short int PadL = Pad[0], PadT = Pad[2];
 
     int C0 = Filter[0];
-    int IterW = Wo_L - Wo_F;
+    unsigned int IterW = Wo_L - Wo_F;
     if (IterW & 0x1)
     {
         for (unsigned int h = Ho_F; h < Ho_L; h++)
@@ -5608,12 +5608,12 @@ static void __attribute__ ((noinline)) KerConv1x1Stride2_Body_fp(
     short int *__restrict__ Filter,
     int W,
     int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     v4s Pad,
     int Norm
 )
@@ -5623,7 +5623,7 @@ static void __attribute__ ((noinline)) KerConv1x1Stride2_Body_fp(
     unsigned short int PadL = Pad[0], PadT = Pad[2];
 
     int C0 = Filter[0];
-    int IterW = Wo_L - Wo_F;
+    unsigned int IterW = Wo_L - Wo_F;
     if (IterW & 0x1)
     {
         for (unsigned int h = Ho_F; h < Ho_L; h++)
@@ -5663,15 +5663,15 @@ static void __attribute__ ((noinline)) KerConv1x1StrideS_Body_fp(
     short int *__restrict__ In,
     short int *__restrict__ Out,
     short int *__restrict__ Filter,
-    int W,
-    int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
-    int Stride,
+    unsigned int W,
+    unsigned int H,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
+    unsigned int Stride,
     v4s Pad,
     int Norm
 )
@@ -5711,14 +5711,14 @@ static void __attribute__ ((noinline)) KerConv3x1Stride1x1_Body_fp(
     short int *__restrict__ In,
     short int *__restrict__ Out,
     short int *__restrict__ Filter,
-    int W,
-    int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int W,
+    unsigned int H,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     v4s Pad,
     int Norm
 )
@@ -5748,7 +5748,7 @@ static void __attribute__ ((noinline)) KerConv3x1Stride1x1_Body_fp(
             V0 = *PtI++;
             V1 = *(short int *) PtI;
             PtI = (v2s *) ((short int *)PtI + W - 2);
-            *PtO = Acc;
+            *PtO = gap8_clip(gap8_roundnorm_reg(Acc, Norm), 15);
             PtO += Wo;
         }
         PtO1++;
@@ -5759,14 +5759,14 @@ static void __attribute__ ((noinline)) KerConv3x1Stride2x1_Body_fp(
     short int *__restrict__ In,
     short int *__restrict__ Out,
     short int *__restrict__ Filter,
-    int W,
-    int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int W,
+    unsigned int H,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     v4s Pad,
     int Norm
 )
@@ -5796,7 +5796,7 @@ static void __attribute__ ((noinline)) KerConv3x1Stride2x1_Body_fp(
             V0 = *PtI++;
             V1 = *(short int *) PtI;
             PtI = (v2s *) ((short int *)PtI + W - 2);
-            *PtO = Acc;
+            *PtO = gap8_clip(gap8_roundnorm_reg(Acc, Norm), 15);
             PtO += Wo;
         }
 
@@ -5808,14 +5808,14 @@ static void __attribute__ ((noinline)) KerConv1x3Stride1x1_Body_fp(
     short int *__restrict__ In,
     short int *__restrict__ Out,
     short int *__restrict__ Filter,
-    int W,
-    int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int W,
+    unsigned int H,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     v4s Pad,
     int Norm
 )
@@ -5823,7 +5823,7 @@ static void __attribute__ ((noinline)) KerConv1x3Stride1x1_Body_fp(
 {
     v2s C0 = *((v2s *) &Filter[0]);
     short int C1 = Filter[2];
-    v2s V0;
+    v2s V0 = {0,0};
     int V1;
     v2s Mask = (v2s)
     {
@@ -5850,7 +5850,7 @@ static void __attribute__ ((noinline)) KerConv1x3Stride1x1_Body_fp(
             PtI = PtI + W;
             Acc = gap8_sumdotp2(V0, C0, Acc);
             Acc += V1 * C1;
-            *PtO = Acc;
+            *PtO = gap8_clip(gap8_roundnorm_reg(Acc, Norm), 15);
             PtO += Wo;
         }
         PtO1++;
@@ -5861,14 +5861,14 @@ static void __attribute__ ((noinline)) KerConv1x3Stride1x2_Body_fp(
     short int *__restrict__ In,
     short int *__restrict__ Out,
     short int *__restrict__ Filter,
-    int W,
-    int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int W,
+    unsigned int H,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     v4s Pad,
     int Norm
 )
@@ -5902,7 +5902,7 @@ static void __attribute__ ((noinline)) KerConv1x3Stride1x2_Body_fp(
             PtI = PtI + W;
             Acc = gap8_sumdotp2(V0, C0, Acc);
             Acc += V1 * C1;
-            *PtO = Acc;
+            *PtO = gap8_clip(gap8_roundnorm_reg(Acc, Norm), 15);
             PtO += Wo;
         }
         PtO1++;
@@ -5913,14 +5913,14 @@ static void __attribute__ ((noinline)) KerConv3x3Stride1_Body_fp(
     short int *__restrict__ In,
     short int *__restrict__ Out,
     short int *__restrict__ Filter,
-    int W,
-    int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int W,
+    unsigned int H,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     v4s Pad,
     int Norm
 )
@@ -5999,14 +5999,14 @@ static void __attribute__ ((noinline)) KerConv3x3Stride2_Body_fp(
     short int *__restrict__ In,
     short int *__restrict__ Out,
     short int *__restrict__ Filter,
-    int W,
-    int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int W,
+    unsigned int H,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     v4s Pad,
     int Norm
 )
@@ -6073,15 +6073,15 @@ static void __attribute__ ((noinline)) KerConv3x3StrideS_Body_fp(
     short int *__restrict__ In,
     short int *__restrict__ Out,
     short int *__restrict__ Filter,
-    int W,
-    int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
-    int Stride,
+    unsigned int W,
+    unsigned int H,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
+    unsigned int Stride,
     v4s Pad,
     int Norm
 )
@@ -6151,21 +6151,21 @@ static void __attribute__ ((noinline)) KerConv5x1Stride1x1_Body_fp(
     short int *__restrict__ In,
     short int *__restrict__ Out,
     short int *__restrict__ Filter,
-    int W,
-    int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int W,
+    unsigned int H,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     v4s Pad,
     int Norm
 )
 {
     v2s C0 = *((v2s *) &Filter[0]), C1 = *((v2s *) &Filter[2]);
     short int C2 = Filter[4];
-    v2s V0, V1;
+    v2s V0 = {0,0}, V1;
     v2s Mask = (v2s)
     {
         1, 2
@@ -6194,7 +6194,7 @@ static void __attribute__ ((noinline)) KerConv5x1Stride1x1_Body_fp(
             Acc = gap8_sumdotp2(V0, C0, Acc);
             Acc = gap8_sumdotp2(V1, C1, Acc);
             Acc += V2 * C2;
-            *PtO = Acc;
+            *PtO = gap8_clip(gap8_roundnorm_reg(Acc, Norm), 15);
             PtO++;
         }
         PtO = PtO + (Wo - Wo_L) + Wo_F;
@@ -6205,14 +6205,14 @@ static void __attribute__ ((noinline)) KerConv5x1Stride2x1_Body_fp(
     short int *__restrict__ In,
     short int *__restrict__ Out,
     short int *__restrict__ Filter,
-    int W,
-    int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int W,
+    unsigned int H,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     v4s Pad,
     int Norm
 )
@@ -6246,7 +6246,7 @@ static void __attribute__ ((noinline)) KerConv5x1Stride2x1_Body_fp(
             Acc = gap8_sumdotp2(V0, C0, Acc);
             Acc = gap8_sumdotp2(V1, C1, Acc);
             Acc += V2 * C2;
-            *PtO = Acc;
+            *PtO = gap8_clip(gap8_roundnorm_reg(Acc, Norm), 15);
             PtO++;
         }
         PtO = PtO + (Wo - Wo_L) + Wo_F;
@@ -6257,21 +6257,21 @@ static void __attribute__ ((noinline)) KerConv1x5Stride1x1_Body_fp(
     short int *__restrict__ In,
     short int *__restrict__ Out,
     short int *__restrict__ Filter,
-    int W,
-    int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int W,
+    unsigned int H,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     v4s Pad,
     int Norm
 )
 {
     v2s C0 = *((v2s *) &Filter[0]), C1 = *((v2s *) &Filter[2]);
     short int C2 = Filter[4];
-    v2s V0, V1;
+    v2s V0 = {0,0}, V1;
     v2s Mask = (v2s)
     {
         1, 2
@@ -6305,7 +6305,7 @@ static void __attribute__ ((noinline)) KerConv1x5Stride1x1_Body_fp(
             Acc = gap8_sumdotp2(V0, C0, Acc);
             Acc = gap8_sumdotp2(V1, C1, Acc);
             Acc += V2 * C2;
-            *PtO = Acc;
+            *PtO = gap8_clip(gap8_roundnorm_reg(Acc, Norm), 15);
             PtO++;
         }
         PtO = PtO + (Wo - Wo_L) + Wo_F;
@@ -6316,14 +6316,14 @@ static void __attribute__ ((noinline)) KerConv1x5Stride1x2_Body_fp(
     short int *__restrict__ In,
     short int *__restrict__ Out,
     short int *__restrict__ Filter,
-    int W,
-    int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int W,
+    unsigned int H,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     v4s Pad,
     int Norm
 )
@@ -6362,7 +6362,7 @@ static void __attribute__ ((noinline)) KerConv1x5Stride1x2_Body_fp(
             Acc = gap8_sumdotp2(V0, C0, Acc);
             Acc = gap8_sumdotp2(V1, C1, Acc);
             Acc += V2 * C2;
-            *PtO = Acc;
+            *PtO = gap8_clip(gap8_roundnorm_reg(Acc, Norm), 15);
             PtO++;
         }
         PtO = PtO + (Wo - Wo_L) + Wo_F;
@@ -6373,14 +6373,14 @@ static void __attribute__ ((noinline)) KerConv5x5Stride1_Body_fp(
     short int *__restrict__ In,
     short int *__restrict__ Out,
     short int *__restrict__ Filter,
-    int W,
-    int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int W,
+    unsigned int H,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     v4s Pad,
     int Norm
 )
@@ -6494,14 +6494,14 @@ static void __attribute__ ((noinline)) KerConv5x5Stride2_Body_fp(
     short int *__restrict__ In,
     short int *__restrict__ Out,
     short int *__restrict__ Filter,
-    int W,
-    int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int W,
+    unsigned int H,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     v4s Pad,
     int Norm
 )
@@ -6612,14 +6612,14 @@ static void __attribute__ ((noinline)) KerConv5x5StrideS_Body_fp(
     short int *__restrict__ In,
     short int *__restrict__ Out,
     short int *__restrict__ Filter,
-    int W,
-    int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int W,
+    unsigned int H,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     int Stride,
     v4s Pad,
     int Norm
@@ -6740,16 +6740,16 @@ static void __attribute__ ((noinline)) KerConvNxNStrideS_Body_fp(
     short int *__restrict__ In,
     short int *__restrict__ Out,
     short int *__restrict__ Filter,
-    int Fw,
-    int Fh,
-    int W,
-    int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Fw,
+    unsigned int Fh,
+    unsigned int W,
+    unsigned int H,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     int Stride,
     v4s Pad,
     int Norm
@@ -6800,16 +6800,16 @@ static void __attribute__ ((noinline)) KerConvNxMStrideSxSy_Body_fp(
     short int *__restrict__ In,
     short int *__restrict__ Out,
     short int *__restrict__ Filter,
-    int Fw,
-    int Fh,
-    int W,
-    int H,
-    int Wo,
-    int Wo_F,
-    int Wo_L,
-    int Ho,
-    int Ho_F,
-    int Ho_L,
+    unsigned int Fw,
+    unsigned int Fh,
+    unsigned int W,
+    unsigned int H,
+    unsigned int Wo,
+    unsigned int Wo_F,
+    unsigned int Wo_L,
+    unsigned int Ho,
+    unsigned int Ho_F,
+    unsigned int Ho_L,
     int StrideX,
     int StrideY,
     v4s Pad,
@@ -6943,10 +6943,10 @@ void KerParConv1x1Stride1_fp(KerParConv_fp_T *Arg)
     v4s PadIn = Arg->Pad;
 
 
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
 
     if (TotalInFeatures < 0)
     {
@@ -6993,10 +6993,10 @@ void KerParConv1x1Stride2_fp(KerParConv_fp_T *Arg)
     unsigned int Last = Min(First + Chunk, OutFeatures);
     v4s PadIn = Arg->Pad;
 
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
 
     if (TotalInFeatures < 0)
     {
@@ -7041,10 +7041,10 @@ void KerParConv1x1StrideS_fp(KerParConv_fp_T *Arg)
     unsigned int Last = Min(First + Chunk, OutFeatures);
     v4s PadIn = Arg->Pad;
 
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
 
     if (TotalInFeatures < 0)
     {
@@ -7090,10 +7090,10 @@ void KerParConv3x1Stride1x1_fp(KerParConv_fp_T *Arg)
     v4s PadIn = Arg->Pad;
 
 
-    int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
-    int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
+    unsigned int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
+    unsigned int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
 
     if (TotalInFeatures < 0)
     {
@@ -7143,10 +7143,10 @@ void KerParConv3x1Stride2x1_fp(KerParConv_fp_T *Arg)
     v4s PadIn = Arg->Pad;
 
 
-    int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
-    int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
+    unsigned int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
+    unsigned int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
 
     if (TotalInFeatures < 0)
     {
@@ -7194,10 +7194,10 @@ void KerParConv1x3Stride1x1_fp(KerParConv_fp_T *Arg)
     v4s PadIn = Arg->Pad;
 
 
-    int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
-    int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
+    unsigned int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
+    unsigned int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
 
     if (TotalInFeatures < 0)
     {
@@ -7245,10 +7245,10 @@ void KerParConv1x3Stride1x2_fp(KerParConv_fp_T *Arg)
     v4s PadIn = Arg->Pad;
 
 
-    int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
-    int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
+    unsigned int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
+    unsigned int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
 
     if (TotalInFeatures < 0)
     {
@@ -7296,10 +7296,10 @@ void KerParConv3x3Stride1_fp(KerParConv_fp_T *Arg)
     v4s PadIn = Arg->Pad;
 
 
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
 
     if (TotalInFeatures < 0)
     {
@@ -7347,10 +7347,10 @@ void KerParConv3x3Stride2_fp(KerParConv_fp_T *Arg)
     v4s PadIn = Arg->Pad;
 
 
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
 
     if (TotalInFeatures < 0)
     {
@@ -7397,10 +7397,10 @@ void KerParConv3x3StrideS_fp(KerParConv_fp_T *Arg)
     unsigned int Last = Min(First + Chunk, OutFeatures);
     v4s PadIn = Arg->Pad;
 
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
 
     if (TotalInFeatures < 0)
     {
@@ -7448,10 +7448,10 @@ void KerParConv5x1Stride1x1_fp(KerParConv_fp_T *Arg)
     v4s PadIn = Arg->Pad;
 
 
-    int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
-    int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
+    unsigned int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
+    unsigned int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
 
     if (TotalInFeatures < 0)
     {
@@ -7499,10 +7499,10 @@ void KerParConv5x1Stride2x1_fp(KerParConv_fp_T *Arg)
     v4s PadIn = Arg->Pad;
 
 
-    int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
-    int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
+    unsigned int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
+    unsigned int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
 
     if (TotalInFeatures < 0)
     {
@@ -7550,10 +7550,10 @@ void KerParConv1x5Stride1x1_fp(KerParConv_fp_T *Arg)
     v4s PadIn = Arg->Pad;
 
 
-    int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
-    int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
+    unsigned int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
+    unsigned int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
 
     if (TotalInFeatures < 0)
     {
@@ -7601,10 +7601,10 @@ void KerParConv1x5Stride1x2_fp(KerParConv_fp_T *Arg)
     v4s PadIn = Arg->Pad;
 
 
-    int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
-    int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
+    unsigned int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
+    unsigned int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
 
     if (TotalInFeatures < 0)
     {
@@ -7651,10 +7651,10 @@ void KerParConv5x5Stride1_fp(KerParConv_fp_T *Arg)
     unsigned int Last = Min(First + Chunk, OutFeatures);
     v4s PadIn = Arg->Pad;
 
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
 
     if (TotalInFeatures < 0)
     {
@@ -7701,10 +7701,10 @@ void KerParConv5x5Stride2_fp(KerParConv_fp_T *Arg)
     unsigned int Last = Min(First + Chunk, OutFeatures);
     v4s PadIn = Arg->Pad;
 
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
 
     if (TotalInFeatures < 0)
     {
@@ -7751,10 +7751,10 @@ void KerParConv5x5StrideS_fp(KerParConv_fp_T *Arg)
     unsigned int Last = Min(First + Chunk, OutFeatures);
     v4s PadIn = Arg->Pad;
 
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
 
     if (TotalInFeatures < 0)
     {
@@ -7804,10 +7804,10 @@ void KerParConvNxNStrideS_fp(KerParConv_fp_T *Arg)
     unsigned int Last = Min(First + Chunk, OutFeatures);
     v4s PadIn = Arg->Pad;
 
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
 
     if (TotalInFeatures < 0)
     {
@@ -7858,10 +7858,10 @@ void KerParConvNxMStrideSxSy_fp(KerParConv_fp_T *Arg)
     unsigned int Last = Min(First + Chunk, OutFeatures);
     v4s PadIn = Arg->Pad;
 
-    int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
-    int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
+    unsigned int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
+    unsigned int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
 
     //Depthwise
     if (TotalInFeatures < 0)
@@ -7977,10 +7977,10 @@ void KerParConv1x1Stride1_fps(KerParConv_fps_T *Arg)
     unsigned int Last = Min(First + Chunk, OutFeatures);
     v4s PadIn = Arg->Pad;
 
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
 
     if (TotalInFeatures < 0)
     {
@@ -8025,10 +8025,10 @@ void KerParConv1x1Stride2_fps(KerParConv_fps_T *Arg)
     unsigned int Last = Min(First + Chunk, OutFeatures);
     v4s PadIn = Arg->Pad;
 
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
 
     if (TotalInFeatures < 0)
     {
@@ -8073,10 +8073,10 @@ void KerParConv1x1StrideS_fps(KerParConv_fps_T *Arg)
     unsigned int Last = Min(First + Chunk, OutFeatures);
     v4s PadIn = Arg->Pad;
 
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
 
     if (TotalInFeatures < 0)
     {
@@ -8122,10 +8122,10 @@ void KerParConv3x1Stride1x1_fps(KerParConv_fps_T *Arg)
     v4s PadIn = Arg->Pad;
 
 
-    int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
-    int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
+    unsigned int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
+    unsigned int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
 
     if (TotalInFeatures < 0)
     {
@@ -8173,10 +8173,10 @@ void KerParConv3x1Stride2x1_fps(KerParConv_fps_T *Arg)
     v4s PadIn = Arg->Pad;
 
 
-    int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
-    int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
+    unsigned int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
+    unsigned int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
 
     if (TotalInFeatures < 0)
     {
@@ -8224,10 +8224,10 @@ void KerParConv1x3Stride1x1_fps(KerParConv_fps_T *Arg)
     v4s PadIn = Arg->Pad;
 
 
-    int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
-    int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
+    unsigned int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
+    unsigned int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
 
     if (TotalInFeatures < 0)
     {
@@ -8275,10 +8275,10 @@ void KerParConv1x3Stride1x2_fps(KerParConv_fps_T *Arg)
     v4s PadIn = Arg->Pad;
 
 
-    int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
-    int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
+    unsigned int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
+    unsigned int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
 
     if (TotalInFeatures < 0)
     {
@@ -8325,10 +8325,10 @@ void KerParConv3x3Stride1_fps(KerParConv_fps_T *Arg)
     unsigned int Last = Min(First + Chunk, OutFeatures);
     v4s PadIn = Arg->Pad;
 
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
 
     if (TotalInFeatures < 0)
     {
@@ -8375,10 +8375,10 @@ void KerParConv3x3Stride2_fps(KerParConv_fps_T *Arg)
     unsigned int Last = Min(First + Chunk, OutFeatures);
     v4s PadIn = Arg->Pad;
 
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
 
     if (TotalInFeatures < 0)
     {
@@ -8425,10 +8425,10 @@ void KerParConv3x3StrideS_fps(KerParConv_fps_T *Arg)
     unsigned int Last = Min(First + Chunk, OutFeatures);
     v4s PadIn = Arg->Pad;
 
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
 
     if (TotalInFeatures < 0)
     {
@@ -8476,10 +8476,10 @@ void KerParConv5x1Stride1x1_fps(KerParConv_fps_T *Arg)
     v4s PadIn = Arg->Pad;
 
 
-    int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
-    int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
+    unsigned int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
+    unsigned int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
 
     if (TotalInFeatures < 0)
     {
@@ -8527,10 +8527,10 @@ void KerParConv5x1Stride2x1_fps(KerParConv_fps_T *Arg)
     v4s PadIn = Arg->Pad;
 
 
-    int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
-    int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
+    unsigned int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
+    unsigned int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
 
     if (TotalInFeatures < 0)
     {
@@ -8578,10 +8578,10 @@ void KerParConv1x5Stride1x1_fps(KerParConv_fps_T *Arg)
     v4s PadIn = Arg->Pad;
 
 
-    int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
-    int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
+    unsigned int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
+    unsigned int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
 
     if (TotalInFeatures < 0)
     {
@@ -8629,10 +8629,10 @@ void KerParConv1x5Stride1x2_fps(KerParConv_fps_T *Arg)
     v4s PadIn = Arg->Pad;
 
 
-    int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
-    int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
+    unsigned int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
+    unsigned int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
 
     if (TotalInFeatures < 0)
     {
@@ -8679,10 +8679,10 @@ void KerParConv5x5Stride1_fps(KerParConv_fps_T *Arg)
     unsigned int Last = Min(First + Chunk, OutFeatures);
     v4s PadIn = Arg->Pad;
 
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
 
     if (TotalInFeatures < 0)
     {
@@ -8729,10 +8729,10 @@ void KerParConv5x5Stride2_fps(KerParConv_fps_T *Arg)
     unsigned int Last = Min(First + Chunk, OutFeatures);
     v4s PadIn = Arg->Pad;
 
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
 
     if (TotalInFeatures < 0)
     {
@@ -8779,10 +8779,10 @@ void KerParConv5x5StrideS_fps(KerParConv_fps_T *Arg)
     unsigned int Last = Min(First + Chunk, OutFeatures);
     v4s PadIn = Arg->Pad;
 
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
 
     if (TotalInFeatures < 0)
     {
@@ -8830,10 +8830,10 @@ void KerParConvNxNStrideS_fps(KerParConv_fps_T *Arg)
     unsigned int Last = Min(First + Chunk, OutFeatures);
     v4s PadIn = Arg->Pad;
 
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
 
     if (TotalInFeatures < 0)
     {
@@ -8882,10 +8882,10 @@ void KerParConvNxMStrideSxSy_fps(KerParConv_fps_T *Arg)
     unsigned int Last = Min(First + Chunk, OutFeatures);
     v4s PadIn = Arg->Pad;
 
-    int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
-    int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
+    unsigned int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
+    unsigned int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
 
     if (TotalInFeatures < 0)
     {
@@ -8992,10 +8992,10 @@ void KerConv1x1Stride1_fp(KerConv_fp_T *Arg)
     short int *__restrict__ Out = Arg->Out;
     unsigned int Norm = Arg->Norm;
     v4s PadIn = Arg->Pad;
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
     unsigned int CoreId = gap8_coreid();
     v4s PadOrg = PadIn;
     unsigned int Chunk, First, Last;
@@ -9035,10 +9035,10 @@ void KerConv1x1Stride2_fp(KerConv_fp_T *Arg)
     short int *__restrict__ Out = Arg->Out;
     unsigned int Norm = Arg->Norm;
     v4s PadIn = Arg->Pad;
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
     unsigned int CoreId = gap8_coreid();
     v4s PadOrg = PadIn;
     unsigned int Chunk, First, Last;
@@ -9078,10 +9078,10 @@ void KerConv1x1StrideS_fp(KerConv_fp_T *Arg)
     short int *__restrict__ Out = Arg->Out;
     unsigned int Norm = Arg->Norm;
     v4s PadIn = Arg->Pad;
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
     unsigned int CoreId = gap8_coreid();
     v4s PadOrg = PadIn;
     unsigned int Chunk, First, Last;
@@ -9123,10 +9123,10 @@ void KerConv3x1Stride1x1_fp(KerConv_fp_T *Arg)
     unsigned int Norm = Arg->Norm;
     v4s PadIn = Arg->Pad;
 
-    int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
-    int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
+    unsigned int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
+    unsigned int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
     unsigned int CoreId = gap8_coreid();
     v4s PadOrg = PadIn;
     unsigned int Chunk, First, Last;
@@ -9172,10 +9172,10 @@ void KerConv3x1Stride2x1_fp(KerConv_fp_T *Arg)
     short int *__restrict__ Out = Arg->Out;
     unsigned int Norm = Arg->Norm;
     v4s PadIn = Arg->Pad;
-    int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
-    int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
+    unsigned int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
+    unsigned int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
     unsigned int CoreId = gap8_coreid();
     v4s PadOrg = PadIn;
     unsigned int Chunk, First, Last;
@@ -9220,10 +9220,10 @@ void KerConv1x3Stride1x1_fp(KerConv_fp_T *Arg)
     short int *__restrict__ Out = Arg->Out;
     unsigned int Norm = Arg->Norm;
     v4s PadIn = Arg->Pad;
-    int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
-    int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
+    unsigned int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
+    unsigned int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
     unsigned int CoreId = gap8_coreid();
     v4s PadOrg = PadIn;
     unsigned int Chunk, First, Last;
@@ -9268,10 +9268,10 @@ void KerConv1x3Stride1x2_fp(KerConv_fp_T *Arg)
     short int *__restrict__ Out = Arg->Out;
     unsigned int Norm = Arg->Norm;
     v4s PadIn = Arg->Pad;
-    int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
-    int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
+    unsigned int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
+    unsigned int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
     unsigned int CoreId = gap8_coreid();
     v4s PadOrg = PadIn;
     unsigned int Chunk, First, Last;
@@ -9315,10 +9315,10 @@ void KerConv3x3Stride1_fp(KerConv_fp_T *Arg)
     short int *__restrict__ Out = Arg->Out;
     unsigned int Norm = Arg->Norm;
     v4s PadIn = Arg->Pad;
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
     unsigned int CoreId = gap8_coreid();
     v4s PadOrg = PadIn;
     unsigned int Chunk, First, Last;
@@ -9362,10 +9362,10 @@ void KerConv3x3Stride2_fp(KerConv_fp_T *Arg)
     short int *__restrict__ Out = Arg->Out;
     unsigned int Norm = Arg->Norm;
     v4s PadIn = Arg->Pad;
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
     unsigned int CoreId = gap8_coreid();
     v4s PadOrg = PadIn;
     unsigned int Chunk, First, Last;
@@ -9409,10 +9409,10 @@ void KerConv3x3StrideS_fp(KerConv_fp_T *Arg)
     short int *__restrict__ Out = Arg->Out;
     unsigned int Norm = Arg->Norm;
     v4s PadIn = Arg->Pad;
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
     unsigned int CoreId = gap8_coreid();
     v4s PadOrg = PadIn;
     unsigned int Chunk, First, Last;
@@ -9458,10 +9458,10 @@ void KerConv5x1Stride1x1_fp(KerConv_fp_T *Arg)
     short int *__restrict__ Out = Arg->Out;
     unsigned int Norm = Arg->Norm;
     v4s PadIn = Arg->Pad;
-    int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
-    int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
+    unsigned int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
+    unsigned int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
     unsigned int CoreId = gap8_coreid();
     v4s PadOrg = PadIn;
     unsigned int Chunk, First, Last;
@@ -9506,10 +9506,10 @@ void KerConv5x1Stride2x1_fp(KerConv_fp_T *Arg)
     short int *__restrict__ Out = Arg->Out;
     unsigned int Norm = Arg->Norm;
     v4s PadIn = Arg->Pad;
-    int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
-    int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
+    unsigned int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
+    unsigned int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
     unsigned int CoreId = gap8_coreid();
     v4s PadOrg = PadIn;
     unsigned int Chunk, First, Last;
@@ -9554,10 +9554,10 @@ void KerConv1x5Stride1x1_fp(KerConv_fp_T *Arg)
     short int *__restrict__ Out = Arg->Out;
     unsigned int Norm = Arg->Norm;
     v4s PadIn = Arg->Pad;
-    int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
-    int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
+    unsigned int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
+    unsigned int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
     unsigned int CoreId = gap8_coreid();
     v4s PadOrg = PadIn;
     unsigned int Chunk, First, Last;
@@ -9602,10 +9602,10 @@ void KerConv1x5Stride1x2_fp(KerConv_fp_T *Arg)
     short int *__restrict__ Out = Arg->Out;
     unsigned int Norm = Arg->Norm;
     v4s PadIn = Arg->Pad;
-    int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
-    int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
+    unsigned int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
+    unsigned int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
     unsigned int CoreId = gap8_coreid();
     v4s PadOrg = PadIn;
     unsigned int Chunk, First, Last;
@@ -9649,10 +9649,10 @@ void KerConv5x5Stride1_fp(KerConv_fp_T *Arg)
     short int *__restrict__ Out = Arg->Out;
     unsigned int Norm = Arg->Norm;
     v4s PadIn = Arg->Pad;
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
     unsigned int CoreId = gap8_coreid();
     v4s PadOrg = PadIn;
     unsigned int Chunk, First, Last;
@@ -9696,10 +9696,10 @@ void KerConv5x5Stride2_fp(KerConv_fp_T *Arg)
     short int *__restrict__ Out = Arg->Out;
     unsigned int Norm = Arg->Norm;
     v4s PadIn = Arg->Pad;
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
     unsigned int CoreId = gap8_coreid();
     v4s PadOrg = PadIn;
     unsigned int Chunk, First, Last;
@@ -9743,10 +9743,10 @@ void KerConv5x5StrideS_fp(KerConv_fp_T *Arg)
     short int *__restrict__ Out = Arg->Out;
     unsigned int Norm = Arg->Norm;
     v4s PadIn = Arg->Pad;
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
     unsigned int CoreId = gap8_coreid();
     v4s PadOrg = PadIn;
     unsigned int Chunk, First, Last;
@@ -9790,10 +9790,10 @@ void KerConvNxNStrideS_fp(KerConv_fp_T *Arg)
     short int *__restrict__ Out = Arg->Out;
     unsigned int Norm = Arg->Norm;
     v4s PadIn = Arg->Pad;
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
     unsigned int CoreId = gap8_coreid();
     v4s PadOrg = PadIn;
     unsigned int Chunk, First, Last;
@@ -9839,10 +9839,10 @@ void KerConvNxMStrideSxSy_fp(KerConv_fp_T *Arg)
     short int *__restrict__ Out = Arg->Out;
     unsigned int Norm = Arg->Norm;
     v4s PadIn = Arg->Pad;
-    int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
-    int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
+    unsigned int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
+    unsigned int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
     unsigned int CoreId = gap8_coreid();
     v4s PadOrg = PadIn;
     unsigned int Chunk, First, Last;
@@ -9953,10 +9953,10 @@ void KerConv1x1Stride1_fps(KerConv_fps_T *Arg)
     signed char *__restrict__ Out = Arg->Out;
     unsigned int Norm = Arg->Norm;
     v4s PadIn = Arg->Pad;
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
     unsigned int CoreId = gap8_coreid();
     v4s PadOrg = PadIn;
     unsigned int Chunk, First, Last;
@@ -9996,10 +9996,10 @@ void KerConv1x1Stride2_fps(KerConv_fps_T *Arg)
     signed char *__restrict__ Out = Arg->Out;
     unsigned int Norm = Arg->Norm;
     v4s PadIn = Arg->Pad;
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
     unsigned int CoreId = gap8_coreid();
     v4s PadOrg = PadIn;
     unsigned int Chunk, First, Last;
@@ -10039,10 +10039,10 @@ void KerConv1x1StrideS_fps(KerConv_fps_T *Arg)
     signed char *__restrict__ Out = Arg->Out;
     unsigned int Norm = Arg->Norm;
     v4s PadIn = Arg->Pad;
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
     unsigned int CoreId = gap8_coreid();
     v4s PadOrg = PadIn;
     unsigned int Chunk, First, Last;
@@ -10083,10 +10083,10 @@ void KerConv3x1Stride1x1_fps(KerConv_fps_T *Arg)
     signed char *__restrict__ Out = Arg->Out;
     unsigned int Norm = Arg->Norm;
     v4s PadIn = Arg->Pad;
-    int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
-    int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
+    unsigned int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
+    unsigned int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
     unsigned int CoreId = gap8_coreid();
     v4s PadOrg = PadIn;
     unsigned int Chunk, First, Last;
@@ -10131,10 +10131,10 @@ void KerConv3x1Stride2x1_fps(KerConv_fps_T *Arg)
     signed char *__restrict__ Out = Arg->Out;
     unsigned int Norm = Arg->Norm;
     v4s PadIn = Arg->Pad;
-    int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
-    int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
+    unsigned int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
+    unsigned int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
     unsigned int CoreId = gap8_coreid();
     v4s PadOrg = PadIn;
     unsigned int Chunk, First, Last;
@@ -10179,10 +10179,10 @@ void KerConv1x3Stride1x1_fps(KerConv_fps_T *Arg)
     signed char *__restrict__ Out = Arg->Out;
     unsigned int Norm = Arg->Norm;
     v4s PadIn = Arg->Pad;
-    int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
-    int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
+    unsigned int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
+    unsigned int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
     unsigned int CoreId = gap8_coreid();
     v4s PadOrg = PadIn;
     unsigned int Chunk, First, Last;
@@ -10227,10 +10227,10 @@ void KerConv1x3Stride1x2_fps(KerConv_fps_T *Arg)
     signed char *__restrict__ Out = Arg->Out;
     unsigned int Norm = Arg->Norm;
     v4s PadIn = Arg->Pad;
-    int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
-    int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
+    unsigned int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
+    unsigned int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
     unsigned int CoreId = gap8_coreid();
     v4s PadOrg = PadIn;
     unsigned int Chunk, First, Last;
@@ -10274,10 +10274,10 @@ void KerConv3x3Stride1_fps(KerConv_fps_T *Arg)
     signed char *__restrict__ Out = Arg->Out;
     unsigned int Norm = Arg->Norm;
     v4s PadIn = Arg->Pad;
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
     unsigned int CoreId = gap8_coreid();
     v4s PadOrg = PadIn;
     unsigned int Chunk, First, Last;
@@ -10321,10 +10321,10 @@ void KerConv3x3Stride2_fps(KerConv_fps_T *Arg)
     signed char *__restrict__ Out = Arg->Out;
     unsigned int Norm = Arg->Norm;
     v4s PadIn = Arg->Pad;
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
     unsigned int CoreId = gap8_coreid();
     v4s PadOrg = PadIn;
     unsigned int Chunk, First, Last;
@@ -10368,10 +10368,10 @@ void KerConv3x3StrideS_fps(KerConv_fps_T *Arg)
     signed char *__restrict__ Out = Arg->Out;
     unsigned int Norm = Arg->Norm;
     v4s PadIn = Arg->Pad;
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
     unsigned int CoreId = gap8_coreid();
     v4s PadOrg = PadIn;
     unsigned int Chunk, First, Last;
@@ -10416,10 +10416,10 @@ void KerConv5x1Stride1x1_fps(KerConv_fps_T *Arg)
     signed char *__restrict__ Out = Arg->Out;
     unsigned int Norm = Arg->Norm;
     v4s PadIn = Arg->Pad;
-    int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
-    int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
+    unsigned int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
+    unsigned int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
     unsigned int CoreId = gap8_coreid();
     v4s PadOrg = PadIn;
     unsigned int Chunk, First, Last;
@@ -10464,10 +10464,10 @@ void KerConv5x1Stride2x1_fps(KerConv_fps_T *Arg)
     signed char *__restrict__ Out = Arg->Out;
     unsigned int Norm = Arg->Norm;
     v4s PadIn = Arg->Pad;
-    int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
-    int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
+    unsigned int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
+    unsigned int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
     unsigned int CoreId = gap8_coreid();
     v4s PadOrg = PadIn;
     unsigned int Chunk, First, Last;
@@ -10512,10 +10512,10 @@ void KerConv1x5Stride1x1_fps(KerConv_fps_T *Arg)
     signed char *__restrict__ Out = Arg->Out;
     unsigned int Norm = Arg->Norm;
     v4s PadIn = Arg->Pad;
-    int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
-    int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
+    unsigned int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
+    unsigned int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
     unsigned int CoreId = gap8_coreid();
     v4s PadOrg = PadIn;
     unsigned int Chunk, First, Last;
@@ -10560,10 +10560,10 @@ void KerConv1x5Stride1x2_fps(KerConv_fps_T *Arg)
     signed char *__restrict__ Out = Arg->Out;
     unsigned int Norm = Arg->Norm;
     v4s PadIn = Arg->Pad;
-    int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
-    int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
+    unsigned int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
+    unsigned int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
     unsigned int CoreId = gap8_coreid();
     v4s PadOrg = PadIn;
     unsigned int Chunk, First, Last;
@@ -10607,10 +10607,10 @@ void KerConv5x5Stride1_fps(KerConv_fps_T *Arg)
     signed char *__restrict__ Out = Arg->Out;
     unsigned int Norm = Arg->Norm;
     v4s PadIn = Arg->Pad;
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
     unsigned int CoreId = gap8_coreid();
     v4s PadOrg = PadIn;
     unsigned int Chunk, First, Last;
@@ -10654,10 +10654,10 @@ void KerConv5x5Stride2_fps(KerConv_fps_T *Arg)
     signed char *__restrict__ Out = Arg->Out;
     unsigned int Norm = Arg->Norm;
     v4s PadIn = Arg->Pad;
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
     unsigned int CoreId = gap8_coreid();
     v4s PadOrg = PadIn;
     unsigned int Chunk, First, Last;
@@ -10701,10 +10701,10 @@ void KerConv5x5StrideS_fps(KerConv_fps_T *Arg)
     signed char *__restrict__ Out = Arg->Out;
     unsigned int Norm = Arg->Norm;
     v4s PadIn = Arg->Pad;
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
     unsigned int CoreId = gap8_coreid();
     v4s PadOrg = PadIn;
     unsigned int Chunk, First, Last;
@@ -10749,10 +10749,10 @@ void KerConvNxNStrideS_fps(KerConv_fps_T *Arg)
     unsigned int Norm = Arg->Norm;
     v4s PadIn = Arg->Pad;
 
-    int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
-    int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
+    unsigned int Wo = (W - FS + PadIn[0] + PadIn[1]) / S + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FS, PadIn[0], S)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FS, PadIn[0], S));
+    unsigned int Ho = (H - FS + PadIn[2] + PadIn[3]) / S + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FS, PadIn[2], S)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FS, PadIn[2], S));
 
     unsigned int CoreId = gap8_coreid();
     v4s PadOrg = PadIn;
@@ -10799,10 +10799,10 @@ void KerConvNxMStrideSxSy_fps(KerConv_fps_T *Arg)
     unsigned int Norm = Arg->Norm;
     v4s PadIn = Arg->Pad;
 
-    int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
-    int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
-    int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
-    int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
+    unsigned int Wo = (W - FSx + PadIn[0] + PadIn[1]) / Sx + 1;
+    unsigned int Wo_F = Min(Wo, FirstDefinedOutput(FSx, PadIn[0], Sx)), Wo_L = Max(Wo_F, LastDefinedOutput(W, FSx, PadIn[0], Sx));
+    unsigned int Ho = (H - FSy + PadIn[2] + PadIn[3]) / Sy + 1;
+    unsigned int Ho_F = Min(Ho, FirstDefinedOutput(FSy, PadIn[2], Sy)), Ho_L = Max(Ho_F, LastDefinedOutput(H, FSy, PadIn[2], Sy));
 
     unsigned int CoreId = gap8_coreid();
     v4s PadOrg = PadIn;
