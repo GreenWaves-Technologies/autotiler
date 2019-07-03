@@ -650,11 +650,11 @@ static void SelectKernels(
 		}
 		else if(FScW == 5 && FScH == 5 && ConvStrideW==1 && ConvStrideH==1)
 		{
-			_ConvKerName = "KerParConv5x5Stride1x1";
+			_ConvKerName = "KerParConv5x5Stride1";
 		}
 		else if(FScW == 5 && FScH == 5 && ConvStrideW==2 && ConvStrideH==2)
 		{
-			_ConvKerName = "KerParConv5x5Stride2x2";
+			_ConvKerName = "KerParConv5x5Stride2";
 		}
 		else if(FScW == 5 && FScH == 5 && ConvStrideW==ConvStrideH)
 		{
@@ -919,10 +919,6 @@ void CNN_LargeConvolutionPoolReLU_Hor(
 	unsigned int TileCons = (ConvStrideH * FSpH) + FScH - ConvStrideH;
 	int Overlap = FScH + ConvStrideH * (FSpH-PoolStrideH-1);
 	int ConvOverlap = FScH - ConvStrideH;
-
-
-	printf("TileCons: %d\n",TileCons);
-	printf("Overlap: %d\n",Overlap);
 
 	unsigned int Wo, Ho, Wc, Hc;
 	//  PadTc Pading Top    convolutions
@@ -3548,6 +3544,8 @@ void CNN_TiledConvNxNReLUPool2x2_HWCE_fp(char *Name, unsigned int FS, unsigned i
 		case 7: /* Relu, PoolAvg 2x2 */
 			KerReLUPoolName = "KerPoolNxNStrideS_fp"; M=3; S=2; Orientation=1; DoReLU=3;  break;
 	}
+
+
 	// UserKernel("Conv5x5ReLUMaxPool2x2_HWCE",
 	UserKernel(Name,
 		KernelDimensions(InPlane, Width, Height, OutPlane),
@@ -3566,21 +3564,43 @@ void CNN_TiledConvNxNReLUPool2x2_HWCE_fp(char *Name, unsigned int FS, unsigned i
 			Call("HwCE_SetYinMode", LOC_IN_PLANE_PROLOG, Bindings(1, Imm(1))),
 			Mode3x3?
 			Call(ConvKerName, LOC_IN_PLANE,
-				Bindings(9, K_Arg("In", KER_ARG_TILE), K_Arg("Out", KER_ARG_TILE), Imm(0), Imm(0),
-						K_Arg("Filter", KER_ARG_TILE), C_ArgIndex("Bias", KER_OUT_PLANE, 1),
-						K_Arg("In", KER_ARG_TILE_W), K_Arg("In", KER_ARG_TILE_H), Imm(0x7))):
+				Bindings(9, 
+							K_Arg("In", KER_ARG_TILE), 
+							K_Arg("Out", KER_ARG_TILE), 
+							Imm(0), 
+							Imm(0),
+							K_Arg("Filter", KER_ARG_TILE), 
+							C_ArgIndex("Bias", KER_OUT_PLANE, 1),
+							K_Arg("In", KER_ARG_TILE_W), 
+							K_Arg("In", KER_ARG_TILE_H), 
+							Imm(0x7))):
 			Call(ConvKerName, LOC_IN_PLANE,
-				Bindings(6, K_Arg("In", KER_ARG_TILE), K_Arg("SetBiasOut", KER_ARG_TILE), K_Arg("Filter", KER_ARG_TILE),
-						C_ArgIndex("Bias", KER_OUT_PLANE, 1), K_Arg("In", KER_ARG_TILE_W), K_Arg("In", KER_ARG_TILE_H))),
+				Bindings(6, 
+						K_Arg("In", KER_ARG_TILE), 
+						K_Arg("SetBiasOut", KER_ARG_TILE), 
+						K_Arg("Filter", KER_ARG_TILE),
+						C_ArgIndex("Bias", KER_OUT_PLANE, 1), 
+						K_Arg("In", KER_ARG_TILE_W), 
+						K_Arg("In", KER_ARG_TILE_H))
+				),
 			Call("HwCE_SetYinMode", LOC_IN_PLANE, Bindings(1, Imm(0))),
 			Call(KerReLUPoolName, LOC_IN_PLANE_EPILOG,
-				Bindings(9,
+				Bindings(13,
 					K_Arg("SetBiasOut", KER_ARG_TILE),
 					K_Arg("SetBiasOut", KER_ARG_TILE_W),
 					K_Arg("SetBiasOut", KER_ARG_TILE_H),
 					K_Arg("Out", KER_ARG_TILE),
-					Imm((int)Pad), Imm(M), Imm(S),
-					Imm(Orientation), Imm(DoReLU))),
+					Imm((int)Pad), 
+					Imm(M), 
+					Imm(S),
+					Imm(Orientation), 
+					Imm(DoReLU),
+					Imm(1), //Dilation 
+					Imm(M), //Only square
+					Imm(S), //Only square
+					Imm(1)  //Dilation 
+					)
+				),
 			Call("HWCE_Disable", LOC_EPILOG, Bindings(0))
 			 ),
 		KerArgs(4,
