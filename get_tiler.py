@@ -262,7 +262,8 @@ ri = vars(__builtins__).get('raw_input',input)
 print("Registration is required to load the GAP8 AutoTiler library\n")
 
 print("In case you have already registered, you can directly enter the link")
-print("to the AutoTiler library or just press Enter.")
+print("to the AutoTiler library that you received from an email.")
+print("Otherwise just press Enter.")
 url = ri("Enter URL from email: ")
 
 if url == '':
