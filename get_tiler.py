@@ -260,58 +260,73 @@ def download_file(url):
 
 ri = vars(__builtins__).get('raw_input',input)
 print("Registration is required to load the GAP8 AutoTiler library\n")
-print("You will be prompted for your name, company and email address and the")
-print("link for the AutoTiler libray will be sent to your email address.")
-print("This information is used uniquely to keep track of AutoTiler users.")
-forename = ri("Enter your first name: ")
-surname = ri("Enter your last name: ")
-company = ri("Enter your company name: ")
 
-while True:
-    country = ri("Enter your country: ")
-    country = country.upper()
-    matches = []
-    for c in Countries:
-        if c[0] == country or c[1].upper() == country:
-            matches = [c]
-            break
-        elif c[1].upper().startswith(country):
-            matches.append(c)
-    if len(matches) == 1:
-        country = matches[0][0]
-        break
-    elif len(matches) > 1:
-        print("Do you mean:")
-        for c in matches:
-            print("{} ({})".format(c[1], c[0]))
-        print()
-    else:
-        print("I don't know that country. Please enter a valid country name or ISO code.")
-
-print("Country ", country)
-
-while True:
-    email = ri("Enter your email address: ")
-    if re.match(r"[^@]+@[^@]+\.[^@]+", email):
-        break
-    else:
-        print("Please enter a valid email address")
-
-url = 'https://hooks.zapier.com/hooks/catch/2624512/e6qico/'
-payload = { 'forename': forename, 'surname': surname, 'company': company, 'email': email, 'country': country }
-headers = { 'content-type': 'application/json' }
-
-print("Triggering email ... please wait")
-try:
-    response = requests.post(url, data=json.dumps(payload), headers=headers, timeout=3)
-    response.raise_for_status()
-except requests.exceptions.RequestException as ex:
-    fatal_error(ex)
-
-
-print("Please check your email and copy and paste the URL in the email below")
+print("In case you have already registered, you can directly enter the link")
+print("to the AutoTiler library or just press Enter.")
 url = ri("Enter URL from email: ")
+
+if url == '':
+    print("You will be prompted for your name, company and email address and the")
+    print("link for the AutoTiler libray will be sent to your email address.")
+    print("This information is used uniquely to keep track of AutoTiler users.")
+    forename = ri("Enter your first name: ")
+    surname = ri("Enter your last name: ")
+    company = ri("Enter your company name: ")
+
+    while True:
+        country = ri("Enter your country: ")
+        country = country.upper()
+        matches = []
+        for c in Countries:
+            if c[0] == country or c[1].upper() == country:
+                matches = [c]
+                break
+            elif c[1].upper().startswith(country):
+                matches.append(c)
+        if len(matches) == 1:
+            country = matches[0][0]
+            break
+        elif len(matches) > 1:
+            print("Do you mean:")
+            for c in matches:
+                print("{} ({})".format(c[1], c[0]))
+            print()
+        else:
+            print("I don't know that country. Please enter a valid country name or ISO code.")
+
+    print("Country ", country)
+
+    while True:
+        email = ri("Enter your email address: ")
+        if re.match(r"[^@]+@[^@]+\.[^@]+", email):
+            break
+        else:
+            print("Please enter a valid email address")
+
+    url = 'https://hooks.zapier.com/hooks/catch/2624512/e6qico/'
+    payload = { 'forename': forename, 'surname': surname, 'company': company, 'email': email, 'country': country }
+    headers = { 'content-type': 'application/json' }
+
+    print("Triggering email ... please wait")
+    try:
+        response = requests.post(url, data=json.dumps(payload), headers=headers, timeout=3)
+        response.raise_for_status()
+    except requests.exceptions.RequestException as ex:
+        fatal_error(ex)
+
+
+    print("Please check your email and copy and paste the URL in the email below")
+    print("Please keep this URL, you will ask to enter it in case you")
+    print("install again the SDK.")
+    url = ri("Enter URL from email: ")
 try:
+    while True:
+        if re.match(r"^https://.*/$", url):
+            break
+        else:
+            print("Please enter a valid URL, it must start with https:// and")
+            print("end with /.")
+            url = ri("Enter URL from email: ")
     f = open(".tiler_url","w+")
     f.write(url)
     f.close()
