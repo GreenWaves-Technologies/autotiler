@@ -1,5 +1,5 @@
-TILER_VER=2.0.1
-TILER_LIB=libtile.${TILER_VER}.a
+TILER_VER=3.0.0
+export TILER_LIB=libtile.${TILER_VER}.a
 ifdef GAP_SDK_HOME
 export TILER_URL=$(GAP_SDK_HOME)/.tiler_url
 else
@@ -20,6 +20,6 @@ endif
 lib/libtile.a: $(TILER_URL)
 	mkdir -p lib
 	rm -rf lib/libtile*
-	echo ${TILER_LIB} | wget --no-use-server-timestamps --base=`cat $(TILER_URL)` --input-file=- -O $@
+	./download_tiler.sh
 
 .PHONY: all clean
