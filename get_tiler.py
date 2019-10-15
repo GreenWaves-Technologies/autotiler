@@ -1,4 +1,4 @@
-import requests, json, sys, re
+import requests, json, sys, re, os
 
 class bcolors:
     HEADER = '\033[95m'
@@ -327,8 +327,8 @@ try:
             print("Please enter a valid URL, it must start with https:// and")
             print("end with /.")
             url = ri("Enter URL from email: ")
-    f = open(".tiler_url","w+")
+    f = open(os.environ.get('TILER_URL'),"w+")
     f.write(url)
     f.close()
 except:
-    fatal_error("problem writing file")
+    fatal_error("problem writing file " + os.environ.get('TILER_URL'))
