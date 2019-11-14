@@ -1,4 +1,4 @@
-TILER_VER=2.0.1
+TILER_VER=2.1.0
 TILER_LIB=libtile.${TILER_VER}.a
 
 all: lib/libtile.a
